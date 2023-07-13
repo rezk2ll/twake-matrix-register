@@ -26,7 +26,7 @@ export const actions: Actions = {
 			const code = locals.session.data.code;
 
 			if (!password || !code) {
-				return fail(400, { code, incorrect: true });
+				return fail(400, { incorrect: true });
 			}
 
 			if (code === password) {
