@@ -19,6 +19,7 @@ from base
 
 RUN mkdir /app
 WORKDIR /app
+RUN mkdir build
 
 COPY --from=deps /app/node_modules /app/node_modules
 COPY --from=build /app/build /app/build
