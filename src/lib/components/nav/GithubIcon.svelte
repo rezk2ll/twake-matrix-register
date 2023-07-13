@@ -4,7 +4,7 @@
 			type="button"
 			class="py-2 md:px-3 px-1 rounded-full relative"
 			target="_blank"
-			href="https://github.com/rezk2ll/linagora"
+			href="https://github.com/linagora"
 		>
 			<div class="flex items-center h-5">
 				<svg
