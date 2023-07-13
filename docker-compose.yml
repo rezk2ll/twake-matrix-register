@@ -1,0 +1,10 @@
+version: '3.9'
+
+services:
+  registration:
+    container_name: twake-matrix-register
+    build: .
+    ports:
+      - 8080:3000
+    env_file:
+      - .env
