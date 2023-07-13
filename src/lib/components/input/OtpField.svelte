@@ -27,5 +27,5 @@
   bind:this={input}
 	type="text"
 	maxlength="1"
-	class="w-10 outline-none p-3 text-center rounded-md m-1 border-solid border-2 border-purple-800 font-bold text-white transition-all bg-gray-900"
+	class="w-10 outline-none p-3 text-center rounded-md m-1 border-solid border-2 border-blue-800 font-bold text-white transition-all bg-gray-900"
 />

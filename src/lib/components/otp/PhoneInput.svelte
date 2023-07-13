@@ -1,26 +1,32 @@
 <script lang="ts">
 	import { TelInput, normalizedCountries } from 'svelte-tel-input';
 	import type { CountryCode, DetailedValue, E164Number } from 'svelte-tel-input/types';
+	import Info from '../dispaly/Info.svelte';
+	import { enhance } from '$app/forms';
+	import Spinner from '../dispaly/Spinner.svelte';
 
 	let selectedCountry: CountryCode | null = 'FR';
 	let valid = false;
 	let value: E164Number | null = null;
 	let detailedValue: DetailedValue;
 	const options = { spaces: false };
+	let loading = false;
 </script>
 
-<div class="flex flex-col space-y-4">
-	<h1 class="text-xl font-semibold capitalize text-gray-800 dark:text-white lg:text-2xl">
-		Enter your phone number
-	</h1>
+<div class="flex flex-col space-y-8">
+	<div class="flex items-center justify-center">
+		<h3 class="text-lg flex text-center font-semibold leading-tight uppercase text-slate-400">SIGN UP</h3>
+	</div>
+	<Info text="Enter the phone number that you will be using to create your account, we will send a verification code to this number." />
 	<form
 		class="flex flex-col items-center justify-center space-y-4"
-		action="/register?/otp"
+		action="/register"
 		method="POST"
+		use:enhance
 	>
 		<div class="w-full flex">
 			<select
-				class="form-select appearance-none block px-3 py-1.5 text-base font-normal bg-clip-padding bg-no-repeat cursor-pointer text-gray-500 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200 m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+				class="form-select appearance-none block px-3 py-1.5 text-base font-normal bg-clip-padding bg-no-repeat cursor-pointer text-gray-500 bg-gray-100 border border-gray-300 rounded-l-lg focus:outline-none"
 				aria-label="select country"
 				name="Country"
 				bind:value={selectedCountry}
@@ -47,10 +53,16 @@
 			/>
 		</div>
 		<input type="hidden" bind:value name="phone" />
-		<input
+		<button
+			disabled={loading}
 			type="submit"
-			value="send verification message"
 			class="flex items-center cursor-pointer font-medium text-sm justify-center m-1 p-3 w-full transform rounded-md bg-blue-500 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-		/>
+		>
+		{#if loading}
+			<Spinner />
+		{:else}
+			send verification message
+		{/if}
+		</button>
 	</form>
 </div>
