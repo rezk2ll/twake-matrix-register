@@ -4,6 +4,9 @@
 	import Info from '../dispaly/Info.svelte';
 	import { enhance } from '$app/forms';
 	import Spinner from '../dispaly/Spinner.svelte';
+	import Fail from '../dispaly/Fail.svelte';
+
+	export let taken: boolean = false;
 
 	let selectedCountry: CountryCode | null = 'FR';
 	let valid = false;
@@ -19,9 +22,13 @@
 			SIGN UP
 		</h3>
 	</div>
-	<Info
-		text="Enter the phone number that you will be using to create your account, we will send a verification code to this number."
-	/>
+	{#if taken}
+		<Fail text="this phone number is not available" />
+	{:else}
+		<Info
+			text="Enter the phone number that you will be using to create your account, we will send a verification code to this number."
+		/>
+	{/if}
 	<form
 		class="flex flex-col items-center justify-center space-y-4"
 		action="/register"
