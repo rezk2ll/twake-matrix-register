@@ -1,4 +1,4 @@
-import { generate, send } from '$lib/services/otp';
+import { generate, isPhoneValid, send } from '$lib/services/otp';
 import { Redirect, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
@@ -21,9 +21,11 @@ export const actions: Actions = {
 				return fail(400, { phone, missing: true });
 			}
 
-			const message = `Your verification code is ${code}`;
+			if (!isPhoneValid(phone)) {
+				return fail(400, { phone, invalid: true });
+			}
 
-			await send(message, phone);
+			await send(code, phone);
 
 			await locals.session.set({
 				code,

@@ -7,8 +7,7 @@
 </script>
 
 {#if form?.error}
-	{JSON.stringify(form?.error)}
 	<Error />
 {:else}
-	<PhoneInput />
+	<PhoneInput taken={form?.invalid} />
 {/if}
