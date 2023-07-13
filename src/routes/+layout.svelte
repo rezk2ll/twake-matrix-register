@@ -13,6 +13,6 @@
 </svelte:head>
 
 <div class="min-h-screen w-full overflow-hidden bg-gray-900 flex flex-col">
-  <Nav />
+	<Nav />
 	<slot />
 </div>

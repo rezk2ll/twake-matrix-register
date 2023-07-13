@@ -9,9 +9,9 @@ export const load: PageServerLoad = async ({ parent }) => {
 		throw redirect(302, '/register/user');
 	}
 
-  if (!session.phone) {
-    throw redirect(302, '/register');
-  }
+	if (!session.phone) {
+		throw redirect(302, '/register');
+	}
 
 	return {
 		mask: maskPhone(session.phone)

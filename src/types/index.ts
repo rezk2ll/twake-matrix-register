@@ -1,14 +1,13 @@
-
 export interface ISmsSendPayload {
-  messages: Message[]
+	messages: Message[];
 }
 
 export interface Message {
-  destinations: Destination[];
-  from: string;
-  text: string;
+	destinations: Destination[];
+	from: string;
+	text: string;
 }
 
 export interface Destination {
-  to: string
+	to: string;
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import GithubIcon from './GithubIcon.svelte';
 	import Menu from './Menu.svelte';
-	import { fly } from "svelte/transition"
+	import { fly } from 'svelte/transition';
 
 	let open = false;
 

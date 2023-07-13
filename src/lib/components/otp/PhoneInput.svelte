@@ -15,9 +15,13 @@
 
 <div class="flex flex-col space-y-8">
 	<div class="flex items-center justify-center">
-		<h3 class="text-lg flex text-center font-semibold leading-tight uppercase text-slate-400">SIGN UP</h3>
+		<h3 class="text-lg flex text-center font-semibold leading-tight uppercase text-slate-400">
+			SIGN UP
+		</h3>
 	</div>
-	<Info text="Enter the phone number that you will be using to create your account, we will send a verification code to this number." />
+	<Info
+		text="Enter the phone number that you will be using to create your account, we will send a verification code to this number."
+	/>
 	<form
 		class="flex flex-col items-center justify-center space-y-4"
 		action="/register"
@@ -58,11 +62,11 @@
 			type="submit"
 			class="flex items-center cursor-pointer font-medium text-sm justify-center m-1 p-3 w-full transform rounded-md bg-blue-500 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
 		>
-		{#if loading}
-			<Spinner />
-		{:else}
-			send verification message
-		{/if}
+			{#if loading}
+				<Spinner />
+			{:else}
+				send verification message
+			{/if}
 		</button>
 	</form>
 </div>
