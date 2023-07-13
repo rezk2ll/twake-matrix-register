@@ -29,13 +29,11 @@ export const send = async (message: string, to: string): Promise<void> => {
 			]
 		};
 
-		const response = await fetch(API_ENDPOINT, {
+		await fetch(API_ENDPOINT, {
 			method: 'POST',
 			body: JSON.stringify(payload),
 			headers: { 'Content-Type': 'application/json', Authorization: `App ${env.SMS_SERVICE_KEY}` }
 		});
-
-    console.log( { response: await response.json() })
 	} catch (error) {
 		console.error('Failed to send message');
 
