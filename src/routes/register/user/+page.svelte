@@ -1,27 +1,62 @@
-<script>
+<script lang="ts">
 	import { enhance } from '$app/forms';
+	import type { ActionData } from './$types';
+	import Fail from '$lib/components/dispaly/Fail.svelte';
+	import { validateEmail } from '$lib/utils/email';
+
+	export let form: ActionData;
+	let invalidNickname: boolean = false;
+	let invalidEmail: boolean = false;
+
+	let nickname: string;
+	let email: string;
+
+	$: invalidNickname = !!form?.taken;
+	$: invalidEmail = !!email && !validateEmail(email);
 </script>
 
 <div class="flex flex-col items-center justify-center p-10 space-y-2">
 	<h1 class="text-3xl font-bold text-center mb-4 cursor-pointer text-white w-full">
 		Create An Account
 	</h1>
-	<form action="/register/user" method="POST" class="flex flex-col space-y-4 w-full" use:enhance>
+	<form
+		action="/register/user"
+		method="POST"
+		class="flex flex-col space-y-4 w-full"
+		use:enhance
+	>
+		{#if form?.missing}
+			<Fail text="Nick name is missing" />
+		{/if}
+
+		{#if form?.taken}
+			<Fail text="Nickname is not available" />
+		{/if}
 		<input
+			bind:value={nickname}
 			type="text"
-			placeholder="Nick name"
+			name="nickname"
+			placeholder="Nickname"
 			required
-			class="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+			class="{invalidNickname
+				? 'border-red-700 focus:border-red-500'
+				: 'border-blue-700 focus:border-blue-500'}
+				block text-sm py-3 px-4 outline-none w-full p-3 rounded-md m-1 border-solid border-2 font-bold text-white transition-all bg-gray-900"
 		/>
 		<input
 			type="text"
+			name="display_name"
 			placeholder="Dispaly name"
-			class="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+			class="block text-sm py-3 px-4 outline-none w-full p-3 rounded-md m-1 border-solid border-2 border-blue-700 focus:border-blue-500 font-bold text-white transition-all bg-gray-900"
 		/>
 		<input
-			type="text"
+			type="email"
+			name="recovery_email"
 			placeholder="Recovery email"
-			class="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+			bind:value={email}
+			class="{invalidEmail
+				? 'border-red-700 focus:border-red-500'
+				: 'border-blue-700 focus:border-blue-500'} block text-sm py-3 px-4 outline-none w-full p-3 rounded-md m-1 border-solid border-2 font-bold text-white transition-all bg-gray-900"
 		/>
 		<input
 			type="submit"
@@ -35,9 +70,3 @@
 		</div>
 	</form>
 </div>
-
-<style lang="postcss">
-	input[type='text'] {
-		@apply w-full outline-none p-3 rounded-md m-1 border-solid border-2 border-blue-700 focus:border-blue-500 font-bold text-white transition-all bg-gray-900;
-	}
-</style>
