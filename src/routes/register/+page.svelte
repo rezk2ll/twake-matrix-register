@@ -9,5 +9,5 @@
 {#if form?.error}
 	<Error />
 {:else}
-	<PhoneInput taken={form?.invalid} />
+	<PhoneInput invalid={form?.invalid || form?.taken} />
 {/if}

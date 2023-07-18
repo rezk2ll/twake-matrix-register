@@ -1,6 +1,7 @@
 import { generate, isPhoneValid, send } from '$lib/services/otp';
 import { Redirect, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import { checkPhoneAvailability } from '$lib/services/user';
 
 export const load: PageServerLoad = async ({ parent }) => {
 	const { session } = await parent();
@@ -23,6 +24,10 @@ export const actions: Actions = {
 
 			if (!isPhoneValid(phone)) {
 				return fail(400, { phone, invalid: true });
+			}
+
+			if (!(await checkPhoneAvailability(phone))) {
+				return fail(400, { phone, taken: true });
 			}
 
 			await send(code, phone);
