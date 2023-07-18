@@ -6,7 +6,7 @@
 	import Spinner from '../dispaly/Spinner.svelte';
 	import Fail from '../dispaly/Fail.svelte';
 
-	export let taken: boolean = false;
+	export let invalid: boolean = false;
 
 	let selectedCountry: CountryCode | null = 'FR';
 	let valid = false;
@@ -22,7 +22,7 @@
 			SIGN UP
 		</h3>
 	</div>
-	{#if taken}
+	{#if invalid}
 		<Fail text="this phone number is not available" />
 	{:else}
 		<Info
