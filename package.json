@@ -38,6 +38,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@types/ldapjs": "^3.0.0",
+		"ldapjs": "^3.0.3",
 		"svelte-kit-cookie-session": "^3.4.1",
 		"svelte-tel-input": "^3.1.0"
 	}
