@@ -1,4 +1,5 @@
 import { env } from '$env/dynamic/private';
+import { parsePhoneNumberWithError } from 'svelte-tel-input';
 import type { ISmsSendPayload } from '../../types';
 
 /**
@@ -57,6 +58,13 @@ export const generate = (): string => {
  * @returns {boolean} - true if the phone number is valid, false otherwise.
  */
 export const isPhoneValid = (phone: string): boolean => {
+	try {
+		const number = parsePhoneNumberWithError(phone);
 
-	return true;
-}
+		return !!number.country;
+	} catch (error) {
+		console.error('failed to parse phone number', { error });
+
+		return false;
+	}
+};
