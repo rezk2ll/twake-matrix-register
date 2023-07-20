@@ -23,7 +23,7 @@
 		</h3>
 	</div>
 	{#if invalid}
-		<Fail text="this phone number is not available" />
+		<Fail>This phone number is not available</Fail>
 	{:else}
 		<Info
 			text="Enter the phone number that you will be using to create your account, we will send a verification code to this number."
@@ -67,12 +67,12 @@
 		<button
 			disabled={loading}
 			type="submit"
-			class="flex items-center cursor-pointer font-medium text-sm justify-center m-1 p-3 w-full transform rounded-md bg-blue-500 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+			class="flex items-center cursor-pointer font-medium text-sm justify-center m-1 p-3 w-full transform rounded-md bg-blue-500 tracking-wide text-white transition-colors duration-300 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
 		>
 			{#if loading}
 				<Spinner />
 			{:else}
-				send verification message
+				Send verification message
 			{/if}
 		</button>
 	</form>

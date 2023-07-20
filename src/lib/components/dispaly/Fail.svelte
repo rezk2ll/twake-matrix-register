@@ -1,7 +1,3 @@
-<script lang="ts">
-	export let text: string;
-</script>
-
 <div
 	class="mb-3 inline-flex w-full items-center rounded-lg bg-red-100 px-6 py-5 text-sm text-red-700"
 	role="alert"
@@ -15,5 +11,5 @@
 			/>
 		</svg>
 	</span>
-	{text}
+	<slot />
 </div>

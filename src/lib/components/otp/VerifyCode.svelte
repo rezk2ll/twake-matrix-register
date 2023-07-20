@@ -36,9 +36,11 @@
 <div class="flex flex-col space-y-4 items-center justify-center">
 	<h3 class="text-lg font-semibold leading-tight uppercase">OTP Verification</h3>
 	{#if valid}
-		<Success text={`we've sent the verification code to ${mask}.`} />
+		<Success>
+			we've sent the verification code to {mask}
+		</Success>
 	{:else}
-		<Fail text="Invalid verification code, try again" />
+		<Fail>Invalid verification code, try again</Fail>
 	{/if}
 	<form
 		action="/register/otp"
