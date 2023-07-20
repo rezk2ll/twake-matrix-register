@@ -35,7 +35,8 @@ export const actions: Actions = {
 			await locals.session.set({
 				code,
 				phone,
-				verified: false
+				verified: false,
+				registered: false
 			});
 
 			throw redirect(302, '/register/otp');
