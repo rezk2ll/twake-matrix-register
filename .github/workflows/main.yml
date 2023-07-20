@@ -9,7 +9,8 @@ on:
       - main
 
   workflow_dispatch:
-
+env:
+  CI: true
 jobs:
   build:
     runs-on: ubuntu-latest
