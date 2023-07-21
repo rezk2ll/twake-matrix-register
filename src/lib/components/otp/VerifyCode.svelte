@@ -6,7 +6,7 @@
 	import OtpField from '../input/OtpField.svelte';
 
 	export let mask: string;
-	export let valid: boolean = true;
+	export let valid = true;
 
 	let input1: HTMLInputElement;
 	let input2: HTMLInputElement;
@@ -18,7 +18,7 @@
 	let value2: string | undefined = undefined;
 	let value3: string | undefined = undefined;
 	let value4: string | undefined = undefined;
-	let loading: boolean = false;
+	let loading = false;
 
 	$: value = `${value1}${value2}${value3}${value4}`;
 

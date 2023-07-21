@@ -28,8 +28,9 @@
 		</div>
 
 		<div class="text-sm tracking-wide mt-0 ml-4">
-			Congratulations! {data.user ?? ''} 🥳 Your account has been successfully created! 🙌. you
-			can now <a href="/login">login</a> or go back to the <a href="/">home page</a>
+			Congratulations! {data.user ?? ''} 🥳 Your account has been successfully created! 🙌. you can now
+			<a href="/login">login</a>
+			or go back to the <a href="/">home page</a>
 			<br />
 		</div>
 	</div>
@@ -37,6 +38,6 @@
 
 <style lang="postcss">
 	a {
-		@apply text-blue-500 hover:text-blue-400
+		@apply text-blue-500 hover:text-blue-400;
 	}
 </style>

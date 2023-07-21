@@ -6,7 +6,7 @@
 	import Spinner from '../dispaly/Spinner.svelte';
 	import Fail from '../dispaly/Fail.svelte';
 
-	export let invalid: boolean = false;
+	export let invalid = false;
 
 	let selectedCountry: CountryCode | null = 'FR';
 	let valid = false;

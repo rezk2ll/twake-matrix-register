@@ -65,7 +65,7 @@ export const checkEmailAvailability = async (email: string): Promise<boolean> =>
 
 		return false;
 	}
-}
+};
 
 /**
  * Signs up a user

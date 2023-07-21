@@ -7,7 +7,7 @@
  *  - contain at least one special character (!@#$%^&*)
  *  - contain at least one lowercase letter
  *
- * @param {string} password - the password to validate  
+ * @param {string} password - the password to validate
  * @returns {boolean} - whether the password is valid or not
  */
 export const validatePassword = (password: string): boolean =>

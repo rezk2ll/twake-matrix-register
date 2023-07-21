@@ -6,8 +6,8 @@
 	import { validatePassword } from '$lib/utils/password';
 
 	export let form: ActionData;
-	let invalidNickname: boolean = false;
-	let invalidEmail: boolean = false;
+	let invalidNickname = false;
+	let invalidEmail = false;
 
 	let nickname: string;
 	let email: string;
