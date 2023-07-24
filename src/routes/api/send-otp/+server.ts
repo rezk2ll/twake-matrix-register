@@ -4,8 +4,8 @@ import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request, locals }) => {
-  const body = await request.json();
-  const { phone } = body;
+	const body = await request.json();
+	const { phone } = body;
 
 	if (!isPhoneValid(phone)) {
 		throw error(400, 'Invalid phone number');
@@ -17,7 +17,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
 	const code = generate();
 
-  await send(code, phone);
+	await send(code, phone);
 	await locals.session.set({ code, phone, verified: false, registered: false });
 
 	return new Response('ok', { status: 200 });
