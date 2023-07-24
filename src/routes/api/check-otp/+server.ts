@@ -5,12 +5,12 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	const { password } = await request.json();
 	const { data } = locals.session;
 
-	if (!locals.session.data.code || !password || !locals.session.data.phone) {
+	if (!data.code || !password || !data.phone) {
 		throw error(400, 'Malformed request');
 	}
 
-	if (locals.session.data.code !== password) {
-		throw error(400, 'Incorrect password');
+	if (data.code !== password) {
+		throw error(401, 'Incorrect password');
 	}
 
 	await locals.session.set({

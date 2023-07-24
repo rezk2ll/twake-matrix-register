@@ -5,9 +5,6 @@ import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request, locals }) => {
   const body = await request.json();
-
-  console.log({ body });
-
   const { phone } = body;
 
 	if (!isPhoneValid(phone)) {
@@ -20,9 +17,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
 	const code = generate();
 
-  // await send(code, phone);
-  console.log({ phone, code })
-
+  await send(code, phone);
 	await locals.session.set({ code, phone, verified: false, registered: false });
 
 	return new Response('ok', { status: 200 });
