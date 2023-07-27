@@ -24,3 +24,16 @@ export interface User {
 	mail?: string;
 	objectclass: 'inetOrgPerson';
 }
+
+export interface AuthAPIResponse {
+	error: string;
+	result: number;
+}
+
+export interface AuthResponse extends AuthAPIResponse {
+	id: string;
+}
+
+export interface TokenResponse extends AuthAPIResponse {
+	token: string;
+}
