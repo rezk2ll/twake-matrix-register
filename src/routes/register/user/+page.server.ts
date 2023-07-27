@@ -3,6 +3,7 @@ import type { PageServerLoad } from '../$types';
 import { checkEmailAvailability, checkNickNameAvailability, signup } from '$lib/services/user';
 import { validatePassword } from '$lib/utils/password';
 import { validateEmail } from '$lib/utils/email';
+import authService from '$lib/services/auth';
 
 export const load: PageServerLoad = async ({ parent }) => {
 	const { session } = await parent();
@@ -17,7 +18,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 };
 
 export const actions: Actions = {
-	default: async ({ request, locals }) => {
+	default: async ({ request, locals, cookies }) => {
 		try {
 			const data = await request.formData();
 			const nickname = data.get('nickname') as string;
@@ -28,7 +29,7 @@ export const actions: Actions = {
 			const { phone, verified } = locals.session.data;
 
 			if (!phone || !verified) {
-				return error(500);
+				return fail(500);
 			}
 
 			if (!nickname) {
@@ -52,6 +53,7 @@ export const actions: Actions = {
 			if ((await checkNickNameAvailability(nickname)) === false) {
 				return fail(400, { nickname, taken: true });
 			}
+
 			await signup(nickname, phone, password, displayName, recoveryEmail);
 
 			await locals.session.set({
@@ -61,6 +63,9 @@ export const actions: Actions = {
 				verified: false,
 				user: nickname
 			});
+			const authSession = await authService.login(nickname, password);
+
+			cookies.set(authService.cookieName, authSession);
 
 			throw redirect(302, '/register/success');
 		} catch (err) {
