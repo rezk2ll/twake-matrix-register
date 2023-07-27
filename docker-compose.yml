@@ -10,6 +10,8 @@ services:
       - .env
     networks:
       - registration-network
+    name: twake-register
+
   openldap:
     image: bitnami/openldap
     ports:
@@ -19,6 +21,19 @@ services:
       - .env
     volumes:
       - openldap_data:/bitnami/openldap
+    networks:
+      - registration-network
+    name: openldap
+
+  llng:
+    image: yadd/lemonldap-ng-full
+    name: lemonldap
+    environment:
+      - LOGGER=stderr
+      - USERLOGGER=stderr
+    ports:
+      - 19876:19876
+      - 80:80
     networks:
       - registration-network
 
