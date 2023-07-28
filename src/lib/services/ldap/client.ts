@@ -18,7 +18,8 @@ class LdapClient {
 		const { LDAP_URL, LDAP_DN, LDAP_ADMIN_PASSWORD, LDAP_BASE } = env;
 
 		if (!LDAP_URL || !LDAP_DN || !LDAP_ADMIN_PASSWORD || !LDAP_BASE) {
-			throw new Error('Missing LDAP credentials');
+			console.warn('Missing LDAP credentials');
+			return;
 		}
 
 		this.base = LDAP_BASE;

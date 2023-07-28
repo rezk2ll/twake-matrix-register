@@ -9,7 +9,8 @@ class LemonLdapAuthService {
 
 	constructor() {
 		if (!env.AUTH_URL) {
-			throw Error('LemonLDAP auth service: missing portal url');
+			console.warn('LemonLDAP auth service: missing portal url');
+			return;
 		}
 
 		this.portal = getUrl(env.AUTH_URL);
