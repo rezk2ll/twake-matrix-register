@@ -33,8 +33,8 @@
 	};
 </script>
 
-<div class="flex flex-col space-y-4 items-center justify-center">
-	<h3 class="text-lg font-semibold leading-tight uppercase">OTP Verification</h3>
+<div class="flex flex-col space-y-5 items-center justify-center">
+	<h1 class="text-black text-4xl not-italic font-bold">OTP Verification</h1>
 	{#if valid}
 		<Success>
 			we've sent the verification code to {mask}
@@ -57,7 +57,7 @@
 			on:click={handleSubmit}
 			type="submit"
 			disabled={loading}
-			class="flex items-center cursor-pointer font-bold justify-center m-1 p-3 w-full transform rounded-lg bg-blue-500 disabled:bg-blue-400 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+			class="flex items-center cursor-pointer font-bold justify-center m-1 p-3 w-full transform rounded-xl bg-blue-500 disabled:bg-blue-400 capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
 		>
 			{#if loading}
 				<Spinner />

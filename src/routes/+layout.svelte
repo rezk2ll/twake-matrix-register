@@ -1,6 +1,5 @@
 <script>
 	import '../app.css';
-	import Nav from '$lib/components/nav/Nav.svelte';
 </script>
 
 <svelte:head>
@@ -12,7 +11,6 @@
 	<title>Sign up on Twake</title>
 </svelte:head>
 
-<div class="min-h-screen w-full overflow-hidden bg-gray-900 flex flex-col">
-	<Nav />
+<div class="min-h-screen w-full overflow-hidden bg-coolgray bg-layout flex flex-col">
 	<slot />
 </div>

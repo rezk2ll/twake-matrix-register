@@ -11,4 +11,4 @@
  * @returns {boolean} - whether the password is valid or not
  */
 export const validatePassword = (password: string): boolean =>
-	/^(?=.*\d)(?=.*[!@#$%^&+*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/g.test(password);
+	/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/g.test(password);

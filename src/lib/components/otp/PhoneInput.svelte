@@ -18,9 +18,7 @@
 
 <div class="flex flex-col space-y-8">
 	<div class="flex items-center justify-center">
-		<h3 class="text-lg flex text-center font-semibold leading-tight uppercase text-slate-400">
-			SIGN UP
-		</h3>
+		<h1 class="text-black text-4xl not-italic font-bold">Sign in</h1>
 	</div>
 	{#if invalid}
 		<Fail>This phone number is not available</Fail>
@@ -60,7 +58,7 @@
 				bind:value
 				{options}
 				required={true}
-				class="text-sm rounded-r-lg block w-full p-2.5 focus:outline-none border border-gray-300 border-l-gray-100 dark:border-l-gray-700 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white text-gray-900"
+				class="text-sm rounded-r-lg block w-full p-2.5 focus:border-blue-600 border border-gray-300 border-l-gray-100 bg-gray-100  text-gray-900"
 			/>
 		</div>
 		<input type="hidden" bind:value name="phone" />

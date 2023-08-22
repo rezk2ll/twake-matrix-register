@@ -30,8 +30,8 @@ export const actions: Actions = {
 				return fail(400, { phone, taken: true });
 			}
 
-			await send(code, phone);
-
+			// await send(code, phone);
+			console.log({ code })
 			await locals.session.set({
 				code,
 				phone,
