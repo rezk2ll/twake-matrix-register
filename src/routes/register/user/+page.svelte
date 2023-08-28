@@ -20,7 +20,7 @@
 	$: invalidConfirmPassword = password && password !== confirmPassword;
 </script>
 
-<div class="flex flex-col items-center justify-center space-y-10">
+<div class="flex flex-col items-center justify-center space-y-10 md:px-0 px-2">
 	<h1 class="text-black text-4xl not-italic font-bold">Create an account</h1>
 	<form action="/register/user" method="POST" class="flex flex-col space-y-4 w-full" use:enhance>
 		{#if form?.missing}

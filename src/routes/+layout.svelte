@@ -11,6 +11,6 @@
 	<title>Sign up on Twake</title>
 </svelte:head>
 
-<div class="min-h-screen w-full overflow-hidden bg-coolgray bg-layout flex flex-col">
+<div class="min-h-screen w-full overflow-hidden bg-coolgray bg-layout bg-no-repeat flex flex-col">
 	<slot />
 </div>

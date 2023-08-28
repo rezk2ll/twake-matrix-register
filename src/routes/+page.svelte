@@ -4,7 +4,7 @@
 </script>
 
 <div
-	class="flex space-x-4 w-full min-w-screen min-h-screen align-middle lg:px-52 py-5"
+	class="flex space-x-4 w-full min-h-screen 2xl:px-52 py-5 pt-20"
 >
 	<div class="w-full overflow-hidden">
 		<div class="flex flex-col md:flex-row w-full items-center justify-center">

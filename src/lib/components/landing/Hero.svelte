@@ -1,13 +1,13 @@
 <script lang="ts">
-	import Twake from '../logo/Twake.svelte';
+	import Logo from '../logo/Logo.svelte';
 </script>
 
-<div class="flex flex-col space-y-20 justify-center font-[Inter]">
+<div class="flex flex-col space-y-20 justify-center font-[Inter] px-10">
 	<div class="w-20 h-30">
-		<Twake />
+		<Logo />
 	</div>
 	<div class="flex flex-col space-y-10">
-		<h1 class="text-8xl font-bold text-black">Collaboration powerhouse</h1>
+		<h1 class="text-5xl md:text-6xl xl:text-8xl font-bold text-black">Collaboration powerhouse</h1>
 		<div class="flex flex-col text-gray-600 font-semibold text-[28px] not-italic">
 			<p>File storage, mail client and calendar.</p>
 			<p>We cover all your needs.</p>
