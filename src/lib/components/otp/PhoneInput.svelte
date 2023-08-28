@@ -18,7 +18,7 @@
 
 <div class="flex flex-col space-y-8">
 	<div class="flex items-center justify-center">
-		<h1 class="text-black text-4xl not-italic font-bold">Sign in</h1>
+		<h1 class="text-black text-4xl not-italic font-bold">Sign up</h1>
 	</div>
 	{#if invalid}
 		<Fail>This phone number is not available</Fail>
