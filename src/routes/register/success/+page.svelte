@@ -4,7 +4,7 @@
 	export let data: PageData;
 </script>
 
-<div class="flex flex-col items-center justify-center space-y-4 w-full text-white">
+<div class="flex flex-col items-center justify-center space-y-4 w-full text-black">
 	<div class="flex items-center justify-center w-full py-5">
 		<h5 class="block font-sans text-3xl font-semibold leading-snug tracking-normal antialiased">
 			🎉 Success
