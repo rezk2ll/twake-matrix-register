@@ -11,6 +11,20 @@
 	<title>Sign up on Twake</title>
 </svelte:head>
 
-<div class="min-h-screen w-full overflow-hidden bg-coolgray bg-layout bg-no-repeat flex flex-col">
-	<slot />
+<div class="min-h-screen w-full overflow-hidden gradiant flex flex-col">
+	<div class="bg-layout bg-no-repeat w-full">
+		<slot />
+	</div>
 </div>
+
+<style>
+	.gradiant {
+		background: linear-gradient(
+				105.88deg,
+				rgba(248, 169, 52, 0.2) 0%,
+				rgba(203, 40, 206, 0.2) 43.6%,
+				rgba(10, 132, 255, 0.2) 100%
+			),
+			linear-gradient(0deg, #ffffff, #ffffff);
+	}
+</style>
