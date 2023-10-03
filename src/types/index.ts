@@ -37,3 +37,7 @@ export interface AuthResponse extends AuthAPIResponse {
 export interface TokenResponse extends AuthAPIResponse {
 	token: string;
 }
+
+export type Tab = "register" | "login"
+
+export type PasswordType = "text" | "password"

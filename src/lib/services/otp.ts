@@ -51,20 +51,3 @@ export const generate = (): string => {
 	return Math.floor(1000 + Math.random() * 9000).toString();
 };
 
-/**
- * Check if the given phone number is valid.
- *
- * @param {string} phone - the phone number to check.
- * @returns {boolean} - true if the phone number is valid, false otherwise.
- */
-export const isPhoneValid = (phone: string): boolean => {
-	try {
-		const number = parsePhoneNumberWithError(phone);
-
-		return !!number.country;
-	} catch (error) {
-		console.error('failed to parse phone number', { error });
-
-		return false;
-	}
-};

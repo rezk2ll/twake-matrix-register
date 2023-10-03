@@ -1,27 +1,47 @@
-<div class="flex flex-col w-full items-center justify-center space-y-10 md:space-y-5 pt-20">
-	<div class="bg-white rounded-3xl flex flex-col space-y-5 items-center justify-center w-full sm:w-2/3 lg:w-1/2 md:w-full p-10">
-		<h1 class="text-black text-4xl not-italic font-bold">Sign in</h1>
-		<a
-			class="w-full rounded-3xl flex h-16 justify-center items-center flex-shrink-0 bg-blue-600 text-white text-center text-2xl not-italic font-medium leading-8"
-			href="/login"
+<script lang="ts">
+	import type { Tab } from '../../../types';
+	import LoginForm from '../forms/LoginForm.svelte';
+	import RegisterForm from '../forms/RegisterForm.svelte';
+
+	let active: Tab = 'register';
+</script>
+
+<div
+	class="md:space-y-5 pt-10 bg-white rounded-3xl flex flex-col space-y-5 w-2/3 p-10"
+>
+	<div
+		class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
+	>
+		<div class="flex items-center justify-center w-full py-2 box-border">
+			<button
+				class="h-10 bg-white w-full box-border border-b-2 {active === 'register'
+					? 'text-blue-500  border-blue-500'
+					: 'border-gray-100'} "
+				on:click={() => (active = 'register')}
+			>
+				Sign up
+			</button>
+		</div>
+		<div
+			class="flex items-center justify-center w-full h-10 py-2 box-border border-transparent border-b-2"
 		>
-			Sign in
-		</a>
-		<a
-			class="w-full rounded-3xl flex h-16 justify-center items-center flex-shrink-0 bg-slate-200 text-blue-600 text-center text-2xl not-italic font-medium leading-8"
-			href="/#"
-		>
-			Reset password
-		</a>
+			<button
+				class="h-10 bg-white w-full box-border border-b-2 {active === 'login'
+					? 'text-blue-500 border-blue-500'
+					: 'border-gray-100'} "
+				on:click={() => (active = 'login')}
+			>
+				Sign in
+			</button>
+		</div>
 	</div>
-	<div class="bg-white rounded-3xl flex flex-col space-y-5 items-center justify-center  w-full sm:w-2/3 lg:w-1/2 md:w-full  p-10">
-		<h1 class="text-black text-4xl not-italic font-bold">Sign up</h1>
-		<p class="text-gray-500 text-center text-xl not-italic font-medium">Unleash Your Team's Potential: Connect, Collaborate, Succeed!</p>
-		<a
-			class="w-full rounded-3xl flex h-16 justify-center items-center flex-shrink-0 bg-green-500 leading-8 text-white text-center text-xl not-italic font-medium"
-			href="/register"
-		>
-			Sign up
-		</a>
+	<div class="text-3xl font-semibold leading-9 tracking-normal text-center w-full">
+		{#if active === 'register'}
+			<span>Sign up</span>
+			<RegisterForm />
+		{:else}
+			<span>Sign in</span>
+			<LoginForm />
+		{/if}
 	</div>
 </div>

@@ -7,7 +7,7 @@
 	class="flex space-x-4 w-full min-h-screen 2xl:px-52 py-5 pt-20"
 >
 	<div class="w-full overflow-hidden">
-		<div class="flex flex-col md:flex-row w-full items-center justify-center">
+		<div class="flex flex-col md:flex-row w-full">
 			<Hero />
 			<AccessSelect />
 		</div>
