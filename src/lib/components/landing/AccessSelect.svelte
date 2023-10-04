@@ -6,9 +6,7 @@
 	let active: Tab = 'register';
 </script>
 
-<div
-	class="md:space-y-5 pt-10 bg-white rounded-3xl flex flex-col space-y-5 w-2/3 p-10"
->
+<div class="md:space-y-5 pt-10 bg-white rounded-3xl flex flex-col space-y-5 w-7/12 p-10">
 	<div
 		class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
 	>
@@ -16,7 +14,7 @@
 			<button
 				class="h-10 bg-white w-full box-border border-b-2 {active === 'register'
 					? 'text-blue-500  border-blue-500'
-					: 'border-gray-100'} "
+					: 'border-gray-100 border-b'} "
 				on:click={() => (active = 'register')}
 			>
 				Sign up
@@ -28,7 +26,7 @@
 			<button
 				class="h-10 bg-white w-full box-border border-b-2 {active === 'login'
 					? 'text-blue-500 border-blue-500'
-					: 'border-gray-100'} "
+					: 'border-gray-100 border-b'} "
 				on:click={() => (active = 'login')}
 			>
 				Sign in

@@ -1,7 +1,8 @@
-import { generate, isPhoneValid, send } from '$lib/services/otp';
+import { generate, send } from '$lib/services/otp';
 import { checkPhoneAvailability } from '$lib/services/user';
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { isPhoneValid } from '$lib/utils/phone';
 
 export const POST: RequestHandler = async ({ request, locals }) => {
 	const body = await request.json();

@@ -1,7 +1,8 @@
-import { generate, isPhoneValid, send } from '$lib/services/otp';
+import { generate, send } from '$lib/services/otp';
 import { Redirect, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { checkPhoneAvailability } from '$lib/services/user';
+import { isPhoneValid } from '$lib/utils/phone';
 
 export const load: PageServerLoad = async ({ parent }) => {
 	const { session } = await parent();

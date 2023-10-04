@@ -1,5 +1,4 @@
 import { env } from '$env/dynamic/private';
-import { parsePhoneNumberWithError } from 'svelte-tel-input';
 import type { ISmsSendPayload } from '../../types';
 
 /**

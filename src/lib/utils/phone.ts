@@ -17,16 +17,13 @@ export const maskPhone = (phone: string): string => {
  * @returns {boolean} - true if the phone number is valid, false otherwise.
  */
 export const isPhoneValid = (phone: string): boolean => {
-	console.log('validating')
+	if (phone.length < 8) return false;
+
 	try {
 		const number = parsePhoneNumberWithError(phone);
 
-		console.log('parsed phone number', { number });
-
 		return !!number.country;
 	} catch (error) {
-		console.error('failed to parse phone number', { error });
-
 		return false;
 	}
 };
