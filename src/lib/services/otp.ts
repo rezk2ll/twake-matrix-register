@@ -42,11 +42,11 @@ export const send = async (code: string, to: string): Promise<void> => {
 };
 
 /**
- * Generates a 4 digit code.
+ * Generates a 6 digit code.
  *
  * @returns {string}
  */
 export const generate = (): string => {
-	return Math.floor(1000 + Math.random() * 9000).toString();
+	return Math.floor(100000 + Math.random() * 900000).toString();
 };
 

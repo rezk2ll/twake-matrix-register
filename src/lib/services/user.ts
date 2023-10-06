@@ -72,21 +72,24 @@ export const checkEmailAvailability = async (email: string): Promise<boolean> =>
  *
  * @param {string} cn - the nickname of the user.
  * @param {string} mobile - the phone of the user.
- * @param {string} displayName - the display name of the user.
+ * @param {string} firstName - the first name of the user.
+ * @param {string} lastName - the last name of the user.
  * @param {string} mail - the email to send the recovery email to.
  */
 export const signup = async (
 	cn: string,
 	mobile: string,
 	password: string,
-	displayName?: string,
+	firstName: string,
+	lastName: string,
 	mail?: string
 ): Promise<void> => {
 	try {
 		const entry: User = {
 			uid: cn,
 			cn,
-			sn: cn,
+			gn: firstName,
+			sn: lastName,
 			mobile,
 			userPassword: password,
 			objectclass: 'inetOrgPerson'
@@ -94,10 +97,6 @@ export const signup = async (
 
 		if (mail) {
 			entry.mail = mail;
-		}
-
-		if (displayName) {
-			entry.displayName = displayName;
 		}
 
 		await ldapClient.insert<User>(`cn=${cn},ou=users`, entry);

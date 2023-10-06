@@ -24,4 +24,6 @@ interface SessionData {
 	verified: boolean = false;
 	registered: boolean = false;
 	user?: string;
+	firstName?: string;
+	lastName?: string;
 }

@@ -8,13 +8,16 @@
 	import SubmitButton from '../button/SubmitButton.svelte';
 	import OutlineLink from '../link/OutlineLink.svelte';
 	import VerifyPhoneModal from '../otp/VerifyPhoneModal.svelte';
+	import { form, phone as phoneStore } from '../../../store';
+	import { enhance } from '$app/forms';
 
 	let password: string = '';
 	let confirmPassword: string = '';
 	let firstName: string = '';
 	let lastName: string = '';
 	let nickName: string = '';
-	let phone: string = '';
+	let phone = '';
+	let invalidPhone = false;
 
 	$: invalidPassword = password.length > 0 && !validatePassword(password);
 	$: invalidConfirmPassword =
@@ -23,10 +26,13 @@
 	$: invalidFirstName = firstName.length > 0 && !validateName(firstName);
 	$: invalidLastName = lastName.length > 0 && !validateName(lastName);
 	$: invalidNickname = nickName.length > 0 && !validateNickName(nickName);
-	$: invalidPhone = phone.length > 0 && !isPhoneValid(phone);
+	$: {
+		invalidPhone = !!phone && phone.length > 0 && !isPhoneValid(phone);
+		!!phone && phoneStore.set(phone);
+	}
 </script>
 
-<form action="" class="flex flex-col space-y-6">
+<form use:enhance action="?/register" method="POST" class="flex flex-col space-y-6">
 	<div class="flex space-x-5 text-xs font-medium leading-4 tracking-wide text-left font-[Inter]">
 		<TextField
 			name="firstname"
@@ -43,20 +49,40 @@
 			bind:isInValid={invalidLastName}
 		/>
 	</div>
-	<TextField
-		name="nickname"
-		placeholder="Last Name"
-		label="Username"
-		bind:value={nickName}
-		bind:isInValid={invalidNickname}
-	/>
-	<PasswordField
-		name="password"
-		placeholder="Password"
-		label="Password"
-		bind:value={password}
-		bind:isInvalid={invalidPassword}
-	/>
+	<div>
+		<TextField
+			name="nickname"
+			placeholder="Last Name"
+			label="Username"
+			bind:value={nickName}
+			bind:isInValid={invalidNickname}
+		/>
+		{#if $form?.invalid_nickname}
+			<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+				>invalid Username.
+			</span>
+		{/if}
+		{#if $form?.nickname_taken}
+			<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+				>username is already taken
+			</span>
+		{/if}
+	</div>
+	<div>
+		<PasswordField
+			name="password"
+			placeholder="Password"
+			label="Password"
+			bind:value={password}
+			bind:isInvalid={invalidPassword}
+		/>
+
+		{#if $form?.invalid_password}
+			<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+				>invalid password
+			</span>
+		{/if}
+	</div>
 	<PasswordField
 		name="confirmpassword"
 		placeholder="Confirm password"
@@ -64,10 +90,16 @@
 		bind:value={confirmPassword}
 		bind:isInvalid={invalidConfirmPassword}
 	/>
-
-	<PhoneField bind:value={phone} bind:isInValid={invalidPhone}>
-		<VerifyPhoneModal bind:phone />
-	</PhoneField>
+	<div>
+		<PhoneField bind:value={phone} bind:isInValid={invalidPhone}>
+			<VerifyPhoneModal bind:phone />
+		</PhoneField>
+		{#if $form?.invalid_phone}
+			<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+				>invalid phone number
+			</span>
+		{/if}
+	</div>
 
 	<div class="flex flex-col items-center justify-center space-y-5">
 		<SubmitButton>Sign up</SubmitButton>

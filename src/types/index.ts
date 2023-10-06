@@ -18,9 +18,10 @@ export interface User {
 	uid: string;
 	cn: string;
 	sn: string;
+	gn: string;
 	userPassword: string;
-	displayName?: string;
 	mobile: string;
+	displayName?: string;
 	mail?: string;
 	objectclass: 'inetOrgPerson';
 }

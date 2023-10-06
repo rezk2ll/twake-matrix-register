@@ -3,21 +3,46 @@
 	import SubmitButton from '../button/SubmitButton.svelte';
 	import TextField from '../input/TextField.svelte';
 	import { maskPhone } from '$lib/utils/phone';
+	import { enhance } from '$app/forms';
+	import { form, verified } from '../../../store';
+	import { validateOTP } from '$lib/utils/password';
 
 	export let phone: string;
 
 	let value: string = '';
-
 	let open = false;
+	let sendOtpForm: HTMLFormElement;
 
-	$: mask = maskPhone(phone);
+	const handleSendOtp = () => {
+		if (!phone) return;
+
+		sendOtpForm.requestSubmit();
+	};
+
+	const openVerificationModal = async () => {
+		open = true;
+		handleSendOtp();
+	};
+
+	$: incorrect = $form?.incorrect === true;
+	$: inValid = !validateOTP(value);
+	$: {
+		if ($form?.verified) {
+			if (open === true) {
+				verified.set(true);
+				$form.verified = false;
+			}
+
+			open = false;
+		}
+	}
 </script>
 
-<span class="absolute inset-y-0 right-0 flex items-center pl-2">
+<span class="absolute inset-y-0 right-0 flex items-center px-2">
 	<button
 		type="button"
-		class="p-1 focus:outline-none focus:shadow-outline px-5 rounded-full bg-indigo-50 text-sm text-blue-500 font-medium leading-5 h-11 items-center"
-		on:click={() => (open = true)}
+		class="p-1 focus:outline-none focus:shadow-outline px-5 rounded-3xl bg-indigo-50 text-sm text-blue-500 font-medium leading-5 h-11 items-center"
+		on:click={openVerificationModal}
 	>
 		Verify
 	</button>
@@ -61,6 +86,9 @@
 					</svg>
 				</button>
 			</div>
+			<form use:enhance action="?/sendOtp" method="POST" class="hidden" bind:this={sendOtpForm}>
+				<input type="text" name="phone" bind:value={phone} required />
+			</form>
 			<div class="flex flex-col space-y-2">
 				<h1 class="text-2xl font-semibold leading-8 tracking-normal text-center">
 					Phone number confirmation
@@ -68,15 +96,29 @@
 				<span class="text-base font-medium leading-6 tracking-tight text-center text-gray-400"
 					>Enter 6 digit code we sent to:</span
 				>
-				<span class="text-base font-medium leading-6 tracking-tight text-center">{mask}</span>
+				<span class="text-base font-medium leading-6 tracking-tight text-center"
+					>{maskPhone(phone)}</span
+				>
 			</div>
-			<form action="" class="px-10 pb-10">
+			<form action="?/checkOtp" use:enhance method="POST" class="px-10 pb-10">
 				<div class="my-5">
-					<TextField label="Code" placeholder="Code" bind:value name="code" isInValid={false} />
+					<TextField
+						label="Code"
+						placeholder="Code"
+						bind:value
+						name="password"
+						isInValid={incorrect}
+						feedback={false}
+					/>
+					{#if incorrect}
+						<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+							>Entered code is incorrect. Try again.
+						</span>
+					{/if}
 				</div>
 				<div class="flex flex-col space-y-2 pt-2">
-					<SubmitButton>Confirm</SubmitButton>
-					<OutlineButton handler={() => {}}>Send code</OutlineButton>
+					<SubmitButton disabled={inValid}>Confirm</SubmitButton>
+					<OutlineButton handler={handleSendOtp}>Send code</OutlineButton>
 				</div>
 			</form>
 		</div>

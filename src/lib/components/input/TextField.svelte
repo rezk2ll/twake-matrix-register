@@ -6,6 +6,7 @@
 	export let value: string;
 	export let isInValid: boolean;
   export let name: string;
+	export let feedback: boolean = true;
 </script>
 
 <div class="relative mt-6">
@@ -25,7 +26,7 @@
 		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 text-xs font-medium leading-4"
 		>{label}</label
 	>
-	{#if value && isInValid === false }
+	{#if feedback && value && isInValid === false }
 		<span class="absolute inset-y-0 right-0 flex items-center pl-2">
 			<div class="p-1 focus:outline-none focus:shadow-outline">
 				<Valid />
