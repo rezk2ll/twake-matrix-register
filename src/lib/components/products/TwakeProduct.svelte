@@ -11,7 +11,7 @@
 		<h1 class="font-semibold text-2xl text-left">Twake</h1>
 		<span class="font-medium leading-4 tracking-[0.4000000059604645px] text-gray-400 text-left">Decentralised corporate communication starts here</span>
 	</div> 
-  <div class="flex shrink items-center justify-center">
+  <a href="https://web.twake.app/" class="flex shrink items-center justify-center">
     <ArrowForward />
-  </div>
+  </a>
 </div>

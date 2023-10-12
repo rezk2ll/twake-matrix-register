@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="md:space-y-5 py-5 bg-[#FFFBFE] shadow-xl rounded-3xl flex flex-col space-y-5 w-1/2 px-10"
+	class="md:space-y-5 py-5 bg-[#FFFBFE] shadow-xl rounded-3xl flex flex-col space-y-5 w-full lg:w-1/2 px-10"
 >
 	<div
 		class="flex flex-col space-y-4 w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"

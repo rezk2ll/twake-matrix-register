@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { ActionData } from '../../../routes/$types';
 	import type { Tab } from '../../../types';
 	import LoginForm from '../forms/LoginForm.svelte';
 	import RegisterForm from '../forms/RegisterForm.svelte';
@@ -7,7 +6,7 @@
 	let active: Tab = 'register';
 </script>
 
-<div class="md:space-y-5 pt-10 bg-white shadow-xl rounded-3xl flex flex-col space-y-5 w-7/12 p-10">
+<div class="pt-10 bg-white shadow-xl rounded-3xl flex flex-col space-y-5 w-full md:w-8/12 2xl:w-7/12 p-10" id="start">
 	<div
 		class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
 	>

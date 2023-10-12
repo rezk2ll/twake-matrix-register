@@ -10,14 +10,16 @@
 	import VerifyPhoneModal from '../otp/VerifyPhoneModal.svelte';
 	import { form, phone as phoneStore } from '../../../store';
 	import { enhance } from '$app/forms';
+	import AvailableNicknames from '../user/AvailableNicknames.svelte';
 
-	let password: string = '';
-	let confirmPassword: string = '';
-	let firstName: string = '';
-	let lastName: string = '';
-	let nickName: string = '';
+	let password = '';
+	let confirmPassword = '';
+	let firstName = '';
+	let lastName = '';
+	let nickName = '';
 	let phone = '';
 	let invalidPhone = false;
+	let show_suggestions = true;
 
 	$: invalidPassword = password.length > 0 && !validatePassword(password);
 	$: invalidConfirmPassword =
@@ -25,10 +27,15 @@
 		(confirmPassword !== password || !validatePassword(confirmPassword));
 	$: invalidFirstName = firstName.length > 0 && !validateName(firstName);
 	$: invalidLastName = lastName.length > 0 && !validateName(lastName);
-	$: invalidNickname = nickName.length > 0 && !validateNickName(nickName);
+	$: invalidNickname =
+		nickName.length > 0 && !validateNickName(nickName);
 	$: {
 		invalidPhone = !!phone && phone.length > 0 && !isPhoneValid(phone);
 		!!phone && phoneStore.set(phone);
+	}
+
+	$: {
+		if ($form?.nickname_taken === true) show_suggestions = true; 
 	}
 </script>
 
@@ -58,14 +65,18 @@
 			bind:isInValid={invalidNickname}
 		/>
 		{#if $form?.invalid_nickname}
-			<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+			<span
+				class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-red-500 px-5"
 				>invalid Username.
 			</span>
 		{/if}
+
 		{#if $form?.nickname_taken}
-			<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
-				>username is already taken
-			</span>
+			<AvailableNicknames
+				bind:value={nickName}
+				nickNames={$form?.alternative_nicknames}
+				bind:show={show_suggestions}
+			/>
 		{/if}
 	</div>
 	<div>
@@ -78,7 +89,8 @@
 		/>
 
 		{#if $form?.invalid_password}
-			<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+			<span
+				class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-red-500 px-5"
 				>invalid password
 			</span>
 		{/if}
@@ -95,7 +107,8 @@
 			<VerifyPhoneModal bind:phone />
 		</PhoneField>
 		{#if $form?.invalid_phone}
-			<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+			<span
+				class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-red-500 px-5"
 				>invalid phone number
 			</span>
 		{/if}

@@ -22,7 +22,7 @@ interface SessionData {
 	phone: string | null;
 	code: string | null;
 	verified: boolean = false;
-	registered: boolean = false;
+	authenticated: boolean = false;
 	user?: string;
 	firstName?: string;
 	lastName?: string;

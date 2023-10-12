@@ -1,3 +1,4 @@
+import { generateNickNames } from '$lib/utils/username';
 import type { User } from '../../types';
 import ldapClient from './ldap/client';
 
@@ -88,7 +89,7 @@ export const signup = async (
 		const entry: User = {
 			uid: cn,
 			cn,
-			gn: firstName,
+			givenName: firstName,
 			sn: lastName,
 			mobile,
 			userPassword: password,
@@ -104,3 +105,67 @@ export const signup = async (
 		console.error('Failed to create user', { error });
 	}
 };
+
+/**
+ * Fetches a user by login.
+ *
+ * login can be: Email / username / phone number
+ *
+ * @param {string} login - the login to fetch the user by.
+ * @returns {User} the fetched user.
+ */
+export const fetchUser = async (login: string): Promise<User | null> => {
+	try {
+		const user = (await ldapClient.find('cn', login, [
+			'cn',
+			'sn',
+			'givenName'
+		])) as unknown as User[];
+
+		return user[0] || null;
+	} catch (error) {
+		console.error('Failed to fetch current user', { error });
+		return null;
+	}
+};
+
+/**
+ * Suggest available nicknames
+ *
+ * @param {string} firstName
+ * @param {string} lastName
+ * @returns {Promise<string[]>} - a list of suggested available nicknames.
+ */
+export const suggestAvailableNickNames = async (
+	firstName: string,
+	lastName: string
+): Promise<string[]> => {
+	const suggestedNickNames: string[] = [];
+
+	const nickNames = generateNickNames(firstName, lastName);
+
+	await Promise.all(
+		nickNames.map(async (nick) => {
+			if ((await checkNickNameAvailability(nick)) === true) {
+				suggestedNickNames.push(nick);
+			}
+		})
+	);
+
+	return suggestedNickNames.slice(0, 5);
+};
+
+/**
+ * Suggest alternative avaialable nicknames
+ *
+ * @param {string} firstName - the first name of the user.
+ * @param {string} lastName - the last name of the user.
+ * @param {string} current - the current nickname of the user to exclude.
+ * @returns
+ */
+export const suggestAlternativeAvaialableNickNames = async (
+	firstName: string,
+	lastName: string,
+	current: string
+): Promise<string[]> =>
+	(await suggestAvailableNickNames(firstName, lastName)).filter((nickName) => nickName !== current);

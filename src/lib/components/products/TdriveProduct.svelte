@@ -13,7 +13,7 @@
 			>Share and collaborate on files securely, anywhere</span
 		>
 	</div>
-	<div class="flex shrink items-center justify-center">
+	<a href="https://tdrive.linagora.com" class="flex shrink items-center justify-center">
 		<ArrowForward />
-	</div>
+	</a>
 </div>

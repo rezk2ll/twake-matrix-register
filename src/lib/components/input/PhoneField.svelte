@@ -20,8 +20,9 @@
 	/>
 	<label
 		for="phone"
-		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 text-xs font-medium leading-4"
-		>Phone number</label
+		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 text-xs font-medium leading-4 {isInValid
+			? 'text-red-500'
+			: ''}">Phone number</label
 	>
 	{#if $verified === false && value && isInValid === false}
 		<span class="absolute inset-y-0 right-0 flex items-center pl-2">

@@ -15,7 +15,7 @@
 </span
 		>
 	</div>
-	<div class="flex shrink items-center justify-center">
+	<a href="https://tmail.linagora.com" class="flex shrink items-center justify-center">
 		<ArrowForward />
-	</div>
+	</a>
 </div>
