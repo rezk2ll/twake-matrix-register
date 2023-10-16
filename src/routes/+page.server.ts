@@ -1,6 +1,6 @@
 import type { Actions, PageServerLoad } from './$types';
 import Client from '$lib/services/ldap/client';
-import { generate } from '$lib/services/otp';
+import { generate, send } from '$lib/services/otp';
 import { Redirect, fail, redirect } from '@sveltejs/kit';
 import { isPhoneValid } from '$lib/utils/phone';
 import { validatePassword } from '$lib/utils/password';
@@ -40,7 +40,7 @@ export const actions: Actions = {
 			return fail(400, { phone, invalid: true });
 		}
 
-		console.log({ code });
+		await send(code, phone);
 
 		await locals.session.set({
 			code,
