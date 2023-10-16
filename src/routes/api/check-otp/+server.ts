@@ -15,7 +15,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 
 	await locals.session.set({
 		...data,
-		verified: true
+		verified: true,
 	});
 
 	return new Response('ok', { status: 200 });

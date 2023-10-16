@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 	const code = generate();
 
 	await send(code, phone);
-	await locals.session.set({ code, phone, verified: false, registered: false });
+	await locals.session.set({ code, phone, verified: false, authenticated: false });
 
 	return new Response('ok', { status: 200 });
 };
