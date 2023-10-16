@@ -2,8 +2,7 @@ version: '3.9'
 
 services:
   registration:
-    container_name: twake-matrix-register
-    build: .
+    image: kferjani/twake-matrix-register:main
     ports:
       - 8080:3000
     env_file:
