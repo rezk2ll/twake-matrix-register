@@ -179,23 +179,24 @@ The request body should be in JSON format and include the following properties:
 | Parameter      | Type   | Description                                                |
 | -------------- | ------ | ---------------------------------------------------------- |
 | nickname       | string | The user's nickname for registration.                      |
-| displayName    | string | The user's display name (optional).                        |
-| recovery_email | string | The user's recovery email for account recovery (optional). |
+| firstname    | string | The user's display name.                        |
+| lastname    | string | The user's display name.                        |
+| phone | string | The user's phone number |
 | password       | string | The user's password for account authentication.            |
 
 Note:
 
 - the password must be at least 8 characters long, with at least a symbol, upper and lower case letters and a number.
-- the recovery email and display name are optional.
 
 Example:
 
 ```json
 {
-	"nickname": "exampleUser123",
-	"displayName": "John Doe",
-	"recovery_email": "john.doe@example.com",
-	"password": "SecurePass123+"
+  "nickname": "exampleUser123",
+  "firstname":  "John",
+  "lastname": "Doe",
+  "password": "SecurePass123+",
+  "phone":  "+21622222222",
 }
 ```
 
@@ -229,13 +230,15 @@ Status: 201 Created
 Body: ok
 ```
 
+a lemondldap cookie will be set when completing the registration successfully.
+
 ### Error Handling
 
 - Status Code 400: The endpoint will return a `400 Bad Request` status code in the following cases:
   - If the request is malformed or missing required fields (e.g., nickname, password).
   - If the provided password does not meet the password validation criteria.
-  - If the provided recovery email is invalid or not available.
-  - If the provided nickname is not available.
+  - If the provided firstname and lastname are not valid.
+  - If the provided nickname is not available or invalid.
   - If the provided phone number is not available.
-- Status Code 401: If the user's phone is not verified, the endpoint will return a `401 Unauthorized` status code.
+- Status Code 401: If the user's phone is not verified, does not match the verified phone, the endpoint will return a `401 Unauthorized` status code.
 - Status code 500: If an internal error occured.
