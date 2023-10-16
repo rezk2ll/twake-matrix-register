@@ -73,6 +73,7 @@ export const checkEmailAvailability = async (email: string): Promise<boolean> =>
  *
  * @param {string} cn - the nickname of the user.
  * @param {string} mobile - the phone of the user.
+ * @param {string} password - the user password.
  * @param {string} firstName - the first name of the user.
  * @param {string} lastName - the last name of the user.
  * @param {string} mail - the email to send the recovery email to.
