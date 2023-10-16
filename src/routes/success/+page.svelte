@@ -4,7 +4,6 @@
 	import LoggedUser from '$lib/components/nav/LoggedUser.svelte';
 	import LoggedHero from '$lib/components/landing/LoggedHero.svelte';
 
-	import Twake from '$lib/components/icons/Twake.svelte';
 	export let data: PageData;
 
 	$: user = `${data.firstName} ${data.lastName}`;
@@ -25,7 +24,6 @@
 					<div class="hidden lg:block">
 						<LoggedHero />
 					</div>
-					<Twake /> 
 					<SuccessCard {user} />
 				</div>
 			</div>
