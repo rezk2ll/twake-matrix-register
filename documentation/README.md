@@ -3,6 +3,8 @@
 - [Send OTP](#send-otp-endpoint)
 - [Check OTP](#check-otp-endpoint)
 - [Create user](#create-user-endpoint)
+- [Validate nickname](#validate-nickname)
+- [Suggest nicknames](#suggest-nicknames)
 
 the endpoints uses encrypted session cookies `twake.session` that is essential to the validation and the whole process of the registration.
 
@@ -242,3 +244,132 @@ a lemondldap cookie will be set when completing the registration successfully.
   - If the provided phone number is not available.
 - Status Code 401: If the user's phone is not verified, does not match the verified phone, the endpoint will return a `401 Unauthorized` status code.
 - Status code 500: If an internal error occured.
+
+## Validate nickname
+
+### Description
+
+This API endpoint allows users to validate a given nickname and check if it's available.
+
+### Endpoint URL
+
+```
+/api/check-nickname
+```
+
+### HTTP Method
+
+```
+POST
+```
+
+### Request Parameters
+
+#### Request Body
+
+The request body should be in JSON format and include the following property:
+
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| nickname     | string | the nickname to check. |
+
+Example:
+
+```json
+{
+	"nickname": "kferjani"
+}
+```
+
+### Response
+
+The API endpoint returns the following response:
+
+| Status Code | Description                                                        |
+| ----------- | ------------------------------------------------------------------ |
+| 200         | OK - The nickname is valid and is available.                       |
+| 400         | Bad Request - Invalid nickname or nickname is already in use.      |
+| 500         | Internal error. something unexpected occured                       |
+
+Example Response (Status Code: 200 - OK):
+
+```
+Status: 200 OK
+Body: ok
+```
+
+### Error Handling
+
+- Status Code 400: The endpoint will return a `400 Bad Request` status code in the following cases:
+  - If the provided nickname is invalid (e.g., not in a valid format).
+  - If the provided nickname is already in use by another user.
+- Status code 500: Internal error
+
+
+## Suggest nicknames
+
+### Description
+
+This API endpoint allows users get a list of suggested available nicknames using their first and last names.
+
+### Endpoint URL
+
+```
+/api/suggest-nicknames
+```
+
+### HTTP Method
+
+```
+POST
+```
+
+### Request Parameters
+
+#### Request Body
+
+The request body should be in JSON format and include the following property:
+
+| Parameter | Type   | Description                          |
+| --------- | ------ | ------------------------------------ |
+| firstname | string | the user firstname.                  |
+| lastname  | string | the user lastname.                   |
+
+Example:
+
+```json
+{
+	"firstname": "John",
+	"lastname": "Doe"
+}
+```
+
+### Response
+
+The API endpoint returns the following response:
+
+| Status Code | Description                                                        |
+| ----------- | ------------------------------------------------------------------ |
+| 200         | OK - returns a list of suggested available nicknames               |
+| 400         | Bad Request - missing or invalid firstname or lastname             |
+| 500         | Internal error. something unexpected occured                       |
+
+Example Response (Status Code: 200 - OK):
+
+```json
+Status: 200 OK
+Body: [
+    "john.doe",
+    "john_doe",
+    "doe.john",
+    "john-doe",
+    "doe"
+]
+```
+
+### Error Handling
+
+- Status Code 400: The endpoint will return a `400 Bad Request` status code in the following cases:
+  - If the is not provided firstname or lastname
+  - If the provided firstname or lastname is invalid.
+- Status code 500: Internal error
