@@ -31,6 +31,7 @@ export const checkNickNameAvailability = async (nickName: string): Promise<boole
  * @returns {Promise<boolean>} - true if the phone is available, false otherwise.
  */
 export const checkPhoneAvailability = async (phone: string): Promise<boolean> => {
+	return true;
 	try {
 		const existingUser = await ldapClient.find('mobile', phone, ['cn']);
 
