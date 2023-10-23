@@ -127,6 +127,7 @@ export const actions: Actions = {
 				return fail(400, { invalid_lastname: true });
 			}
 
+			console.info('registering user')
 			await signup(nickname, phone, password, firstName, lastName);
 
 			await locals.session.set({
@@ -139,6 +140,7 @@ export const actions: Actions = {
 				lastName
 			});
 
+			console.info('logging in user')
 			const authSessionCookie = await authService.login(nickname, password);
 
 			cookies.set(authService.cookieName, authSessionCookie);
@@ -148,6 +150,8 @@ export const actions: Actions = {
 			if ((err as Redirect).location) {
 				throw err;
 			}
+
+			console.error({ err })
 
 			return fail(500, { error: true });
 		}
@@ -187,6 +191,8 @@ export const actions: Actions = {
 			if ((err as Redirect).location) {
 				throw err;
 			}
+
+			console.error({ err })
 
 			return fail(500, { failed_login: true });
 		}
