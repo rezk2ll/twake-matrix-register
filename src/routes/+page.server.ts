@@ -1,6 +1,6 @@
 import type { Actions, PageServerLoad } from './$types';
 import Client from '$lib/services/ldap/client';
-import { generate, send } from '$lib/services/otp';
+import { send, verify } from '$lib/services/otp';
 import { Redirect, fail, redirect } from '@sveltejs/kit';
 import { isPhoneValid } from '$lib/utils/phone';
 import { validatePassword } from '$lib/utils/password';
@@ -27,10 +27,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 export const actions: Actions = {
 	sendOtp: async ({ request, locals }) => {
 		const data = await request.formData();
-		const code = generate();
 		const phone = data.get('phone') as string;
-
-		console.log({ phone });
 
 		if (!phone) {
 			return fail(400, { phone, missing: true });
@@ -40,10 +37,17 @@ export const actions: Actions = {
 			return fail(400, { phone, invalid: true });
 		}
 
-		await send(code, phone);
+		const { last_sent } = locals.session.data;
+
+		if (last_sent && last_sent > Date.now() - 60000) {
+			return fail(400, { phone, invalid: true });
+		}
+
+		const token = await send(phone);
 
 		await locals.session.set({
-			code,
+			otp_request_token: token,
+			last_sent: Date.now(),
 			phone,
 			verified: false,
 			authenticated: false
@@ -61,11 +65,11 @@ export const actions: Actions = {
 			return fail(400, { missing: true });
 		}
 
-		if (!password || !session.data.code) {
+		if (!password || !session.data.otp_request_token) {
 			return fail(400, { incorrect: true });
 		}
 
-		if (session.data.code === password) {
+		if (await verify(session.data.phone, password, session.data.otp_request_token)) {
 			await locals.session.update((data) => ({
 				...data,
 				verified: true
@@ -81,7 +85,7 @@ export const actions: Actions = {
 		}
 	},
 
-	register: async ({ request, locals, cookies }) => {
+	register: async ({ request, locals, cookies, url }) => {
 		try {
 			const data = await request.formData();
 			const { session } = locals;
@@ -127,23 +131,22 @@ export const actions: Actions = {
 				return fail(400, { invalid_lastname: true });
 			}
 
-			console.info('registering user')
 			await signup(nickname, phone, password, firstName, lastName);
 
 			await locals.session.set({
 				authenticated: true,
-				code: null,
-				phone: null,
+				otp_request_token: null,
+				last_sent: null,
+				phone,
 				verified: false,
 				user: nickname,
 				firstName,
 				lastName
 			});
 
-			console.info('logging in user')
 			const authSessionCookie = await authService.login(nickname, password);
 
-			cookies.set(authService.cookieName, authSessionCookie);
+			cookies.set(authService.cookieName, authSessionCookie, { domain: url.host });
 
 			throw redirect(302, '/success');
 		} catch (err) {
@@ -157,7 +160,7 @@ export const actions: Actions = {
 		}
 	},
 
-	login: async ({ request, locals, cookies }) => {
+	login: async ({ request, locals, cookies, url }) => {
 		try {
 			const data = await request.formData();
 
@@ -184,7 +187,7 @@ export const actions: Actions = {
 				user: user?.cn
 			}));
 
-			cookies.set(authService.cookieName, cookie);
+			cookies.set(authService.cookieName, cookie, { domain: url.host });
 
 			throw redirect(302, '/success');
 		} catch (err) {

@@ -12,16 +12,25 @@
 	let value: string = '';
 	let open = false;
 	let sendOtpForm: HTMLFormElement;
+	let resendCounter = 60;
+
+	setInterval(() => {
+		if (resendCounter > 0) resendCounter--;
+	}, 1000);
 
 	const handleSendOtp = () => {
 		if (!phone) return;
 
+		if(resendCounter > 0 && open) return;
+
 		sendOtpForm.requestSubmit();
+
+		resendCounter = 60;
 	};
 
 	const openVerificationModal = async () => {
-		open = true;
 		handleSendOtp();
+		open = true;
 	};
 
 	$: incorrect = $form?.incorrect === true;
@@ -118,7 +127,13 @@
 				</div>
 				<div class="flex flex-col space-y-2 pt-2">
 					<SubmitButton disabled={inValid}>Confirm</SubmitButton>
-					<OutlineButton handler={handleSendOtp}>Send code</OutlineButton>
+					<OutlineButton handler={handleSendOtp} disabled={resendCounter > 0}>
+						{#if resendCounter === 0}
+							 Send code
+						{:else}
+							 Send code again in: 0:{resendCounter}
+						{/if}
+					</OutlineButton>
 				</div>
 			</form>
 		</div>

@@ -1,21 +1,22 @@
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { verify } from '$lib/services/otp';
 
 export const POST: RequestHandler = async ({ request, locals }) => {
 	const { password } = await request.json();
 	const { data } = locals.session;
 
-	if (!data.code || !password || !data.phone) {
+	if (!data.otp_request_token || !password || !data.phone) {
 		throw error(400, 'Malformed request');
 	}
 
-	if (data.code !== password) {
+	if (!(await verify(data.phone, data.otp_request_token, password))) {
 		throw error(401, 'Incorrect password');
 	}
 
 	await locals.session.set({
 		...data,
-		verified: true,
+		verified: true
 	});
 
 	return new Response('ok', { status: 200 });

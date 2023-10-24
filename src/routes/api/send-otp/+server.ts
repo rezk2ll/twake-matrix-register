@@ -1,4 +1,4 @@
-import { generate, send } from '$lib/services/otp';
+import { send } from '$lib/services/otp';
 import { checkPhoneAvailability } from '$lib/services/user';
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
@@ -12,14 +12,23 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		throw error(400, 'Invalid phone number');
 	}
 
+	if (locals.session.data.last_sent && locals.session.data.last_sent > Date.now() - 60000) {
+		throw error(429, 'Too many requests');
+	}
+
 	if (!(await checkPhoneAvailability(phone))) {
 		throw error(400, 'Phone number is already in use');
 	}
 
-	const code = generate();
+	const token = await send(phone);
 
-	await send(code, phone);
-	await locals.session.set({ code, phone, verified: false, authenticated: false });
+	await locals.session.set({
+		otp_request_token: token,
+		phone,
+		last_sent: Date.now(),
+		verified: false,
+		authenticated: false
+	});
 
 	return new Response('ok', { status: 200 });
 };

@@ -4,7 +4,8 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				'coolgray': '#EDEEF0'
+				'coolgray': '#EDEEF0',
+				'coolgray-400': '#818C99'
 			},
 			backgroundImage: {
 				'layout': 'url("/bubble-dynamic-clay.svg"), url("/lock-dynamic-clay.png")'

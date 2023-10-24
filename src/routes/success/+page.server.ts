@@ -11,6 +11,7 @@ export const load: PageServerLoad = async ({ parent }) => {
 	return {
 		username: session.user,
 		firstName: session.firstName,
-		lastName: session.lastName
+		lastName: session.lastName,
+		phone: session.phone,
 	};
 };

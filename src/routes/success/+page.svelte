@@ -8,6 +8,7 @@
 
 	$: user = `${data.firstName} ${data.lastName}`;
   $: username = data.username ?? '';
+	$: phone = data.phone ?? '';
 </script>
 
 <div class="bg-white w-full min-h-screen">
@@ -18,13 +19,13 @@
 				<LoggedUser {username} {user} />
 			</div>
 		</div>
-		<div class="flex space-x-4 w-full 2xl:px-52 py-5 pt-10">
+		<div class="flex space-x-4 w-full xl:px-20 2xl:px-48 py-5 pt-10">
 			<div class="w-full overflow-hidden">
-				<div class="flex flex-col md:flex-row w-full py-10 lg:px-10">
-					<div class="hidden lg:block">
+				<div class="flex flex-col-reverse md:flex-row-reverse w-full py-10 lg:px-10">
+					<SuccessCard {user} bind:id={username} {phone} />
+					<div class="hidden md:block w-full">
 						<LoggedHero />
 					</div>
-					<SuccessCard {user} />
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,32 @@
 export interface ISmsSendPayload {
-	messages: Message[];
+	phone_number: string;
+	text: string;
+	channel: "sms" | "voice_sms",
+	sender: string;
+	code_length: number;
+	allow_digits: boolean;
+	allow_special_chars: boolean;
+	allow_uppercase: boolean;
+	allow_lowercase: boolean;
+}
+
+export interface ISmsSentResponse {
+	code: number;
+	message: string;
+	ticket_number?: string;
+	otp_request_token?: string;
+}
+
+export interface IValidateOTPPayload {
+	code: string;
+	phone_number: string;
+	otp_request_token: string;
+}
+
+export interface IValidateOTPResponse {
+	code: string;
+	message: string;
+	remaining_number_of_attempts: number;
 }
 
 export interface Message {

@@ -20,7 +20,8 @@ export {};
 
 interface SessionData {
 	phone: string | null;
-	code: string | null;
+	otp_request_token: string | null;
+	last_sent: number | null;
 	verified: boolean = false;
 	authenticated: boolean = false;
 	user?: string;

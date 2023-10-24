@@ -17,7 +17,7 @@
 		bind:value
 		{placeholder}
 		type="text"
-		class="h-14 rounded-[4px] ring-2 focus:outline-none px-4 text-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left peer w-full placeholder:text-transparent {isInValid
+		class="h-14 rounded-[4px] ring-2 focus:outline-none px-4 text-[17px] font-medium leading-6 tracking-tight text-left peer w-full placeholder:text-transparent {isInValid
 			? 'ring-red-500 focus:ring-red-500'
 			: 'ring-gray-300 focus:ring-blue-500'}"
 	/>

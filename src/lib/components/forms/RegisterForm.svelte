@@ -120,7 +120,7 @@
 	</div>
 	<div class="flex items-start space-x-5 pr-10">
 		<input type="checkbox" required class=" mt-1" />
-		<span class="text-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
+		<span class="text-[17px] font-medium leading-6 tracking-tight text-left"
 			>I agree with <a href="#/ue" class="text-blue-500">User Agreement</a> and
 			<a href="#/ue" class="text-blue-500">Personal Data Usage</a>
 			terms under conditions stipulated in

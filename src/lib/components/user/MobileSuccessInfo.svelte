@@ -1,0 +1,41 @@
+<script lang="ts">
+	import OutlineButton from '../button/OutlineButton.svelte';
+
+	export let user: string;
+	export let id: string;
+	export let phone = '+21652128155';
+</script>
+
+<div
+	class="flex flex-col space-y-4 items-center justify-center text-sm font-medium leading-5 tracking-wide text-center w-full"
+>
+	<div class="bg-gray-100 rounded-2xl flex flex-col space-y-3 pb-5 w-full">
+		<div class="flex flex-row w-full px-4 py-4">
+			<img src="/images/avatar.svg" alt="avatar" class="w-12" />
+			<div class="flex flex-col px-4 gap-0 items-start grow">
+				<h1 class="text-xl font-semibold tracking-normal">Congratulations,</h1>
+				<h1 class="text-xl font-semibold tracking-normal">
+					{user}!
+				</h1>
+			</div>
+			<img src="/images/arrow-forward.svg" alt="next" />
+		</div>
+		<div class="flex flex-col gap-0.5 px-4">
+			<span class="text-[17px] font-normal leading-6 tracking-wide text-left">@{id}</span>
+			<span class="text-sm font-normal leading-5 text-left text-gray-500">Twake matrix ID</span>
+		</div>
+		<div class="flex flex-col gap-0.5 px-4">
+			<span class="text-[17px] font-normal leading-6 tracking-wide text-left">{phone}</span>
+			<span class="text-sm font-normal leading-5 text-left text-gray-500">Twake phone number</span>
+		</div>
+
+		<div class="flex items-center justify-center pt-5">
+			<div class="w-4/5 md:hidden">
+				<OutlineButton handler={() => {}}>Add recovery email</OutlineButton>
+			</div>
+		</div>
+	</div>
+	<span class="text-lg font-medium leading-6 tracking-tight text-center px-10">
+		Sign into Tdrive and Tmail using Twake credentials
+	</span>
+</div>

@@ -1,7 +1,4 @@
 <script lang="ts">
-	import Tmail from './../icons/Tmail.svelte';
-	import Tdrive from '../icons/Tdrive.svelte';
-	import Twake from '../icons/Twake.svelte';
 	import TwakeIcon from '../logo/TwakeIcon.svelte';
 </script>
 
@@ -14,7 +11,7 @@
 	</div>
 	<div class="flex flex-col space-y-6 w-full">
 		<h1
-			class="text-4xl md:text-6xl xl:text-5xl text-black font-semibold leading-[52px] tracking-normal text-left;"
+			class="text-4xl md:text-5xl xl:text-5xl text-black font-semibold leading-[52px] tracking-normal text-left;"
 		>
 			Twake ID - one account for everything
 		</h1>
@@ -25,9 +22,9 @@
 		</p>
 
 		<div class="flex flex-row space-x-8">
-			<Twake />
-			<Tmail />
-			<Tdrive />
+			<img src="/images/twakechat.svg" alt="twake" class="w-14 h-14" />
+			<img src="/images/tmail.svg" alt="tmail" class="w-14 h-14" />
+			<img src="/images/tdrive.svg" alt="tdrive" class="w-14 h-14" />
 		</div>
 	</div>
 </div>

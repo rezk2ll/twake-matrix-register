@@ -5,7 +5,7 @@ import { checkNickNameAvailability, checkPhoneAvailability, signup } from '$lib/
 import authService from '$lib/services/auth';
 import { validateName, validateNickName } from '$lib/utils/username';
 
-export const POST: RequestHandler = async ({ request, locals, cookies }) => {
+export const POST: RequestHandler = async ({ request, locals, cookies, url }) => {
 	const { nickname, phone, firstname, lastname, password } = await request.json();
 
 	const { phone: verifiedPhone, verified } = locals.session.data;
@@ -18,11 +18,11 @@ export const POST: RequestHandler = async ({ request, locals, cookies }) => {
 		throw error(400, 'Bad Request: missing fields');
 	}
 
-	if(!validateName(firstname) || !validateName(lastname)) {
+	if (!validateName(firstname) || !validateName(lastname)) {
 		throw error(400, 'Bad Request: invalid name');
 	}
 
-	if(!validateNickName(nickname)) {
+	if (!validateNickName(nickname)) {
 		throw error(400, 'Bad Request: invalid nickname');
 	}
 
@@ -43,16 +43,17 @@ export const POST: RequestHandler = async ({ request, locals, cookies }) => {
 	await locals.session.set({
 		authenticated: true,
 		user: nickname,
-		code: null,
+		otp_request_token: null,
 		phone: null,
 		verified: false,
 		firstName: firstname,
-		lastName: lastname
+		lastName: lastname,
+		last_sent: null
 	});
 
 	const authSessionCookie = await authService.login(nickname, password);
 
-	cookies.set(authService.cookieName, authSessionCookie);
+	cookies.set(authService.cookieName, authSessionCookie, { domain: url.host 	});
 
 	return new Response('ok', { status: 201 });
 };
