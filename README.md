@@ -4,6 +4,8 @@ Registration platform for twake in matrix
 
 [API Documentation](documentation/README.md)
 
+[How to deploy it locally](documentation/development.md)
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
