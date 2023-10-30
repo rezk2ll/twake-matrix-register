@@ -1,5 +1,10 @@
 import { env } from '$env/dynamic/private';
-import type { ISmsSendPayload, ISmsSentResponse, IValidateOTPPayload } from '../../types';
+import type {
+	ISmsSendPayload,
+	ISmsSentResponse,
+	IValidateOTPPayload,
+	VerificationResult
+} from '../../types';
 
 /**
  * Sends an OTP to the given phone number.
@@ -15,10 +20,6 @@ export const send = async (to: string): Promise<string> => {
 		}
 
 		const payload: ISmsSendPayload = {
-			allow_digits: true,
-			allow_lowercase: false,
-			allow_special_chars: false,
-			allow_uppercase: false,
 			channel: 'sms',
 			code_length: 6,
 			phone_number: to,
@@ -63,7 +64,7 @@ export const verify = async (
 	phone: string,
 	code: string,
 	otp_request_token: string
-): Promise<boolean> => {
+): Promise<VerificationResult> => {
 	try {
 		const API_ENDPOINT = `${env.SMS_SERVICE_API}/validate`;
 
@@ -75,7 +76,7 @@ export const verify = async (
 			code,
 			otp_request_token,
 			phone_number: phone
-		}
+		};
 
 		const response = await fetch(API_ENDPOINT, {
 			method: 'PUT',
@@ -87,7 +88,17 @@ export const verify = async (
 			}
 		});
 
-		return response.status === 200;
+		const json = await response.json();
+
+		if (json.message === 'success' && json.code === 0) {
+			return 'correct';
+		}
+
+		if (json.code === 199 || json.message === 'Wrong OTP code.') {
+			return 'wrong';
+		}
+
+		return 'timeout';
 	} catch (error) {
 		console.error('Failed to verify OTP', error);
 
