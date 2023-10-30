@@ -4,10 +4,6 @@ export interface ISmsSendPayload {
 	channel: "sms" | "voice_sms",
 	sender: string;
 	code_length: number;
-	allow_digits: boolean;
-	allow_special_chars: boolean;
-	allow_uppercase: boolean;
-	allow_lowercase: boolean;
 }
 
 export interface ISmsSentResponse {
@@ -69,3 +65,5 @@ export interface TokenResponse extends AuthAPIResponse {
 export type Tab = "register" | "login"
 
 export type PasswordType = "text" | "password"
+
+export type VerificationResult = "correct" | "wrong" | "timeout"
