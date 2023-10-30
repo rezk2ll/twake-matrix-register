@@ -10,8 +10,14 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		throw error(400, 'Malformed request');
 	}
 
-	if (!(await verify(data.phone, data.otp_request_token, password))) {
+	const verification = await verify(data.phone, data.otp_request_token, password);
+
+	if (verification === 'wrong') {
 		throw error(401, 'Incorrect password');
+	}
+
+	if (verification === 'timeout') {
+		throw error(400, 'Maximum amount of wrong attempts has been reached');
 	}
 
 	await locals.session.set({
