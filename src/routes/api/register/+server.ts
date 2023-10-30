@@ -4,6 +4,7 @@ import { validatePassword } from '$lib/utils/password';
 import { checkNickNameAvailability, checkPhoneAvailability, signup } from '$lib/services/user';
 import authService from '$lib/services/auth';
 import { validateName, validateNickName } from '$lib/utils/username';
+import { extractMainDomain } from '$lib/utils/url';
 
 export const POST: RequestHandler = async ({ request, locals, cookies, url }) => {
 	const { nickname, phone, firstname, lastname, password } = await request.json();
@@ -53,7 +54,7 @@ export const POST: RequestHandler = async ({ request, locals, cookies, url }) =>
 
 	const authSessionCookie = await authService.login(nickname, password);
 
-	cookies.set(authService.cookieName, authSessionCookie, { domain: url.host 	});
+	cookies.set(authService.cookieName, authSessionCookie, { domain: extractMainDomain(url.host) });
 
 	return new Response('ok', { status: 201 });
 };

@@ -13,6 +13,7 @@ import {
 } from '$lib/services/user';
 import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
+import { extractMainDomain } from '$lib/utils/url';
 
 export const load: PageServerLoad = async ({ parent }) => {
 	await Client.getClient();
@@ -146,7 +147,9 @@ export const actions: Actions = {
 
 			const authSessionCookie = await authService.login(nickname, password);
 
-			cookies.set(authService.cookieName, authSessionCookie, { domain: url.host });
+			cookies.set(authService.cookieName, authSessionCookie, {
+				domain: extractMainDomain(url.host)
+			});
 
 			throw redirect(302, '/success');
 		} catch (err) {
@@ -154,7 +157,7 @@ export const actions: Actions = {
 				throw err;
 			}
 
-			console.error({ err })
+			console.error({ err });
 
 			return fail(500, { error: true });
 		}
@@ -187,7 +190,7 @@ export const actions: Actions = {
 				user: user?.cn
 			}));
 
-			cookies.set(authService.cookieName, cookie, { domain: url.host });
+			cookies.set(authService.cookieName, cookie, { domain: extractMainDomain(url.host) });
 
 			throw redirect(302, '/success');
 		} catch (err) {
@@ -195,7 +198,7 @@ export const actions: Actions = {
 				throw err;
 			}
 
-			console.error({ err })
+			console.error({ err });
 
 			return fail(500, { failed_login: true });
 		}
