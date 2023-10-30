@@ -30,6 +30,10 @@ export const actions: Actions = {
 		const data = await request.formData();
 		const phone = data.get('phone') as string;
 
+		if (!(await checkPhoneAvailability(phone))) {
+			return fail(400, { phone, phone_taken: true });
+		}
+
 		if (!phone) {
 			return fail(400, { phone, missing: true });
 		}
@@ -70,18 +74,28 @@ export const actions: Actions = {
 			return fail(400, { incorrect: true });
 		}
 
-		if (await verify(session.data.phone, password, session.data.otp_request_token)) {
+		const verification = await verify(session.data.phone, password, session.data.otp_request_token);
+
+		if (verification === 'correct') {
 			await locals.session.update((data) => ({
 				...data,
 				verified: true
 			}));
 
 			return { verified: true };
+		} else if (verification === 'timeout') {
+			await locals.session.update((data) => ({
+				...data,
+				verified: false
+			}));
+
+			return fail(400, { timeout: true });
 		} else {
 			await locals.session.update((data) => ({
 				...data,
 				verified: false
 			}));
+
 			return fail(400, { incorrect: true });
 		}
 	},
