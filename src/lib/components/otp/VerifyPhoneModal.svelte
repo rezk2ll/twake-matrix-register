@@ -21,7 +21,7 @@
 	const handleSendOtp = () => {
 		if (!phone) return;
 
-		if(resendCounter > 0 && open) return;
+		if (resendCounter > 0 && open) return;
 
 		sendOtpForm.requestSubmit();
 
@@ -34,7 +34,9 @@
 	};
 
 	$: incorrect = $form?.incorrect === true;
-	$: inValid = !validateOTP(value);
+	$: timeout = $form?.timeout === true;
+	$: invalidPhone = $form?.phone_taken === true;
+	$: inValid = !validateOTP(value) || invalidPhone || timeout;
 	$: {
 		if ($form?.verified) {
 			if (open === true) {
@@ -102,40 +104,56 @@
 				<h1 class="text-2xl font-semibold leading-8 tracking-normal text-center">
 					Phone number confirmation
 				</h1>
-				<span class="text-base font-medium leading-6 tracking-tight text-center text-gray-400"
-					>Enter 6 digit code we sent to:</span
-				>
-				<span class="text-base font-medium leading-6 tracking-tight text-center"
-					>{maskPhone(phone)}</span
-				>
+				{#if invalidPhone}
+					<span class="text-base font-medium leading-6 tracking-tight text-center text-red-400"
+						>this phone is already taken</span
+					>
+				{:else}
+					<span class="text-base font-medium leading-6 tracking-tight text-center text-gray-400"
+						>Enter 6 digit code we sent to:</span
+					>
+					<span class="text-base font-medium leading-6 tracking-tight text-center"
+						>{maskPhone(phone)}</span
+					>
+				{/if}
 			</div>
-			<form action="?/checkOtp" use:enhance method="POST" class="px-10 pb-10">
-				<div class="my-5">
-					<TextField
-						label="Code"
-						placeholder="Code"
-						bind:value
-						name="password"
-						isInValid={incorrect}
-						feedback={false}
-					/>
-					{#if incorrect}
-						<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
-							>Entered code is incorrect. Try again.
-						</span>
-					{/if}
-				</div>
-				<div class="flex flex-col space-y-2 pt-2">
-					<SubmitButton disabled={inValid}>Confirm</SubmitButton>
-					<OutlineButton handler={handleSendOtp} disabled={resendCounter > 0}>
-						{#if resendCounter === 0}
-							 Send code
-						{:else}
-							 Send code again in: 0:{resendCounter}
+
+			{#if !invalidPhone}
+				<form action="?/checkOtp" use:enhance method="POST" class="px-10 pb-10">
+					<div class="my-5">
+						<TextField
+							label="Code"
+							placeholder="Code"
+							bind:value
+							name="password"
+							isInValid={incorrect}
+							feedback={false}
+						/>
+						{#if incorrect}
+							<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+								>Entered code is incorrect. Try again.
+							</span>
 						{/if}
-					</OutlineButton>
-				</div>
-			</form>
+						{#if timeout}
+							<span class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+								>too many wrong attempts has been made. try again later.
+							</span>
+						{/if}
+					</div>
+					<div class="flex flex-col space-y-2 pt-2">
+						<SubmitButton disabled={inValid}>Confirm</SubmitButton>
+						<OutlineButton handler={handleSendOtp} disabled={resendCounter > 0 || timeout}>
+							{#if resendCounter === 0}
+								Send code
+							{:else}
+								Send code again in: 0:{resendCounter}
+							{/if}
+						</OutlineButton>
+					</div>
+				</form>
+			{:else}
+				<div class="px-10 pb-10" />
+			{/if}
 		</div>
 	</div>
 </div>
