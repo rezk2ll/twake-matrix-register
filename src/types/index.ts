@@ -67,3 +67,12 @@ export type Tab = "register" | "login"
 export type PasswordType = "text" | "password"
 
 export type VerificationResult = "correct" | "wrong" | "timeout"
+
+export type PlatformType = "web" | "android" | "ios" | "server"
+
+export type ApplicationType = "tdrive" | "tmail" | "twake"
+
+export interface IApplicationStorePayload {
+	type: 'play_store_url' | 'app_store_url';
+	url: string;
+}
