@@ -15,12 +15,20 @@ import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain } from '$lib/utils/url';
 
-export const load: PageServerLoad = async ({ parent }) => {
+export const load: PageServerLoad = async ({ locals, url }) => {
 	await Client.getClient();
 
-	const { session } = await parent();
+	const { session } = locals;
+	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? null;
 
-	if (session.authenticated === true) {
+	if (redirectUrl) {
+		await session.update((data) => ({
+			...data,
+			redirectUrl
+		}));
+	}
+
+	if (session.data.authenticated === true) {
 		throw redirect(302, '/success');
 	}
 };
