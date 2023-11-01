@@ -13,5 +13,6 @@ export const load: PageServerLoad = async ({ parent }) => {
 		firstName: session.firstName,
 		lastName: session.lastName,
 		phone: session.phone,
+		redirectUrl: session.redirectUrl ?? null
 	};
 };

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { redirectUrl as redirectUrlStore } from './../../store';
 	import type { PageData } from './$types';
 	import SuccessCard from '$lib/components/landing/SuccessCard.svelte';
 	import LoggedUser from '$lib/components/nav/LoggedUser.svelte';
@@ -7,8 +8,9 @@
 	export let data: PageData;
 
 	$: user = `${data.firstName} ${data.lastName}`;
-  $: username = data.username ?? '';
+	$: username = data.username ?? '';
 	$: phone = data.phone ?? '';
+	$: redirectUrlStore.set(data.redirectUrl);
 </script>
 
 <div class="bg-white w-full min-h-screen">
