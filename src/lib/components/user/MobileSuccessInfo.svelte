@@ -3,7 +3,7 @@
 
 	export let user: string;
 	export let id: string;
-	export let phone = '+21652128155';
+	export let phone: string;
 </script>
 
 <div
@@ -24,14 +24,17 @@
 			<span class="text-[17px] font-normal leading-6 tracking-wide text-left">@{id}</span>
 			<span class="text-sm font-normal leading-5 text-left text-gray-500">Twake matrix ID</span>
 		</div>
-		<div class="flex flex-col gap-0.5 px-4">
-			<span class="text-[17px] font-normal leading-6 tracking-wide text-left">{phone}</span>
-			<span class="text-sm font-normal leading-5 text-left text-gray-500">Twake phone number</span>
-		</div>
+		{#if phone}
+			<div class="flex flex-col gap-0.5 px-4">
+				<span class="text-[17px] font-normal leading-6 tracking-wide text-left">{phone}</span>
+				<span class="text-sm font-normal leading-5 text-left text-gray-500">Twake phone number</span
+				>
+			</div>
+		{/if}
 
 		<div class="flex items-center justify-center pt-5">
 			<div class="w-4/5 md:hidden">
-				<OutlineButton handler={() => {}}>Add recovery email</OutlineButton>
+				<OutlineButton disabled={true} handler={() => {}}>Add recovery email</OutlineButton>
 			</div>
 		</div>
 	</div>
