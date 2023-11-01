@@ -9,6 +9,8 @@ export const phone = writable<string>('');
 
 export const verifiedPhones = writable<string[]>([]);
 
+export const redirectUrl = writable<string | null>(null); 
+
 verified.subscribe((v) => {
 	if (v === true) {
 		verifiedPhones.update((phones) => [...phones, get(phone)]);
