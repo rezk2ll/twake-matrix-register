@@ -1,14 +1,11 @@
 <script lang="ts">
-	const openDeepLink = () => {
-		const url =
-			'tmail://test';
+	import { goto } from '$app/navigation';
+	import { TMAIL_WEB } from '$env/static/private';
+	import { openAppDeepLink } from '$lib/utils/url';
+	import { redirectUrl as redirectUrlStore } from '../../../store';
 
-		window.location.href = url;
-
-		setTimeout(function () {
-			window.location.href =
-				'https://play.google.com/store/apps/details?id=com.linagora.android.teammail&pcampaignid=web_share';
-		}, 1000);
+	const open = () => {
+		$redirectUrlStore ? openAppDeepLink($redirectUrlStore, 'tmail') : goto(TMAIL_WEB);
 	};
 </script>
 
@@ -19,17 +16,12 @@
 	<div class="flex flex-col w-full items-start justify-start">
 		<h1 class="hidden md:block font-semibold text-2xl text-left">Tmail</h1>
 		<h1 class="md:hidden font-semibold text-base text-left">Twake Mail (mobile app)</h1>
-		<button
-			on:click={openDeepLink}
-			class="md:hidden text-base font-medium leading-4 tracking-[0.4000000059604645px] text-blue-500 text-left"
-			>Download from PlayStore
-		</button>
 		<span
-			class="hidden md:block text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-coolgray-400 text-left lg:pr-10"
+			class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-coolgray-400 text-left lg:pr-10"
 			>Experience email communication like never before</span
 		>
 	</div>
-	<a href="https://tmail.linagora.com" class="flex shrink items-center justify-center">
+	<button type="button" on:click={open} class="flex shrink items-center justify-center">
 		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
-	</a>
+	</button>
 </div>
