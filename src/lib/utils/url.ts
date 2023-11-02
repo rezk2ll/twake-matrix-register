@@ -1,7 +1,8 @@
 import { browser } from '$app/environment';
 import type { ApplicationType } from '../../types';
-import { getApplicationDeepLink, getApplicationStoreUrl } from './device';
-import base64url from 'base64url';
+import { isMobile } from './device';
+import { getApplicationDeepLink, getApplicationGotoLink, getApplicationStoreUrl } from './product';
+import { encode as base64url } from 'universal-base64url';
 
 /**
  * formats a url by adding a trailing slash if it doesn't have one
@@ -29,11 +30,11 @@ export const extractMainDomain = (subdomain: string): string => {
 
 /**
  * Opens the redirect deep link.
- * 
+ *
  * @param {string} redirect - The redirect url.
  * @param {ApplicationType} app - The application to open.
  */
-export const openAppDeepLink = (redirect: string, app: ApplicationType): void => {
+export const openRedirectLink = (redirect: string, app: ApplicationType): void => {
 	if (!browser) return;
 
 	const url = new URL(redirect);
@@ -49,7 +50,30 @@ export const openAppDeepLink = (redirect: string, app: ApplicationType): void =>
 		url.searchParams.append(appStoreUrl.type, base64url(appStoreUrl.url));
 	}
 
-	console.log(url.toString());
-
 	window.location.href = url.toString();
+};
+
+/**
+ * opens the application link.
+ * 
+ * @param {ApplicationType} app - The application to open.
+ */
+export const attemptToOpenApp = (app: ApplicationType): void => {
+	if (!browser) return;
+
+	const link = getApplicationGotoLink(app);
+
+	window.location.href = link;
+
+	if (isMobile()) {
+		const appStoreUrl = getApplicationStoreUrl(app);
+
+		if (appStoreUrl && appStoreUrl.url) {
+			setTimeout(() => {
+				navigator.clipboard.writeText(link).catch(console.error);
+
+				window.location.href = appStoreUrl.url;
+			}, 250);
+		}
+	}
 };
