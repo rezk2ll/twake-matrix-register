@@ -1,12 +1,10 @@
 import type { Actions, PageServerLoad } from './$types';
 import Client from '$lib/services/ldap/client';
-import { send, verify } from '$lib/services/otp';
 import { type Redirect, fail, redirect } from '@sveltejs/kit';
 import { isPhoneValid } from '$lib/utils/phone';
 import { validatePassword } from '$lib/utils/password';
 import {
 	checkNickNameAvailability,
-	checkPhoneAvailability,
 	fetchUser,
 	signup,
 	suggestAlternativeAvaialableNickNames
@@ -38,10 +36,6 @@ export const actions: Actions = {
 		const data = await request.formData();
 		const phone = data.get('phone') as string;
 
-		if (!(await checkPhoneAvailability(phone))) {
-			return fail(400, { phone, phone_taken: true });
-		}
-
 		if (!phone) {
 			return fail(400, { phone, missing: true });
 		}
@@ -50,13 +44,7 @@ export const actions: Actions = {
 			return fail(400, { phone, invalid: true });
 		}
 
-		const { last_sent } = locals.session.data;
-
-		if (last_sent && last_sent > Date.now() - 60000) {
-			return fail(400, { phone, invalid: true });
-		}
-
-		const token = await send(phone);
+		const token = 'demo';
 
 		await locals.session.set({
 			otp_request_token: token,
@@ -82,30 +70,12 @@ export const actions: Actions = {
 			return fail(400, { incorrect: true });
 		}
 
-		const verification = await verify(session.data.phone, password, session.data.otp_request_token);
+		await locals.session.update((data) => ({
+			...data,
+			verified: true
+		}));
 
-		if (verification === 'correct') {
-			await locals.session.update((data) => ({
-				...data,
-				verified: true
-			}));
-
-			return { verified: true };
-		} else if (verification === 'timeout') {
-			await locals.session.update((data) => ({
-				...data,
-				verified: false
-			}));
-
-			return fail(400, { timeout: true });
-		} else {
-			await locals.session.update((data) => ({
-				...data,
-				verified: false
-			}));
-
-			return fail(400, { incorrect: true });
-		}
+		return { verified: true };
 	},
 
 	register: async ({ request, locals, cookies, url }) => {
@@ -115,7 +85,7 @@ export const actions: Actions = {
 			const phone = data.get('phone') as string;
 			const { phone: verifiedPhone } = session.data;
 
-			if (!phone || isPhoneValid(phone) === false || !(await checkPhoneAvailability(phone))) {
+			if (!phone || isPhoneValid(phone) === false) {
 				return fail(400, { invalid_phone: true });
 			}
 
