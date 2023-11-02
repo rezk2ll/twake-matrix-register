@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { TWAKE_WEB } from '$env/static/private';
-	import { openAppDeepLink } from '$lib/utils/url';
+	import { attemptToOpenApp, openRedirectLink } from '$lib/utils/url';
 	import { redirectUrl as redirectUrlStore } from '../../../store';
 
 	const open = () => {
-		$redirectUrlStore ? openAppDeepLink($redirectUrlStore, 'twake') : goto(TWAKE_WEB);
+		$redirectUrlStore ? openRedirectLink($redirectUrlStore, 'twake') : attemptToOpenApp('twake');
 	};
 </script>
 

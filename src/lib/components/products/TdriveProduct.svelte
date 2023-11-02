@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { TDRIVE_WEB } from '$env/static/private';
-	import { openAppDeepLink } from '$lib/utils/url';
+	import { attemptToOpenApp, openRedirectLink } from '$lib/utils/url';
 	import { redirectUrl as redirectUrlStore } from '../../../store';
 
 	const open = () => {
-		$redirectUrlStore ? openAppDeepLink($redirectUrlStore, 'tdrive') : goto(TDRIVE_WEB);
+		$redirectUrlStore ? openRedirectLink($redirectUrlStore, 'tdrive') : attemptToOpenApp('tdrive');
 	};
 </script>
 

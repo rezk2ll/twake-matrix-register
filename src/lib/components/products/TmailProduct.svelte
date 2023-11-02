@@ -1,11 +1,9 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { TMAIL_WEB } from '$env/static/private';
-	import { openAppDeepLink } from '$lib/utils/url';
+	import { attemptToOpenApp, openRedirectLink } from '$lib/utils/url';
 	import { redirectUrl as redirectUrlStore } from '../../../store';
 
 	const open = () => {
-		$redirectUrlStore ? openAppDeepLink($redirectUrlStore, 'tmail') : goto(TMAIL_WEB);
+		$redirectUrlStore ? openRedirectLink($redirectUrlStore, 'tmail') : attemptToOpenApp('tmail');
 	};
 </script>
 
