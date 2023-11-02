@@ -1,7 +1,7 @@
 import type { Actions, PageServerLoad } from './$types';
 import Client from '$lib/services/ldap/client';
 import { send, verify } from '$lib/services/otp';
-import { Redirect, fail, redirect } from '@sveltejs/kit';
+import { type Redirect, fail, redirect } from '@sveltejs/kit';
 import { isPhoneValid } from '$lib/utils/phone';
 import { validatePassword } from '$lib/utils/password';
 import {
