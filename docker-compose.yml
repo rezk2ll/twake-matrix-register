@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   registration:
-    image: kferjani/twake-matrix-register:main
+    image: kferjani/twake-matrix-register:demo
     ports:
       - 8080:3000
     env_file:

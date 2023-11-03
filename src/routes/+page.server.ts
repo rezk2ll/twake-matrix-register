@@ -81,15 +81,9 @@ export const actions: Actions = {
 	register: async ({ request, locals, cookies, url }) => {
 		try {
 			const data = await request.formData();
-			const { session } = locals;
 			const phone = data.get('phone') as string;
-			const { phone: verifiedPhone } = session.data;
 
 			if (!phone || isPhoneValid(phone) === false) {
-				return fail(400, { invalid_phone: true });
-			}
-
-			if (!session.data.verified || verifiedPhone !== phone) {
 				return fail(400, { invalid_phone: true });
 			}
 
