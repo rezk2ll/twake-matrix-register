@@ -9,9 +9,9 @@ import { extractMainDomain } from '$lib/utils/url';
 export const POST: RequestHandler = async ({ request, locals, cookies, url }) => {
 	const { nickname, phone, firstname, lastname, password } = await request.json();
 
-	const { phone: verifiedPhone, verified } = locals.session.data;
+	const { verified } = locals.session.data;
 
-	if (!phone || !verified || verifiedPhone !== phone) {
+	if (!phone || !verified) {
 		throw error(401, 'Unauthorized: phone is not verified');
 	}
 
