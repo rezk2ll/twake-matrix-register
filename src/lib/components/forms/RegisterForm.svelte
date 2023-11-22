@@ -1,16 +1,14 @@
 <script lang="ts">
-	import { validatePassword } from '$lib/utils/password';
-	import { validateName, validateNickName } from '$lib/utils/username';
-	import { isPhoneValid } from '$lib/utils/phone';
 	import TextField from '../input/TextField.svelte';
 	import PasswordField from '../input/PasswordField.svelte';
 	import PhoneField from '../input/PhoneField.svelte';
 	import SubmitButton from '../button/SubmitButton.svelte';
-	import OutlineLink from '../link/OutlineLink.svelte';
 	import VerifyPhoneModal from '../otp/VerifyPhoneModal.svelte';
 	import { form, phone as phoneStore } from '../../../store';
 	import { enhance } from '$app/forms';
 	import AvailableNicknames from '../user/AvailableNicknames.svelte';
+	import { createUserFormSchema, fullCreateUserFormSchema } from '$lib/schemas/zodSchema';
+	import { isNickNameTaken, suggestNickNames } from '$lib/utils/api';
 
 	let password = '';
 	let confirmPassword = '';
@@ -18,42 +16,76 @@
 	let lastName = '';
 	let nickName = '';
 	let phone = '';
-	let invalidPhone = false;
-	let show_suggestions = true;
+	let accepted = false;
+	let disabled = true;
+	let alternativeNicknames: string[] = [];
+	let loading = false;
+	let nickNameTaken = false;
+	let nickNamechecked = false;
 
-	$: invalidPassword = password.length > 0 && !validatePassword(password);
-	$: invalidConfirmPassword =
-		confirmPassword.length > 0 &&
-		(confirmPassword !== password || !validatePassword(confirmPassword));
-	$: invalidFirstName = firstName.length > 0 && !validateName(firstName);
-	$: invalidLastName = lastName.length > 0 && !validateName(lastName);
-	$: invalidNickname =
-		nickName.length > 0 && !validateNickName(nickName);
-	$: {
-		invalidPhone = !!phone && phone.length > 0 && !isPhoneValid(phone);
-		!!phone && phoneStore.set(phone);
-	}
+	$: !!phone && phoneStore.set(phone);
 
 	$: {
-		if ($form?.nickname_taken === true) show_suggestions = true; 
+		if ($form?.nickname_taken === true) nickNameTaken = true;
 	}
+
+	$: disabled =
+		!fullCreateUserFormSchema.safeParse({
+			firstName,
+			lastName,
+			nickName,
+			phone,
+			password,
+			confirmPassword,
+			accepted
+		}).success && nickNameTaken === false;
+
+	$: validNickName = nickName.length > 0 && nickNamechecked && !nickNameTaken;
+
+	const checkNickName = async () => {
+		if (!nickName || nickNamechecked) return;
+
+		loading = true;
+		alternativeNicknames = [];
+		nickNameTaken = false;
+		nickNamechecked = true;
+
+		const result = await isNickNameTaken(nickName);
+
+		if (result && firstName && lastName) {
+			alternativeNicknames = await suggestNickNames(firstName, lastName);
+			nickNamechecked = false;
+		}
+
+		loading = false;
+		nickNameTaken = result;
+	};
+
+	const invalidateNickNameCheck = () => nickNamechecked = false;
 </script>
 
-<form use:enhance action="?/register" method="POST" class="flex flex-col space-y-6">
-	<div class="flex space-x-5 text-xs font-medium leading-4 tracking-wide text-left font-[Inter]">
+<form
+	use:enhance
+	action="?/register"
+	method="POST"
+	class="flex flex-col space-y-4 xl:space-y-6 lg:space-y-5 text-xs font-medium leading-4 tracking-wide text-left font-[Inter]"
+>
+	<div class="flex space-x-5">
 		<TextField
 			name="firstname"
 			placeholder="First Name"
 			label="First Name"
 			bind:value={firstName}
-			bind:isInValid={invalidFirstName}
+			isInValid={false}
+			feedback={false}
 		/>
 		<TextField
 			name="lastname"
 			placeholder="Last Name"
 			label="Last Name"
 			bind:value={lastName}
-			bind:isInValid={invalidLastName}
+			isInValid={false}
+			feedback={false}
 		/>
 	</div>
 	<div>
@@ -62,21 +94,23 @@
 			placeholder="Last Name"
 			label="Username"
 			bind:value={nickName}
-			bind:isInValid={invalidNickname}
+			isInValid={!createUserFormSchema.safeParse({ nickName }).success || nickNameTaken}
+			onBlur={checkNickName}
+			feedback={validNickName}
+			onInput={invalidateNickNameCheck}
+			{loading}
 		/>
-		{#if $form?.invalid_nickname}
-			<span
-				class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-red-500 px-5"
-				>invalid Username.
-			</span>
-		{/if}
-
-		{#if $form?.nickname_taken}
+		{#if nickNameTaken === true}
 			<AvailableNicknames
 				bind:value={nickName}
-				nickNames={$form?.alternative_nicknames}
-				bind:show={show_suggestions}
+				nickNames={alternativeNicknames}
+				bind:show={nickNameTaken}
+				bind:checked={nickNamechecked}
 			/>
+		{:else if nickName.length && !createUserFormSchema.safeParse({ nickName }).success}
+			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+				>invalid Username.
+			</span>
 		{/if}
 	</div>
 	<div>
@@ -85,12 +119,10 @@
 			placeholder="Password"
 			label="Password"
 			bind:value={password}
-			bind:isInvalid={invalidPassword}
+			isInvalid={!createUserFormSchema.safeParse({ password }).success}
 		/>
-
 		{#if $form?.invalid_password}
-			<span
-				class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-red-500 px-5"
+			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
 				>invalid password
 			</span>
 		{/if}
@@ -100,26 +132,24 @@
 		placeholder="Confirm password"
 		label="Confirm password"
 		bind:value={confirmPassword}
-		bind:isInvalid={invalidConfirmPassword}
+		isInvalid={!fullCreateUserFormSchema.safeParse({ password, confirmPassword }).success}
 	/>
 	<div>
-		<PhoneField bind:value={phone} bind:isInValid={invalidPhone}>
+		<PhoneField bind:value={phone} isInValid={!createUserFormSchema.safeParse({ phone }).success}>
 			<VerifyPhoneModal bind:phone />
 		</PhoneField>
 		{#if $form?.invalid_phone}
-			<span
-				class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-red-500 px-5"
+			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
 				>invalid phone number
 			</span>
 		{/if}
 	</div>
 
 	<div class="flex flex-col items-center justify-center space-y-5">
-		<SubmitButton>Sign up</SubmitButton>
-		<OutlineLink href="#/login">Login with SSO</OutlineLink>
+		<SubmitButton {disabled}>Sign up</SubmitButton>
 	</div>
 	<div class="flex items-start space-x-5 pr-10">
-		<input type="checkbox" required class=" mt-1" />
+		<input type="checkbox" bind:checked={accepted} class=" mt-1" />
 		<span class="text-[17px] font-medium leading-6 tracking-tight text-left"
 			>I agree with <a href="#/ue" class="text-blue-500">User Agreement</a> and
 			<a href="#/ue" class="text-blue-500">Personal Data Usage</a>
