@@ -1,4 +1,4 @@
-import { derived, writable, get } from 'svelte/store';
+import { writable, get } from 'svelte/store';
 import type { ActionData } from '../routes/$types';
 
 export const form = writable<ActionData>();
@@ -24,5 +24,3 @@ phone.subscribe((v) => {
 		verified.set(false);
 	}
 });
-
-export const der = derived(verified, ($verified) => $verified);
