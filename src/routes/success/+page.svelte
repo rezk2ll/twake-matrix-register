@@ -21,11 +21,11 @@
 				<LoggedUser {username} {user} />
 			</div>
 		</div>
-		<div class="flex space-x-4 w-full xl:px-20 2xl:px-48 py-5 pt-10">
+		<div class="flex space-x-4 w-full xl:px-20 2xl:px-48 lg:py-4">
 			<div class="w-full overflow-hidden">
-				<div class="flex flex-col-reverse md:flex-row-reverse w-full py-10 lg:px-10">
+				<div class="flex flex-col-reverse lg:flex-row-reverse w-full py-10 lg:px-10">
 					<SuccessCard {user} bind:id={username} {phone} />
-					<div class="hidden md:block w-full">
+					<div class="hidden lg:block w-full">
 						<LoggedHero />
 					</div>
 				</div>
