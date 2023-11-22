@@ -4,11 +4,11 @@
 
 <div class="flex flex-col space-y-20 font-[Inter] px-7 md:px-10 pt-56">
 	<Logo />
-	<div class="flex flex-col space-y-10 w-full h-screen xl:h-fit xl:w-5/6">
-		<h1 class="hidden md:block text-4xl md:text-2xl xl:text-5xl font-semibold text-black">
+	<div class="flex flex-col space-y-10 w-full h-screen lg:h-fit xl:w-5/6">
+		<h1 class="hidden lg:block text-4xl md:text-2xl xl:text-5xl font-semibold text-black">
 			Decentralised messenger for new era of corporate communication
 		</h1>
-		<div class="md:hidden flex flex-col space-y-5">
+		<div class="lg:hidden flex flex-col space-y-5">
 			<h1 class=" text-2xl font-semibold text-black">
 				Decentralised corporate communication starts here
 			</h1>

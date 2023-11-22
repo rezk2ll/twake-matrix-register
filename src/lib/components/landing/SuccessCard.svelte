@@ -12,15 +12,15 @@
 </script>
 
 <div
-	class="md:space-y-5 py-5 bg-[#FFFBFE] md:shadow-xl rounded-3xl flex flex-col space-y-5 w-full md:w-6/12 xl:w-1/2 px-5 md:px-10"
+	class="lg:space-y-5 py-10 lg:py-4 xl:py-5 bg-[#FFFBFE] md:shadow-xl rounded-3xl flex flex-col space-y-5 w-full xl:w-1/2 px-5 xl:px-10"
 >
 	<div
 		class="flex flex-col space-y-4 w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
 	>
-		<div class="md:hidden w-full">
+		<div class="lg:hidden w-full">
 			<MobileSuccessInfo {user} {id} {phone} />
 		</div>
-		<div class="hidden md:block w-full">
+		<div class="hidden lg:block w-full">
 			<SuccessInfo {user} />
 		</div>
 
@@ -28,10 +28,6 @@
 			<TwakeProduct />
 			<TdriveProduct />
 			<TmailProduct />
-		</div>
-
-		<div class="w-4/5 hidden md:block">
-			<OutlineButton handler={() => {}}>Add recovery email</OutlineButton>
 		</div>
 	</div>
 </div>
