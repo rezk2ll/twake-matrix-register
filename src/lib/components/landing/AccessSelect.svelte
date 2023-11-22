@@ -2,44 +2,53 @@
 	import type { Tab } from '../../../types';
 	import LoginForm from '../forms/LoginForm.svelte';
 	import RegisterForm from '../forms/RegisterForm.svelte';
+	import Logo from '../logo/Logo.svelte';
 
 	let active: Tab = 'register';
 </script>
 
-<div class="md:pt-10 bg-white md:shadow-xl md:rounded-3xl flex flex-col space-y-5 w-full lg:w-8/12 2xl:w-7/12 p-10 h-screen md:h-fit" id="start">
+<div class="w-full flex flex-col md:flex-row justify-center">
 	<div
-		class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
+		class="bg-white md:shadow-xl md:rounded-3xl flex flex-col space-y-5 w-full xl:w-10/12 2xl:w-7/12 md:px-16 py-6 h-screen md:h-fit"
+		id="start"
 	>
-		<div class="flex items-center justify-center w-full py-2 box-border">
-			<button
-				class="h-10 bg-white w-full box-border border-b-2 {active === 'register'
-					? 'text-blue-500  border-blue-500'
-					: 'border-gray-100 border-b'} "
-				on:click={() => (active = 'register')}
-			>
-				Sign up
-			</button>
+		<div class="lg:hidden flex h-6 w-full items-center justify-center">
+			<Logo />
 		</div>
 		<div
-			class="flex items-center justify-center w-full h-10 py-2 box-border border-transparent border-b-2"
+			class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
 		>
-			<button
-				class="h-10 bg-white w-full box-border border-b-2 {active === 'login'
-					? 'text-blue-500 border-blue-500'
-					: 'border-gray-100 border-b'} "
-				on:click={() => (active = 'login')}
+			<div class="flex items-center justify-center w-full lg:p-3 box-border">
+				<button
+					class="h-10 bg-white w-full box-border border-b-2 {active === 'register'
+						? 'text-blue-500  border-blue-500'
+						: 'border-gray-100 border-b'} "
+					on:click={() => (active = 'register')}
+				>
+					Sign up
+				</button>
+			</div>
+			<div
+				class="flex items-center justify-center w-full h-10 py-2 box-border border-transparent border-b-2"
 			>
-				Sign in
-			</button>
+				<button
+					class="h-10 bg-white w-full box-border border-b-2 {active === 'login'
+						? 'text-blue-500 border-blue-500'
+						: 'border-gray-100 border-b'} "
+					on:click={() => (active = 'login')}
+				>
+					Sign in
+				</button>
+			</div>
 		</div>
-	</div>
-	<div class="text-3xl font-semibold leading-9 tracking-normal text-center w-full">
-		{#if active === 'register'}
-			<span>Sign up</span>
-			<RegisterForm />
-		{:else}
-			<span>Sign in</span>
-			<LoginForm />
-		{/if}
+		<div class="text-3xl font-semibold leading-9 tracking-normal text-center w-full">
+			{#if active === 'register'}
+				<span>Sign up</span>
+				<RegisterForm />
+			{:else}
+				<span>Sign in</span>
+				<LoginForm />
+			{/if}
+		</div>
 	</div>
 </div>
