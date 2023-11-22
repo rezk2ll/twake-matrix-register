@@ -61,16 +61,16 @@
 		nickNameTaken = result;
 	};
 
-	const invalidateNickNameCheck = () => nickNamechecked = false;
+	const invalidateNickNameCheck = () => (nickNamechecked = false);
 </script>
 
 <form
 	use:enhance
 	action="?/register"
 	method="POST"
-	class="flex flex-col space-y-4 xl:space-y-6 lg:space-y-5 text-xs font-medium leading-4 tracking-wide text-left font-[Inter]"
+	class="flex flex-col space-y-4 px-4 py-3 xl:px-3 lg:space-y-5 text-xs font-medium leading-4 tracking-wide text-left font-[Inter] w-full"
 >
-	<div class="flex space-x-5">
+	<div class="flex space-x-5 w-full">
 		<TextField
 			name="firstname"
 			placeholder="First Name"
@@ -88,45 +88,43 @@
 			feedback={false}
 		/>
 	</div>
-	<div>
-		<TextField
-			name="nickname"
-			placeholder="Last Name"
-			label="Username"
+	<TextField
+		name="nickname"
+		placeholder="Last Name"
+		label="Username"
+		bind:value={nickName}
+		isInValid={!createUserFormSchema.safeParse({ nickName }).success || nickNameTaken}
+		onBlur={checkNickName}
+		feedback={validNickName}
+		onInput={invalidateNickNameCheck}
+		{loading}
+	/>
+	{#if nickNameTaken === true}
+		<AvailableNicknames
 			bind:value={nickName}
-			isInValid={!createUserFormSchema.safeParse({ nickName }).success || nickNameTaken}
-			onBlur={checkNickName}
-			feedback={validNickName}
-			onInput={invalidateNickNameCheck}
-			{loading}
+			nickNames={alternativeNicknames}
+			bind:show={nickNameTaken}
+			bind:checked={nickNamechecked}
 		/>
-		{#if nickNameTaken === true}
-			<AvailableNicknames
-				bind:value={nickName}
-				nickNames={alternativeNicknames}
-				bind:show={nickNameTaken}
-				bind:checked={nickNamechecked}
-			/>
-		{:else if nickName.length && !createUserFormSchema.safeParse({ nickName }).success}
-			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
-				>invalid Username.
-			</span>
-		{/if}
-	</div>
-	<div>
-		<PasswordField
-			name="password"
-			placeholder="Password"
-			label="Password"
-			bind:value={password}
-			isInvalid={!createUserFormSchema.safeParse({ password }).success}
-		/>
-		{#if $form?.invalid_password}
-			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
-				>invalid password
-			</span>
-		{/if}
-	</div>
+	{:else if nickName.length && !createUserFormSchema.safeParse({ nickName }).success}
+		<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+			>invalid Username.
+		</span>
+	{/if}
+
+	<PasswordField
+		name="password"
+		placeholder="Password"
+		label="Password"
+		bind:value={password}
+		isInvalid={!createUserFormSchema.safeParse({ password }).success}
+	/>
+	{#if $form?.invalid_password}
+		<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+			>invalid password
+		</span>
+	{/if}
+
 	<PasswordField
 		name="confirmpassword"
 		placeholder="Confirm password"
@@ -134,22 +132,21 @@
 		bind:value={confirmPassword}
 		isInvalid={!fullCreateUserFormSchema.safeParse({ password, confirmPassword }).success}
 	/>
-	<div>
-		<PhoneField bind:value={phone} isInValid={!createUserFormSchema.safeParse({ phone }).success}>
-			<VerifyPhoneModal bind:phone />
-		</PhoneField>
-		{#if $form?.invalid_phone}
-			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
-				>invalid phone number
-			</span>
-		{/if}
-	</div>
+
+	<PhoneField bind:value={phone} isInValid={!createUserFormSchema.safeParse({ phone }).success}>
+		<VerifyPhoneModal bind:phone />
+	</PhoneField>
+	{#if $form?.invalid_phone}
+		<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+			>invalid phone number
+		</span>
+	{/if}
 
 	<div class="flex flex-col items-center justify-center space-y-5">
 		<SubmitButton {disabled}>Sign up</SubmitButton>
 	</div>
-	<div class="flex items-start space-x-5 pr-10">
-		<input type="checkbox" bind:checked={accepted} class=" mt-1" />
+	<div class="flex items-start space-x-5 xl:-mx-5">
+		<input type="checkbox" bind:checked={accepted} class="mt-1" />
 		<span class="text-[17px] font-medium leading-6 tracking-tight text-left"
 			>I agree with <a href="#/ue" class="text-blue-500">User Agreement</a> and
 			<a href="#/ue" class="text-blue-500">Personal Data Usage</a>
