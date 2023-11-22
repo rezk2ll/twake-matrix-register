@@ -3,10 +3,12 @@
 	export let value: string;
 	export let nickNames: string[];
 	export let show: boolean = true;
+	export let checked: boolean;
 
 	const setNickName = (val: string) => {
 		value = val;
 		show = false;
+		checked = true;
 	};
 
 	$: display = show;
@@ -14,7 +16,7 @@
 
 {#if display}
 	<span
-		class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-red-500 px-5"
+		class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
 		>Sorry, this username is already taken
 	</span>
 {/if}
