@@ -13,20 +13,17 @@
 </svelte:head>
 
 <div class="min-h-screen w-full overflow-hidden gradiant flex flex-col font-[Inter]">
-	<div class="bg-layout bg-no-repeat w-full">
-		<slot />
-		<div class="h-36 fixed bottom-0 w-full gradiant -z-30" />
-	</div>
+	<slot />
 </div>
 
 <style>
 	.gradiant {
 		background: linear-gradient(
-				105.88deg,
+				106deg,
 				rgba(248, 169, 52, 0.2) 0%,
 				rgba(203, 40, 206, 0.2) 43.6%,
 				rgba(10, 132, 255, 0.2) 100%
 			),
-			linear-gradient(0deg, #ffffff, #ffffff);
+			#fff;
 	}
 </style>
