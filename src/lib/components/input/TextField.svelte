@@ -15,7 +15,7 @@
 	$: notValid = value.length > 0 && isInValid;
 </script>
 
-<div class="relative mt-6">
+<div class="relative mt-6 w-full">
 	<input
 		required
 		id={name}
@@ -25,7 +25,7 @@
 		on:blur={onBlur}
 		on:input={onInput}
 		type="text"
-		class="h-14 rounded-[4px] ring-2 focus:outline-none px-4 text-[17px] font-medium leading-6 tracking-tight text-left peer w-full placeholder:text-transparent {notValid
+		class="h-[52px] rounded-[4px] ring-2 focus:outline-none px-4 text-[17px] font-medium leading-6 tracking-tight text-left peer w-full placeholder:text-transparent {notValid
 			? 'ring-red-500 focus:ring-red-500'
 			: 'ring-gray-300 focus:ring-blue-500'}"
 	/>
