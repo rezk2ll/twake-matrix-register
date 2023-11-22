@@ -12,8 +12,8 @@
 		<img src="/images/tmail.svg" alt="tmail" class="h-full" />
 	</div>
 	<div class="flex flex-col w-full items-start justify-start">
-		<h1 class="hidden md:block font-semibold text-2xl text-left">Tmail</h1>
-		<h1 class="md:hidden font-semibold text-base text-left">Twake Mail (mobile app)</h1>
+		<h1 class="hidden lg:block font-semibold text-2xl text-left">Tmail</h1>
+		<h1 class="lg:hidden font-semibold text-base text-left">Twake Mail (mobile app)</h1>
 		<span
 			class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-coolgray-400 text-left lg:pr-10"
 			>Experience email communication like never before</span
