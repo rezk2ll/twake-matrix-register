@@ -9,11 +9,9 @@
 	$: formStore.set(form);
 </script>
 
-<div class="flex space-x-4 w-full min-h-screen md:px-10 2xl:px-52 md:py-5 pt-10">
-	<div class="w-full overflow-hidden">
-		<div class="flex flex-col lg:flex-row w-full">
-			<Hero />
-			<AccessSelect />
-		</div>
+<div class="flex w-full min-h-screen md:py-5 lg:px-10 xl:px-[124px]">
+	<div class="flex flex-col lg:flex-row w-full overflow-hidden pt-9 ">
+		<Hero />
+		<AccessSelect />
 	</div>
 </div>
