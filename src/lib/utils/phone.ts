@@ -1,4 +1,4 @@
-import { parsePhoneNumberWithError } from 'svelte-tel-input';
+import validator from 'validator';
 
 /**
  * Masks a phone number.
@@ -17,13 +17,5 @@ export const maskPhone = (phone: string): string => {
  * @returns {boolean} - true if the phone number is valid, false otherwise.
  */
 export const isPhoneValid = (phone: string): boolean => {
-	if (phone.length < 8) return false;
-
-	try {
-		const number = parsePhoneNumberWithError(phone);
-
-		return !!number.country;
-	} catch (error) {
-		return false;
-	}
+	return validator.isMobilePhone(phone);
 };
