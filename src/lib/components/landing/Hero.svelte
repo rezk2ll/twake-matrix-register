@@ -2,22 +2,26 @@
 	import Logo from '../logo/Logo.svelte';
 </script>
 
-<div class="flex flex-col space-y-20 font-[Inter] px-7 md:px-10 pt-56">
+<div
+	class="flex flex-col w-full space-y-12 font-[Inter] px-5 md:px-10 pt-52 items-center lg:items-start"
+>
 	<Logo />
-	<div class="flex flex-col space-y-10 w-full h-screen lg:h-fit xl:w-5/6">
-		<h1 class="hidden lg:block text-4xl md:text-2xl xl:text-5xl font-semibold text-black">
-			Decentralised messenger for new era of corporate communication
+	<div class="flex flex-col space-y-5 w-full h-screen lg:h-fit 2xl:w-8/12">
+		<h1
+			class="text-2xl leading-8 lg:text-4xl not-italic font-semibold lg:leading-[44px] text-center lg:text-left w-full"
+		>
+			Twake ID is your one entry access to all our services Chat, Mail and Drive
 		</h1>
-		<div class="lg:hidden flex flex-col space-y-5">
-			<h1 class=" text-2xl font-semibold text-black">
-				Decentralised corporate communication starts here
-			</h1>
-			<a
-				href="#start"
-				class="flex items-center rounded-full justify-center w-full h-12 bg-blue-500 text-base font-medium leading-5 tracking-wide text-center text-white"
-			>
-				Start your journey
-			</a>
+		<a
+			href="#start"
+			class=" lg:hidden flex items-center rounded-full justify-center w-full h-12 bg-blue-500 text-base font-medium leading-5 tracking-wide text-center text-white"
+		>
+			Start your journey
+		</a>
+		<div class="hidden lg:flex flex-row gap-[50.2px]">
+			<img src="/images/twakechat.svg" alt="twake" class="w-[88px] h-[88px]" />
+			<img src="/images/tdrive.svg" alt="tdrive" class="w-[88px] h-[88px]" />
+			<img src="/images/tmail.svg" alt="tmail" class="w-[88px] h-[88px]" />
 		</div>
 	</div>
 </div>
