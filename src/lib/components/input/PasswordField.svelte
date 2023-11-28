@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PasswordType } from '../../../types';
+	import ErrorIcon from '../icons/ErrorIcon.svelte';
 	import Hide from '../icons/hide.svelte';
 	import Show from '../icons/show.svelte';
 	import Valid from '../icons/valid.svelte';
@@ -10,6 +11,7 @@
 	export let name: string;
 	export let placeholder: string;
 	export let feedback: boolean = true;
+	export let info: boolean = true;
 
 	let type: PasswordType = 'password';
 
@@ -39,22 +41,15 @@
 	/>
 	<label
 		for={name}
-		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 text-xs font-medium leading-4 {notValid
+		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 overflow-hidden text-ellipsis text-[11px] not-italic font-medium leading-4 tracking-[0.5px] {notValid
 			? 'text-red-500'
-			: ''}"
-		>{label}</label
+			: 'text-[color:var(--m-3-sys-light-bg-surface-on-surface-variant,#1C1B1F)]'}">{label}</label
 	>
-	{#if value}
-		<span
-			class="absolute inset-y-0 {notValid
-				? 'right-0'
-				: feedback
-				? 'right-10'
-				: 'right-0'} flex items-center pl-2"
-		>
+	<span class="absolute inset-y-0 right-0 flex items-center px-1">
+		{#if value}
 			<button
 				type="button"
-				class="p-1 focus:outline-none focus:shadow-outline"
+				class="focus:outline-none focus:shadow-outline"
 				on:click={toggleVisibility}
 			>
 				{#if type === 'text'}
@@ -63,13 +58,11 @@
 					<Show />
 				{/if}
 			</button>
-		</span>
-		{#if notValid === false && feedback}
-			<span class="absolute inset-y-0 right-0 flex items-center pl-2">
-				<div class="p-1 focus:outline-none focus:shadow-outline">
-					<Valid />
-				</div>
-			</span>
+			{#if notValid === false && feedback}
+				<Valid />
+			{:else if notValid && feedback && info}
+				<ErrorIcon />
+			{/if}
 		{/if}
-	{/if}
+	</span>
 </div>
