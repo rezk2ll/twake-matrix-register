@@ -1,19 +1,26 @@
 <script lang="ts">
 	import Valid from '../icons/valid.svelte';
 	import { verified } from '../../../store';
+	import Spin from '../icons/Spin.svelte';
 
 	export let value: string;
 	export let isInValid: boolean;
+	export let onBlur: () => void = () => {};
+	export let onInput: () => void = () => {};
+	export let loading: boolean = false;
+	export let checked: boolean;
 
 	$: notValid = value.length > 0 && isInValid;
 </script>
 
-<div class="relative mt-6">
+<div class="relative">
 	<input
 		required
 		id="phone"
 		name="phone"
 		type="text"
+		on:blur={onBlur}
+		on:input={onInput}
 		bind:value
 		class="h-[52px] rounded-[4px] ring-2 focus:outline-none px-5 text-[17px] font-medium leading-6 tracking-tight text-left peer w-full placeholder:text-transparent {notValid
 			? 'ring-red-500 focus:ring-red-500'
@@ -22,18 +29,18 @@
 	/>
 	<label
 		for="phone"
-		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 text-xs font-medium leading-4 {notValid
+		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 overflow-hidden text-ellipsis text-[11px] not-italic font-medium leading-4 tracking-[0.5px] {notValid
 			? 'text-red-500'
-			: ''}">Phone number</label
+			: 'text-[color:var(--m-3-sys-light-bg-surface-on-surface-variant,#1C1B1F)]'}"
+		>Phone number</label
 	>
-	{#if $verified === false && value && notValid === false}
-		<span class="absolute inset-y-0 right-0 flex items-center pl-2">
+	<span class="absolute inset-y-0 right-0 flex items-center pl-2">
+		{#if loading}
+			<Spin />
+		{:else if $verified === false && value && notValid === false && checked}
 			<slot />
-		</span>
-	{/if}
-	{#if $verified === true}
-		<span class="absolute inset-y-0 right-0 flex items-center pl-2">
+		{:else if $verified}
 			<Valid />
-		</span>
-	{/if}
+		{/if}
+	</span>
 </div>
