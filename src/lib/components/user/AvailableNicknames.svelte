@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { isMobile } from '$lib/utils/device';
 	import { clickOutside } from './../../utils/html';
 	export let value: string;
 	export let nickNames: string[];
@@ -12,31 +13,40 @@
 	};
 
 	$: display = show;
+
+	$: nickNamesList = isMobile() ? nickNames.slice(0, 2) : nickNames;
 </script>
 
 {#if display}
-	<span
-		class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
-		>Sorry, this username is already taken
-	</span>
+	<div class="flex justify-start items-start py-1 w-full px-4">
+		<span
+			class="text-[color:var(--m-3-sys-light-error-error,#FF3347)] text-[11px] not-italic font-medium leading-4 tracking-[0.5px]"
+			>Sorry, this username is already taken
+		</span>
+	</div>
 {/if}
-<div
-	use:clickOutside={() => display = false}
-	class="{display
-		? 'block'
-		: 'hidden'} absolute z-10 mt-2 pl-5 py-2 w-80 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
->
-	<div class="py-1" role="none">
+{#if nickNames.length > 0 && display}
+	<div
+		use:clickOutside={() => {
+			if (display) display = false;
+		}}
+		class="flex flex-col lg:absolute lg:z-10 lg:px-4 pt-3 lg:py-3 w-[328px] lg:-mx-1 lg:origin-top-right rounded-2xl bg-white lg:shadow-2xl lg:ring-1 lg:ring-black lg:ring-opacity-5 focus:outline-none"
+	>
 		<div
-			class="flex items-start justify-start text-[22px] font-semibold leading-7 tracking-normal text-left w-fit"
+			class="hidden lg:flex items-start justify-start overflow-hidden text-[#1C1B1F] text-ellipsis text-[22px] not-italic font-semibold leading-7"
 		>
 			Available usernames
 		</div>
-		<div class="flex flex-col space-y-2 text-xs text-left py-2">
-			{#each nickNames as nickName}
+		<div
+			class="flex lg:hidden overflow-hidden text-[color:var(--m-3-sys-light-tetirary-tertiary,#8C9CAF)] text-ellipsis text-sm not-italic font-medium leading-5 tracking-[0.1px]"
+		>
+			Available usernames
+		</div>
+		<div class="flex flex-row lg:flex-col lg:space-y-2 space-x-3 lg:space-x-0 flex-nowrap pt-2">
+			{#each nickNamesList as nickName}
 				<button
 					type="button"
-					class="rounded-xl bg-indigo-50 p-3 text-left w-fit"
+					class="bg-[#E8F0FA] rounded-lg py-[6px] px-4 max-h-8 min-w-fit w-fit text-[color:var(--m-3-sys-light-bg-surface-on-surface-variant,#1C1B1F)] text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 					on:click={() => setNickName(nickName)}
 				>
 					{nickName}
@@ -44,4 +54,4 @@
 			{/each}
 		</div>
 	</div>
-</div>
+{/if}
