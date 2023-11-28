@@ -1,5 +1,6 @@
 import { writable, get } from 'svelte/store';
 import type { ActionData } from '../routes/$types';
+import type { Tab } from '../types';
 
 export const form = writable<ActionData>();
 
@@ -24,3 +25,5 @@ phone.subscribe((v) => {
 		verified.set(false);
 	}
 });
+
+export const activeTab = writable<Tab>('register');
