@@ -38,3 +38,24 @@ export const suggestNickNames = async (firstname: string, lastname: string): Pro
 		return [];
 	}
 };
+
+/**
+ * check if the phone is taken using the check-phone API
+ *
+ * @param {string} phone - the phone number to check
+ */
+export const isPhoneTaken = async (phone: string): Promise<boolean> => {
+	try {
+		const response = await fetch('/api/check-phone', {
+			method: 'POST',
+			body: JSON.stringify({ phone })
+		});
+
+		const { available } = await response.json();
+
+		return !available;
+	} catch (error) {
+		console.debug('failed to check phone');
+		return false;
+	}
+};
