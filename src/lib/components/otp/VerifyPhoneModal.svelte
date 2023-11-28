@@ -6,6 +6,7 @@
 	import { enhance } from '$app/forms';
 	import { form, verified } from '../../../store';
 	import { validateOTP } from '$lib/utils/password';
+	import ArrowLeft from '../icons/ArrowLeft.svelte';
 
 	export let phone: string;
 
@@ -59,18 +60,20 @@
 	</button>
 </span>
 <div
-	class="fixed w-full h-100 inset-0 z-50 overflow-hidden flex justify-center items-center {open ===
+	class="fixed w-full h-screen inset-0 z-50 overflow-hidden flex justify-center items-center {open ===
 	false
 		? 'hidden'
 		: ''}"
 	style="background: rgba(0,0,0,.6);"
 >
-	<div class=" bg-white w-full md:max-w-md mx-auto rounded-2xl shadow-xl z-50 overflow-y-auto">
+	<div
+		class=" bg-white h-full lg:h-auto w-full md:max-w-md mx-auto rounded-2xl shadow-xl z-50 overflow-y-auto"
+	>
 		<div class="text-left">
 			<div class="flex justify-between items-center">
-				<div />
+				<div class="hidden lg:block" />
 				<button
-					class="modal-close cursor-pointer z-50"
+					class="modal-close hidden lg:block cursor-pointer z-50"
 					type="button"
 					on:click={() => (open = false)}
 				>
@@ -96,14 +99,28 @@
 						</defs>
 					</svg>
 				</button>
+				<div class="lg:hidden" />
 			</div>
 			<form use:enhance action="?/sendOtp" method="POST" class="hidden" bind:this={sendOtpForm}>
 				<input type="text" name="phone" bind:value={phone} required />
 			</form>
 			<div class="flex flex-col space-y-2">
-				<h1 class="text-2xl font-semibold leading-8 tracking-normal text-center">
-					Phone number confirmation
-				</h1>
+				<div class="flex flex-row pl-10 space-x-2 pt-10">
+					<button
+						class="lg:hidden modal-close cursor-pointer z-50"
+						type="button"
+						on:click={() => (open = false)}
+					>
+						<ArrowLeft />
+					</button>
+
+					<h1 class="hidden lg:block text-2xl font-semibold leading-8 tracking-normal text-center">
+						Phone number confirmation
+					</h1>
+					<h1 class="lg:hidden text-2xl font-semibold leading-8 tracking-normal text-left">
+						Confirm your phone number
+					</h1>
+				</div>
 				{#if invalidPhone}
 					<span class="text-base font-medium leading-6 tracking-tight text-center text-red-400"
 						>this phone is already taken</span
