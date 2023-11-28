@@ -1,10 +1,8 @@
 <script lang="ts">
-	import type { Tab } from '../../../types';
+	import { activeTab } from '../../../store';
 	import LoginForm from '../forms/LoginForm.svelte';
 	import RegisterForm from '../forms/RegisterForm.svelte';
 	import Logo from '../logo/Logo.svelte';
-
-	let active: Tab = 'register';
 </script>
 
 <div class="w-full flex flex-col md:flex-row justify-center">
@@ -20,10 +18,10 @@
 		>
 			<div class="flex items-center justify-center w-full lg:p-3 box-border">
 				<button
-					class="h-10 bg-white w-full box-border border-b-2 {active === 'register'
+					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'register'
 						? 'text-blue-500  border-blue-500'
 						: 'border-gray-100 border-b'} "
-					on:click={() => (active = 'register')}
+					on:click={() => ($activeTab = 'register')}
 				>
 					Sign up
 				</button>
@@ -32,17 +30,19 @@
 				class="flex items-center justify-center w-full h-10 py-2 box-border border-transparent border-b-2"
 			>
 				<button
-					class="h-10 bg-white w-full box-border border-b-2 {active === 'login'
+					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'login'
 						? 'text-blue-500 border-blue-500'
 						: 'border-gray-100 border-b'} "
-					on:click={() => (active = 'login')}
+					on:click={() => ($activeTab = 'login')}
 				>
 					Sign in
 				</button>
 			</div>
 		</div>
-		<div class="text-3xl font-semibold leading-9 tracking-normal text-center w-full">
-			{#if active === 'register'}
+		<div
+			class="text-3xl flex flex-col space-y-4 font-semibold leading-9 tracking-normal text-center w-full"
+		>
+			{#if $activeTab === 'register'}
 				<span>Sign up</span>
 				<RegisterForm />
 			{:else}
