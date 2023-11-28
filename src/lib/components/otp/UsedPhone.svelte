@@ -21,6 +21,7 @@
 		This number is already registered. Sign in instead.
 	</div>
 	<button
+		on:click={() => ($activeTab = 'login')}
 		type="button"
 		class="flex items-center w-4/12 justify-center px-3 py-[10px] text-[color:var(--m-3-sys-light-primary-inverse-primary,var(--m-3-sys-primary-inverse-primary,#9BC8FF))] text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 	>
