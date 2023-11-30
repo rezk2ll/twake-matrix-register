@@ -7,7 +7,7 @@
 
 {#if show}
 	<div
-		class="hidden lg:block absolute w-full px-4 max-w-full pt-3 pb-2 z-10 ml-2 -translate-x-1/2 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.30),0px_2px_6px_2px_rgba(0,0,0,0.15)] -top-40 left-1/2 bg-[color:var(--m-3-sys-light-bg-surface-surface,#F4F4F4)] rounded-xl"
+		class="hidden lg:block absolute w-full px-4 max-w-full pt-3 pb-2 z-10 ml-2 -translate-x-1/2 shadow-[0px_1px_2px_0px_rgba(0,0,0,0.30),0px_2px_6px_2px_rgba(0,0,0,0.15)] -top-40 left-1/2 bg-gray-100 rounded-xl"
 	>
 		<TooltipContent {title} {description} bind:show />
 	</div>
@@ -33,10 +33,7 @@
 
 <style lang="css">
 	.dialog {
-		background: var(
-			--m-3-surfaces-light-surface-3,
-			linear-gradient(0deg, rgba(116, 116, 128, 0.08) 0%, rgba(116, 116, 128, 0.08) 100%),
-			#f2f2f2
-		);
+		background: linear-gradient(0deg, rgba(116, 116, 128, 0.08) 0%, rgba(116, 116, 128, 0.08) 100%),
+			#f2f2f2;
 	}
 </style>
