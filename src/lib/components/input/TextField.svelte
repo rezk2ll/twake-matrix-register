@@ -45,20 +45,20 @@
 	<label
 		for="field"
 		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 overflow-hidden text-ellipsis text-[11px] not-italic font-medium leading-4 tracking-[0.5px] {notValid
-			? 'text-red-500'
-			: 'text-[color:var(--m-3-sys-light-bg-surface-on-surface-variant,#1C1B1F)]'}">{label}</label
+			? 'text-red-500 peer-focus:text-red-500'
+			: 'text-[#1C1B1F] peer-focus:text-blue-500'}">{label}</label
 	>
 	<span class="absolute inset-y-0 right-0 flex items-center px-1">
 		{#if suffix.length > 0}
 			<div
-				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-[color:var(--m-3-sys-light-tetirary-tertiary,#8C9CAF)] text-ellipsis whitespace-nowrap text-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
+				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-[#8C9CAF] text-ellipsis whitespace-nowrap text-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
 			>
 				{suffix}
 			</div>
 		{/if}
 		{#if info && !feedback}
 			<div
-				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-[color:var(--m-3-sys-light-tetirary-tertiary,#8C9CAF)] text-ellipsis whitespace-nowraptext-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
+				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-[#8C9CAF] text-ellipsis whitespace-nowraptext-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
 			>
 				{#if notValid}
 					<ErrorIcon />
