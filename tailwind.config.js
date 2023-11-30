@@ -5,7 +5,10 @@ export default {
 		extend: {
 			colors: {
 				'coolgray': '#EDEEF0',
-				'coolgray-400': '#818C99'
+				'coolgray-400': '#818C99',
+				'disabled': 'rgba(28, 27, 31, 0.12)',
+				'disabled-text': '#1C1B1F',
+				'primary': '#0A84FF'
 			},
 			backgroundImage: {
 				'layout': 'url("/bubble-dynamic-clay.svg"), url("/lock-dynamic-clay.png")'
