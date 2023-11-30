@@ -19,8 +19,7 @@
 
 {#if display}
 	<div class="flex justify-start items-start py-1 w-full px-4">
-		<span
-			class="text-[color:var(--m-3-sys-light-error-error,#FF3347)] text-[11px] not-italic font-medium leading-4 tracking-[0.5px]"
+		<span class="text-[#FF3347] text-[11px] not-italic font-medium leading-4 tracking-[0.5px]"
 			>Sorry, this username is already taken
 		</span>
 	</div>
@@ -38,7 +37,7 @@
 			Available usernames
 		</div>
 		<div
-			class="flex lg:hidden overflow-hidden text-[color:var(--m-3-sys-light-tetirary-tertiary,#8C9CAF)] text-ellipsis text-sm not-italic font-medium leading-5 tracking-[0.1px]"
+			class="flex lg:hidden overflow-hidden text-[#8C9CAF] text-ellipsis text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 		>
 			Available usernames
 		</div>
@@ -46,7 +45,7 @@
 			{#each nickNamesList as nickName}
 				<button
 					type="button"
-					class="bg-[#E8F0FA] rounded-lg py-[6px] px-4 max-h-8 min-w-fit w-fit text-[color:var(--m-3-sys-light-bg-surface-on-surface-variant,#1C1B1F)] text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
+					class="bg-[#E8F0FA] rounded-lg py-[6px] px-4 max-h-8 min-w-fit w-fit text-[#1C1B1F] text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 					on:click={() => setNickName(nickName)}
 				>
 					{nickName}
