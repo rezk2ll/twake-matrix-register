@@ -18,7 +18,7 @@
 	let lastName = '';
 	let nickName = '';
 	let phone = '';
-	let accepted = false;
+	let accepted = true;
 	let disabled = true;
 	let alternativeNicknames: string[] = [];
 	let loading = false;
@@ -151,6 +151,7 @@
 		label="Password"
 		bind:value={password}
 		isInvalid={!createUserFormSchema.safeParse({ password }).success}
+		error="Weak password. Use upper and lower case letters and numbers."
 	/>
 	{#if $form?.invalid_password}
 		<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
@@ -164,6 +165,7 @@
 		label="Confirm password"
 		bind:value={confirmPassword}
 		isInvalid={!fullCreateUserFormSchema.safeParse({ password, confirmPassword }).success}
+		error="Passwords do not match"
 	/>
 	<div class="max-w-full">
 		<PhoneField
@@ -182,11 +184,11 @@
 			</span>
 		{:else if phoneTaken}
 			<div class="relative w-full">
-				<UsedPhone />
+				<UsedPhone checked={phoneChecked} />
 			</div>
 		{/if}
 	</div>
-	<div class="flex flex-col items-center justify-center pt-8">
+	<div class="flex flex-col items-center justify-center">
 		<SubmitButton {disabled}>Sign up</SubmitButton>
 	</div>
 	<div class="flex items-start space-x-5 xl:-mx-5">
