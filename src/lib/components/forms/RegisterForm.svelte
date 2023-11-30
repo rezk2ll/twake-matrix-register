@@ -1,6 +1,5 @@
 <script lang="ts">
 	import UsedPhone from './../otp/UsedPhone.svelte';
-	import InfoTooltip from './../dispaly/InfoTooltip.svelte';
 	import TextField from '../input/TextField.svelte';
 	import PasswordField from '../input/PasswordField.svelte';
 	import PhoneField from '../input/PhoneField.svelte';
@@ -189,15 +188,21 @@
 		{/if}
 	</div>
 	<div class="flex flex-col items-center justify-center">
-		<SubmitButton {disabled}>Sign up</SubmitButton>
+		<SubmitButton {disabled} ariaLabel="Sign up">Sign up</SubmitButton>
 	</div>
 	<div class="flex items-start space-x-5 xl:-mx-5">
-		<input type="checkbox" bind:checked={accepted} class="mt-1" />
+		<input
+			type="checkbox"
+			bind:checked={accepted}
+			class="mt-1"
+			name="accept"
+			aria-label="accept terms and conditions"
+		/>
 		<span class="text-[17px] font-medium leading-6 tracking-tight text-left"
-			>I agree with <a href="#/ue" class="text-blue-500">User Agreement</a> and
-			<a href="#/ue" class="text-blue-500">Personal Data Usage</a>
+			>I agree with <a href="#/ue" class="text-primary">User Agreement</a> and
+			<a href="#/ue" class="text-primary">Personal Data Usage</a>
 			terms under conditions stipulated in
-			<a href="#/pp" class="text-blue-500">Privacy Policy</a> agreement.</span
+			<a href="#/pp" class="text-primary">Privacy Policy</a> agreement.</span
 		>
 	</div>
 </form>

@@ -19,11 +19,16 @@
 			>Share and collaborate on files securely, anywhere</span
 		>
 		<span
-			class="lg:hidden font-medium leading-4 text-base tracking-[0.4000000059604645px] text-blue-500 text-left"
+			class="lg:hidden font-medium leading-4 text-base tracking-[0.4000000059604645px] text-primary text-left"
 			>tdrive.linagora.com</span
 		>
 	</div>
-	<button type="button" on:click={open} class="flex shrink items-center justify-center">
+	<button
+		aria-label="open tdrive"
+		type="button"
+		on:click={open}
+		class="flex shrink items-center justify-center"
+	>
 		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
 	</button>
 </div>

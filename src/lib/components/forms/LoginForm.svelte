@@ -32,11 +32,11 @@
 		</span>
 	{/if}
 	<div class="flex flex-col items-center justify-center space-y-5">
-		<SubmitButton>Sign in</SubmitButton>
+		<SubmitButton ariaLabel="Sign in">Sign in</SubmitButton>
 		<OutlineLink href="#/login">Login with SSO</OutlineLink>
 	</div>
 
-	<a href="#/recover" class="text-blue-500 text-sm font-medium leading-5 tracking-wide"
+	<a href="#/recover" class="text-primary text-sm font-medium leading-5 tracking-wide"
 		>recover password</a
 	>
 </form>

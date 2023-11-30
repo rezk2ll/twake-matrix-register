@@ -32,7 +32,7 @@
 		class="flex flex-col lg:absolute lg:z-10 lg:px-4 pt-3 lg:py-3 w-[328px] lg:-mx-1 lg:origin-top-right rounded-2xl bg-white lg:shadow-2xl lg:ring-1 lg:ring-black lg:ring-opacity-5 focus:outline-none"
 	>
 		<div
-			class="hidden lg:flex items-start justify-start overflow-hidden text-[#1C1B1F] text-ellipsis text-[22px] not-italic font-semibold leading-7"
+			class="hidden lg:flex items-start justify-start overflow-hidden text-disabled-text text-ellipsis text-[22px] not-italic font-semibold leading-7"
 		>
 			Available usernames
 		</div>
@@ -44,8 +44,9 @@
 		<div class="flex flex-row lg:flex-col lg:space-y-2 space-x-3 lg:space-x-0 flex-nowrap pt-2">
 			{#each nickNamesList as nickName}
 				<button
+					aria-label="pick {nickName}"
 					type="button"
-					class="bg-[#E8F0FA] rounded-lg py-[6px] px-4 max-h-8 min-w-fit w-fit text-[#1C1B1F] text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
+					class="bg-[#E8F0FA] rounded-lg py-[6px] px-4 max-h-8 min-w-fit w-fit text-disabled-text text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 					on:click={() => setNickName(nickName)}
 				>
 					{nickName}

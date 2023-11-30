@@ -3,7 +3,7 @@
 
 	export let checked: boolean = false;
 
-  $: show = checked;
+	$: show = checked;
 </script>
 
 {#if show}
@@ -11,9 +11,10 @@
 		class="hidden lg:block text-black text-[11px] not-italic font-medium leading-4 tracking-[0.5px] text-left w-full px-4 p-1"
 	>
 		Number is already registered. <button
+			aria-label="sign in instead"
 			type="button"
 			on:click={() => ($activeTab = 'login')}
-			class="text-[#0A84FF]"
+			class="text-primary"
 			>Sign in
 		</button> instead
 	</div>
@@ -26,6 +27,7 @@
 			This number is already registered. Sign in instead.
 		</div>
 		<button
+			aria-label="sign in instead"
 			on:click={() => ($activeTab = 'login')}
 			type="button"
 			class="flex items-center w-4/12 justify-center px-3 py-[10px] text-[#9BC8FF] text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
@@ -34,7 +36,7 @@
 		</button>
 		<button
 			type="button"
-      on:click={() => show = false}
+			on:click={() => (show = false)}
 			class="ms-auto -mx-1.5 -my-1.5 text-gray-500 rounded-lg inline-flex items-center justify-center h-8 w-8"
 			data-dismiss-target="#alert-5"
 			aria-label="Close"

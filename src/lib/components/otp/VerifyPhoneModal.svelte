@@ -53,14 +53,15 @@
 
 <span class="hidden absolute inset-y-0 right-0 lg:flex items-center px-2">
 	<button
+		aria-label="verify phone"
 		type="button"
-		class="p-1 focus:outline-none focus:shadow-outline px-5 rounded-3xl bg-indigo-50 text-sm text-blue-500 font-medium leading-5 h-11 items-center"
+		class="ocus:outline-none focus:shadow-outline px-6 py-[10px] rounded-full bg-indigo-50 text-sm text-primary font-medium leading-5 h-11 items-center"
 		on:click={openVerificationModal}
 	>
 		Verify
 	</button>
 </span>
-<div class="lg:hidden pt-3 ">
+<div class="lg:hidden pt-3" aria-label="verify phone">
 	<PrimaryButton handler={openVerificationModal}>Verify phone number</PrimaryButton>
 </div>
 <div
@@ -76,6 +77,7 @@
 		<div class="flex justify-between items-center">
 			<div class="hidden lg:block" />
 			<button
+				aria-label="close"
 				class="modal-close hidden lg:block cursor-pointer z-50 -mr-8"
 				type="button"
 				on:click={() => (open = false)}
@@ -110,6 +112,7 @@
 		<div class="flex flex-col space-y-2">
 			<div class="flex flex-row space-x-2 lg:items-center lg:justify-center">
 				<button
+					aria-label="close"
 					class="lg:hidden modal-close cursor-pointer z-50"
 					type="button"
 					on:click={() => (open = false)}
@@ -161,7 +164,7 @@
 					{/if}
 				</div>
 				<div class="flex flex-col space-y-2 pt-2">
-					<SubmitButton disabled={inValid}>Confirm</SubmitButton>
+					<SubmitButton disabled={inValid} ariaLabel="confirm">Confirm</SubmitButton>
 					<OutlineButton handler={handleSendOtp} disabled={resendCounter > 0 || timeout}>
 						{#if resendCounter === 0}
 							Send code

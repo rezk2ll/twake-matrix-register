@@ -23,7 +23,7 @@
 			>Start your journey</span
 		>
 	</div>
-	<button type="button" on:click={open} class="flex shrink items-center justify-center">
+	<button type="button" aria-label="open twake" on:click={open} class="flex shrink items-center justify-center">
 		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
 	</button>
 </div>

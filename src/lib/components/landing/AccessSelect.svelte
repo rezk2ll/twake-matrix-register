@@ -18,8 +18,9 @@
 		>
 			<div class="flex items-center justify-center w-full lg:p-3 box-border">
 				<button
+					aria-label="sign up"
 					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'register'
-						? 'text-blue-500  border-blue-500'
+						? 'text-primary border-[#0A84FF]'
 						: 'border-gray-100 border-b'} "
 					on:click={() => ($activeTab = 'register')}
 				>
@@ -30,8 +31,9 @@
 				class="flex items-center justify-center w-full h-10 py-2 box-border border-transparent border-b-2"
 			>
 				<button
+					aria-label="sign in"
 					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'login'
-						? 'text-blue-500 border-blue-500'
+						? 'text-primary border-[#0A84FF]'
 						: 'border-gray-100 border-b'} "
 					on:click={() => ($activeTab = 'login')}
 				>

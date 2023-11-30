@@ -13,6 +13,7 @@
 
 <div class="flex flex-col gap-2">
 	<button
+		aria-label="user menu"
 		type="button"
 		class="flex flex-row space-x-2 items-center justify-center"
 		on:click={toggle}

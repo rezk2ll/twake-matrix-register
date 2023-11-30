@@ -19,7 +19,7 @@
 			>Experience email communication like never before</span
 		>
 	</div>
-	<button type="button" on:click={open} class="flex shrink items-center justify-center">
+	<button aria-label="open tmail" type="button" on:click={open} class="flex shrink items-center justify-center">
 		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
 	</button>
 </div>
