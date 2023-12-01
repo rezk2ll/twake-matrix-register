@@ -9,7 +9,7 @@
 	$: failedLogin = $form?.failed_login === true;
 </script>
 
-<form use:enhance action="?/login" method="POST" class="flex flex-col space-y-6">
+<form use:enhance action="?/login" method="POST" class="flex flex-col space-y-4 px-4 py-3 xl:px-3 lg:space-y-5 font-[Inter] w-full h-full">
 	<TextField
 		name="login"
 		label="Cellphone / Username / Email"
@@ -31,7 +31,7 @@
 			Invalid credentials
 		</span>
 	{/if}
-	<div class="flex flex-col items-center justify-center space-y-5">
+	<div class="flex flex-col items-center space-y-5 flex-1 justify-end">
 		<SubmitButton ariaLabel="Sign in">Sign in</SubmitButton>
 		<OutlineLink href="#/login">Login with SSO</OutlineLink>
 	</div>
