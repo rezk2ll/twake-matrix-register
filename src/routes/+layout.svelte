@@ -12,7 +12,7 @@
 	<title>Sign up on Twake</title>
 </svelte:head>
 
-<div class="min-h-screen w-full overflow-hidden gradiant flex flex-col font-[Inter]">
+<div class="w-full lg:h-screen overflow-hidden overflow-x-hidden gradiant flex flex-col font-[Inter]">
 	<slot />
 </div>
 

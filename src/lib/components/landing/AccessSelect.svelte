@@ -5,7 +5,7 @@
 	import Logo from '../logo/Logo.svelte';	
 </script>
 
-<div class="w-full flex flex-col md:flex-row justify-center h-screen">
+<div class="w-full flex flex-col md:flex-row justify-center h-screen lg:h-full">
 	<div
 		class="bg-white md:shadow-xl md:rounded-3xl flex flex-col space-y-5 w-full xl:w-10/12 2xl:w-7/12 md:px-16 py-6 h-full lg:h-fit"
 		id="start"
