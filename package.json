@@ -43,6 +43,7 @@
 	"type": "module",
 	"dependencies": {
 		"ldapjs": "^3.0.3",
+		"svelte-i18n": "^4.0.0",
 		"svelte-kit-cookie-session": "^3.4.1",
 		"universal-base64url": "^1.1.0",
 		"validator": "^13.11.0"
