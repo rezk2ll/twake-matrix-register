@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { _ } from 'svelte-i18n';
 	import Logo from '../logo/Logo.svelte';
 </script>
 
@@ -10,7 +11,7 @@
 		<h1
 			class="text-2xl leading-8 lg:text-4xl not-italic font-semibold lg:leading-[44px] text-center lg:text-left w-full"
 		>
-			Twake ID is your one entry access to all our services Chat, Mail and Drive
+			{$_('welcome')}
 		</h1>
 		<a
 			href="#start"
