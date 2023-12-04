@@ -7,19 +7,19 @@
 <div
 	class="flex flex-col space-y-4 w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
 >
-	<div class="flex flex-col">
-		<h1 class="text-[28px] font-semibold leading-9 tracking-normal text-center px-12">
+	<div class="flex flex-col text-center text-[28px] not-italic font-semibold leading-9 text-[#1C1B1F]">
+		<h1 class="px-12">
 			{$t('Congratulations')},
 		</h1>
-		<h1 class="text-[28px] font-semibold leading-9 tracking-normal text-center px-12">
+		<h1 class="px-12">
 			{user}!
 		</h1>
 	</div>
 
-	<span class="text-[17px] font-medium leading-6 tracking-tight text-center text-gray-400"
+	<span class="text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px] text-[#818C99]"
 		>{$t('You are all set up')}</span
 	>
-	<span class="text-[17px] font-medium leading-6 tracking-wide text-center text-black"
+	<span class="text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px] text-[#313033]"
 		>{$t('logged_twakeid_choose')}</span
 	>
 </div>
