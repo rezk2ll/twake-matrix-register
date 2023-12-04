@@ -1,3 +1,7 @@
+<script>
+	import { t } from 'svelte-i18n';
+</script>
+
 <div
 	class="font-regular relative block w-full max-w-screen-md rounded-lg bg-red-500 px-4 py-4 text-base text-white"
 	data-dismissible="alert"
@@ -21,10 +25,10 @@
 		<h5
 			class="block font-sans text-xl font-semibold leading-snug tracking-normal text-white antialiased"
 		>
-			Error
+			{$t('Error')}
 		</h5>
 		<p class="mt-2 block font-sans text-base font-normal leading-relaxed text-white antialiased">
-			Sorry, something went wrong please try again.
+			{ $t('sorry-something-went-wrong-please-try-again') }
 		</p>
 	</div>
 	<div

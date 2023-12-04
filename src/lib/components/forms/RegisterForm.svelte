@@ -10,6 +10,7 @@
 	import AvailableNicknames from '../user/AvailableNicknames.svelte';
 	import { createUserFormSchema, fullCreateUserFormSchema } from '$lib/schemas/zodSchema';
 	import { isNickNameTaken, isPhoneTaken, suggestNickNames } from '$lib/utils/api';
+	import { t } from 'svelte-i18n';
 
 	let password = '';
 	let confirmPassword = '';
@@ -99,16 +100,16 @@
 	<div class="flex flex-col lg:flex-row lg:space-x-5 space-y-4 lg:space-y-0 w-full">
 		<TextField
 			name="firstname"
-			placeholder="First Name"
-			label="First Name"
+			placeholder={$t('First Name')}
+			label={$t('First Name')}
 			bind:value={firstName}
 			isInValid={false}
 			feedback={false}
 		/>
 		<TextField
 			name="lastname"
-			placeholder="Last Name"
-			label="Last Name"
+			placeholder={$t('Last Name')}
+			label={$t('Last Name')}
 			bind:value={lastName}
 			isInValid={false}
 			feedback={false}
@@ -117,8 +118,8 @@
 	<div class="w-full">
 		<TextField
 			name="nickname"
-			placeholder="Last Name"
-			label="Username"
+			placeholder={$t('Username')}
+			label={$t('Username')}
 			bind:value={nickName}
 			isInValid={!createUserFormSchema.safeParse({ nickName }).success || nickNameTaken}
 			onBlur={checkNickName}
@@ -127,8 +128,8 @@
 			{loading}
 			suffix="@twake.app"
 			info={true}
-			infoTitle="Matrix ID/Email"
-			infoDescription="Username you enter will be used to form you Matrix ID as well as your Twake mail address."
+			infoTitle={$t('Matrix ID/Email')}
+			infoDescription={$t('username_info_tooltip')}
 		/>
 		{#if nickNameTaken === true}
 			<AvailableNicknames
@@ -139,32 +140,32 @@
 			/>
 		{:else if nickName.length && !createUserFormSchema.safeParse({ nickName }).success}
 			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
-				>invalid Username.
+				>{$t('invalid Username')}
 			</span>
 		{/if}
 	</div>
 
 	<PasswordField
 		name="password"
-		placeholder="Password"
-		label="Password"
+		placeholder={$t('Password')}
+		label={$t('Password')}
 		bind:value={password}
 		isInvalid={!createUserFormSchema.safeParse({ password }).success}
-		error="Weak password. Use upper and lower case letters and numbers."
+		error={$t('weak_password')}
 	/>
 	{#if $form?.invalid_password}
 		<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
-			>invalid password
+			>{$t('invalid password')}
 		</span>
 	{/if}
 
 	<PasswordField
 		name="confirmpassword"
-		placeholder="Confirm password"
-		label="Confirm password"
+		placeholder={$t('Confirm password')}
+		label={$t('Confirm password')}
 		bind:value={confirmPassword}
 		isInvalid={!fullCreateUserFormSchema.safeParse({ password, confirmPassword }).success}
-		error="Passwords do not match"
+		error={$t('password_mismatch')}
 	/>
 	<div class="max-w-full">
 		<PhoneField
@@ -179,7 +180,7 @@
 		</PhoneField>
 		{#if $form?.invalid_phone}
 			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
-				>invalid phone number
+				>{$t('invalid phone number')}
 			</span>
 		{:else if phoneTaken}
 			<div class="relative w-full">
@@ -188,7 +189,7 @@
 		{/if}
 	</div>
 	<div class="flex flex-col items-center justify-center">
-		<SubmitButton {disabled} ariaLabel="Sign up">Sign up</SubmitButton>
+		<SubmitButton {disabled} ariaLabel={$t('Sign up')}>{$t('Sign up')}</SubmitButton>
 	</div>
 	<div class="flex items-start space-x-5 xl:-mx-5">
 		<input
@@ -196,13 +197,10 @@
 			bind:checked={accepted}
 			class="mt-1"
 			name="accept"
-			aria-label="accept terms and conditions"
+			aria-label={$t('accept terms and conditions')}
 		/>
 		<span class="text-[17px] font-medium leading-6 tracking-tight text-left"
-			>I agree with <a href="#/ue" class="text-primary">User Agreement</a> and
-			<a href="#/ue" class="text-primary">Personal Data Usage</a>
-			terms under conditions stipulated in
-			<a href="#/pp" class="text-primary">Privacy Policy</a> agreement.</span
+			>{@html $t('uela')}</span
 		>
 	</div>
 </form>

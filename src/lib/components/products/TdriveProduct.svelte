@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from 'svelte-i18n';
 	import { attemptToOpenApp, openRedirectLink } from '$lib/utils/url';
 	import { redirectUrl as redirectUrlStore } from '../../../store';
 
@@ -16,7 +17,7 @@
 		<h1 class="lg:hidden font-semibold text-base text-left">Twake Drive (web)</h1>
 		<span
 			class="hidden lg:block text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-coolgray-400 text-left lg:pr-10"
-			>Share and collaborate on files securely, anywhere</span
+			>{$t('tdrive_description')}</span
 		>
 		<span
 			class="lg:hidden font-medium leading-4 text-base tracking-[0.4000000059604645px] text-primary text-left"

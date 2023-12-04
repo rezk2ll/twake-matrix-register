@@ -9,6 +9,7 @@
 	import { validateOTP } from '$lib/utils/password';
 	import ArrowLeft from '../icons/ArrowLeft.svelte';
 	import Confirmed from '../icons/Confirmed.svelte';
+	import { t } from 'svelte-i18n';
 
 	export let phone: string;
 
@@ -42,8 +43,6 @@
 	$: inValid = !validateOTP(value) || invalidPhone || timeout;
 	$: confirmed = $form?.verified === true;
 
-	$: console.log($form);
-
 	const handleContinue = () => {
 		verified.set(true);
 		open = false;
@@ -59,11 +58,11 @@
 		class="ocus:outline-none focus:shadow-outline px-6 py-[10px] rounded-full bg-indigo-50 text-sm text-primary font-medium leading-5 h-11 items-center"
 		on:click={openVerificationModal}
 	>
-		Verify
+		{$t('Verify')}
 	</button>
 </span>
 <div class="lg:hidden pt-3" aria-label="verify phone">
-	<PrimaryButton handler={openVerificationModal}>Verify phone number</PrimaryButton>
+	<PrimaryButton handler={openVerificationModal}>{$t('Verify phone number')}</PrimaryButton>
 </div>
 <div
 	class="fixed w-full h-screen inset-0 z-50 overflow-hidden flex justify-center items-center {open ===
@@ -85,31 +84,31 @@
 					</div>
 					<div class="lg:hidden">
 						<h1 class="text-center text-[22px] not-italic font-semibold leading-7">
-							Your phone number has been successfully confirmed.
+							{$t('your-phone-number-has-been-successfully-confirmed')}
 						</h1>
 					</div>
 					<div class="hidden lg:flex flex-col space-y-2">
 						<h1
 							class="overflow-hidden text-[#1C1B1F] text-center text-ellipsis text-2xl not-italic font-semibold leading-8"
 						>
-							Phone number confirmation
+							{$t('Phone number confirmation')}
 						</h1>
 						<p
 							class="text-[#8C9CAF] text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px]"
 						>
-							Your phone number successfully confirmed
+							{$t('Your phone number successfully confirmed')}
 						</p>
 					</div>
 				</div>
 				<div class="lg:hidden">
 					<PrimaryButton handler={handleContinue} ariaLabel="continue sign up"
-						>Continue Sign Up</PrimaryButton
+						>{$t('Continue Sign Up')}</PrimaryButton
 					>
 				</div>
 				<div class="hidden lg:flex items-center justify-center">
 					<div class="w-8/12">
 						<OutlineButton handler={handleContinue} ariaLabel="continue sign up"
-							>Continue Sign Up</OutlineButton
+							>{$t('Continue Sign Up')}</OutlineButton
 						>
 					</div>
 				</div>
@@ -165,19 +164,19 @@
 						<h1
 							class="hidden lg:block text-2xl font-semibold leading-8 tracking-normal text-center"
 						>
-							Phone number confirmation
+							{$t('Phone number confirmation')}
 						</h1>
 						<h1 class="lg:hidden text-2xl font-semibold leading-8 tracking-normal text-left">
-							Confirm your phone number
+							{$t('Confirm your phone number')}
 						</h1>
 					</div>
 					{#if invalidPhone}
 						<span class="text-base font-medium leading-6 tracking-tight text-center text-red-400"
-							>this phone is already taken</span
+							>{$t('this phone is already taken')}</span
 						>
 					{:else}
 						<span class="text-base font-medium leading-6 tracking-tight text-center text-gray-400"
-							>Enter 6 digit code we sent to:</span
+							>{$t('Enter 6 digit code we sent to')}:</span
 						>
 						<span class="text-base font-medium leading-6 tracking-tight text-center"
 							>{maskPhone(phone)}</span
@@ -188,8 +187,8 @@
 					<form action="?/checkOtp" use:enhance method="POST" class="pb-10 flex flex-col h-full">
 						<div class="my-5">
 							<TextField
-								label="Code"
-								placeholder="Code"
+								label={$t('Code')}
+								placeholder={$t('Code')}
 								bind:value
 								name="password"
 								isInValid={incorrect}
@@ -198,23 +197,26 @@
 							{#if incorrect}
 								<span
 									class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
-									>Entered code is incorrect. Try again.
+									>{ $t('entered-code-is-incorrect-try-again') }
 								</span>
 							{/if}
 							{#if timeout}
 								<span
 									class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
-									>too many wrong attempts has been made. try again later.
+								>
+									{$t('too-many-wrong-attempts-has-been-made-try-again-later')}
 								</span>
 							{/if}
 						</div>
 						<div class="flex flex-col space-y-2 flex-1 justify-end">
-							<SubmitButton disabled={inValid} ariaLabel="confirm">Confirm</SubmitButton>
+							<SubmitButton disabled={inValid} ariaLabel={$t('Confirm')}
+								>{$t('Confirm')}</SubmitButton
+							>
 							<OutlineButton handler={handleSendOtp} disabled={resendCounter > 0 || timeout}>
 								{#if resendCounter === 0}
-									Send code
+									{$t('Send code')}
 								{:else}
-									Send code again in: 0:{resendCounter}
+									{$t('Send code again in')}: 0:{resendCounter}
 								{/if}
 							</OutlineButton>
 						</div>

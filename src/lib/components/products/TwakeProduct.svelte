@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from 'svelte-i18n';
 	import { attemptToOpenApp, openRedirectLink } from '$lib/utils/url';
 	import { redirectUrl as redirectUrlStore } from '../../../store';
 
@@ -16,14 +17,19 @@
 		<h1 class="lg:hidden font-semibold text-base text-left">Twake Chat</h1>
 		<span
 			class="hidden lg:block text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-coolgray-400 text-left lg:pr-10"
-			>Decentralised corporate communication starts here</span
+			>{ $t('twake_chat_description') }</span
 		>
 		<span
 			class="lg:hidden font-medium leading-4 tracking-[0.4000000059604645px] text-coolgray-400 text-left text-base"
-			>Start your journey</span
+			>{ $t('Start your journey') }</span
 		>
 	</div>
-	<button type="button" aria-label="open twake" on:click={open} class="flex shrink items-center justify-center">
+	<button
+		type="button"
+		aria-label={ $t('open-twake') }
+		on:click={open}
+		class="flex shrink items-center justify-center"
+	>
 		<img src="/images/arrow-forward.svg" alt="next" class="w-6" />
 	</button>
 </div>

@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { t } from 'svelte-i18n';
 	import { activeTab } from '../../../store';
 	import LoginForm from '../forms/LoginForm.svelte';
 	import RegisterForm from '../forms/RegisterForm.svelte';
-	import Logo from '../logo/Logo.svelte';	
+	import Logo from '../logo/Logo.svelte';
 </script>
 
 <div class="w-full flex flex-col md:flex-row justify-center h-screen lg:h-full">
@@ -18,26 +19,26 @@
 		>
 			<div class="flex items-center justify-center w-full lg:p-3 box-border">
 				<button
-					aria-label="sign up"
+					aria-label={$t('Sign up')}
 					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'register'
 						? 'text-primary border-[#0A84FF]'
 						: 'border-gray-100 border-b'} "
 					on:click={() => ($activeTab = 'register')}
 				>
-					Sign up
+					{$t('Sign up')}
 				</button>
 			</div>
 			<div
 				class="flex items-center justify-center w-full h-10 py-2 box-border border-transparent border-b-2"
 			>
 				<button
-					aria-label="sign in"
+					aria-label={$t('Sign in')}
 					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'login'
 						? 'text-primary border-[#0A84FF]'
 						: 'border-gray-100 border-b'} "
 					on:click={() => ($activeTab = 'login')}
 				>
-					Sign in
+					{$t('Sign in')}
 				</button>
 			</div>
 		</div>
@@ -45,10 +46,10 @@
 			class="text-3xl flex flex-col space-y-4 font-semibold leading-9 tracking-normal text-center w-full"
 		>
 			{#if $activeTab === 'register'}
-				<span>Sign up</span>
+				<span>{$t('Sign up')}</span>
 				<RegisterForm />
 			{:else}
-				<span>Sign in</span>
+				<span>{$t('Sign in')}</span>
 				<LoginForm />
 			{/if}
 		</div>

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { isMobile } from '$lib/utils/device';
 	import { clickOutside } from './../../utils/html';
+	import { t } from 'svelte-i18n';
+
 	export let value: string;
 	export let nickNames: string[];
 	export let show: boolean = true;
@@ -20,7 +22,7 @@
 {#if display}
 	<div class="flex justify-start items-start py-1 w-full px-4">
 		<span class="text-[#FF3347] text-[11px] not-italic font-medium leading-4 tracking-[0.5px]"
-			>Sorry, this username is already taken
+			>{$t('username_taken')}
 		</span>
 	</div>
 {/if}
@@ -34,12 +36,12 @@
 		<div
 			class="hidden lg:flex items-start justify-start overflow-hidden text-disabled-text text-ellipsis text-[22px] not-italic font-semibold leading-7"
 		>
-			Available usernames
+			{$t('available-usernames')}
 		</div>
 		<div
 			class="flex lg:hidden overflow-hidden text-[#8C9CAF] text-ellipsis text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 		>
-			Available usernames
+			{$t('available-usernames')}
 		</div>
 		<div class="flex flex-row lg:flex-col lg:space-y-2 space-x-3 lg:space-x-0 flex-nowrap pt-2">
 			{#each nickNamesList as nickName}

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Logout from './../icons/Logout.svelte';
 	import Avatar from './../icons/Avatar.svelte';
+	import { t } from 'svelte-i18n';
+
 	export let user: string;
 	export let username: string;
 
@@ -36,7 +38,7 @@
 			<Logout />
 
 			<div class="mx-1">
-				<h1 class="text-sm font-semibold">Logout</h1>
+				<h1 class="text-sm font-semibold">{$t('Logout')}</h1>
 			</div>
 		</a>
 	</div>

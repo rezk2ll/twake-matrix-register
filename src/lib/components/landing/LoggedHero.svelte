@@ -1,5 +1,6 @@
 <script lang="ts">
 	import TwakeIcon from '../logo/TwakeIcon.svelte';
+	import { t } from 'svelte-i18n';
 </script>
 
 <div class="flex flex-col space-y-20 font-[Inter] px-10 pt-20 w-full">
@@ -13,12 +14,11 @@
 		<h1
 			class="text-4xl md:text-5xl xl:text-5xl text-black font-semibold leading-[52px] tracking-normal text-left;"
 		>
-			Twake ID - one account for everything
+			{$t('logged_twake_id')}
 		</h1>
 
 		<p class="text-[17px] font-medium leading-6 tracking-tight text-left text-gray-400 w-3/4">
-			Chat, share files, exchange email in a secure and safe way using the same account across all
-			devices and products.
+			{$t('logged_hero')}
 		</p>
 
 		<div class="flex flex-row space-x-8">

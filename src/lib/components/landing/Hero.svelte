@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { _ } from 'svelte-i18n';
+	import { t } from 'svelte-i18n';
 	import Logo from '../logo/Logo.svelte';
 </script>
 
@@ -11,13 +11,13 @@
 		<h1
 			class="text-2xl leading-8 lg:text-4xl not-italic font-semibold lg:leading-[44px] text-center lg:text-left w-full"
 		>
-			{$_('welcome')}
+			{$t('welcome')}
 		</h1>
 		<a
 			href="#start"
 			class=" lg:hidden flex items-center rounded-full justify-center w-full h-12 bg-blue-500 text-base font-medium leading-5 tracking-wide text-center text-white"
 		>
-			Start your journey
+			{ $t('Start your journey') }
 		</a>
 		<div class="hidden lg:flex flex-row gap-[50.2px]">
 			<img src="/images/twakechat.svg" alt="twake" class="w-[88px] h-[88px]" />

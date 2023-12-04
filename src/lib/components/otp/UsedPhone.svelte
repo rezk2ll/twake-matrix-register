@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { activeTab } from '../../../store';
+	import { t } from 'svelte-i18n';
 
 	export let checked: boolean = false;
 
@@ -10,13 +11,15 @@
 	<div
 		class="hidden lg:block text-black text-[11px] not-italic font-medium leading-4 tracking-[0.5px] text-left w-full px-4 p-1"
 	>
-		Number is already registered. <button
-			aria-label="sign in instead"
+		{$t('Number is already registered')}
+		<button
+			aria-label={$t('sign-in-instead')}
 			type="button"
 			on:click={() => ($activeTab = 'login')}
 			class="text-primary"
-			>Sign in
-		</button> instead
+			>{$t('Sign in')}
+		</button>
+		{$t('instead')}
 	</div>
 	<div
 		id="alert-5"
@@ -24,15 +27,15 @@
 		role="alert"
 	>
 		<div class="ms-3 text-sm font-medium text-gray-800 dark:text-gray-300 w-9/12 text-left">
-			This number is already registered. Sign in instead.
+			{ $t('this-number-is-already-registered-sign-in-instead') }
 		</div>
 		<button
-			aria-label="sign in instead"
+			aria-label={ $t('sign-in-instead') }
 			on:click={() => ($activeTab = 'login')}
 			type="button"
 			class="flex items-center w-4/12 justify-center px-3 py-[10px] text-[#9BC8FF] text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 		>
-			Sign in
+			{ $t('Sign in') }
 		</button>
 		<button
 			type="button"

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { t } from 'svelte-i18n';
+
 	export let show: boolean = false;
 	export let title: string;
 	export let description: string;
@@ -26,7 +28,7 @@
 		<span
 			class="text-primary text-center text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 		>
-			Ok, got it
+			{ $t('Ok-got-it') }
 		</span>
 	</button>
 </div>
