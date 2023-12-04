@@ -13,10 +13,10 @@
   "Login with SSO": "Login with SSO",
   "recover password": "recover password",
   "logged_twake_id": "Twake ID - one account for everything",
-  "logged_hero": "Chat, share files, exchange email in a secure and safe way using the same account across all devices and products.",
+  "logged_hero": "Twake ID is your one entry access to all our services Chat, Mail and Drive",
   "Congratulations": "Congratulations",
   "You are all set up": "You are all set up.",
-  "logged_twakeid_choose": "As Twake ID is a unified authentication mechanism you can log into any Linagora product via the same credentials",
+  "logged_twakeid_choose": "Sign into Twake Chat, Twake Drive and Twake Mail using your Twake ID",
   "logged_twakeid_choose_mobile": "Sign into Tdrive and Tmail using Twake credentials",
   "twake_chat_description": "Decentralised corporate communication starts here",
   "tdrive_description": "Share and collaborate on files securely, anywhere",
@@ -62,5 +62,6 @@
   "twake-matrix-id": "Twake matrix ID",
   "add-recovery-email": "Add recovery email",
   "sorry-something-went-wrong-please-try-again": "Sorry, something went wrong please try again.",
-  "entered-code-is-incorrect-try-again": "Entered code is incorrect. Try again."
+  "entered-code-is-incorrect-try-again": "Entered code is incorrect. Try again.",
+  "twake-mail": "Twake mail"
 }
