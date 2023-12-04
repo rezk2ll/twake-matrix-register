@@ -18,14 +18,14 @@
 >
 	<TextField
 		name="login"
-		label={$t("Cellphone / Username / Email")}
+		label={$t('Cellphone / Username / Email')}
 		value=""
-		placeholder={$t("login")}
+		placeholder={$t('login')}
 		bind:isInValid={failedLogin}
 		feedback={false}
 	/>
 	<PasswordField
-		label="{ $t('Password') }"
+		label={$t('Password')}
 		name="password"
 		value=""
 		isInvalid={failedLogin}
@@ -39,12 +39,11 @@
 			{$t('Invalid credentials')}
 		</span>
 	{/if}
-	<div class="flex flex-col items-center space-y-5 flex-1 justify-end">
+	<div class="flex flex-col items-center space-y-5 flex-1 justify-end h-full">
 		<SubmitButton ariaLabel={$t('Sign in')}>{$t('Sign in')}</SubmitButton>
 		<OutlineLink href="#/login">{$t('Login with SSO')}</OutlineLink>
+		<a href="#/recover" class="text-primary text-sm font-medium leading-5 tracking-wide"
+			>{$t('recover password')}</a
+		>
 	</div>
-
-	<a href="#/recover" class="text-primary text-sm font-medium leading-5 tracking-wide"
-		>{$t('recover password')}</a
-	>
 </form>
