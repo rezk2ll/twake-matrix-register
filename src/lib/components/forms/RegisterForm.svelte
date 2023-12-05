@@ -18,7 +18,7 @@
 	let lastName = '';
 	let nickName = '';
 	let phone = '';
-	let accepted = true;
+	let accepted = false;
 	let disabled = true;
 	let alternativeNicknames: string[] = [];
 	let loading = false;
