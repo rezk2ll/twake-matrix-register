@@ -1,4 +1,6 @@
 import { browser } from '$app/environment';
+import { goto } from '$app/navigation';
+import { PUBLIC_OIDC_PROVIDER } from '$env/static/public';
 import type { ApplicationType } from '../../types';
 import { isMobile } from './device';
 import { getApplicationDeepLink, getApplicationGotoLink, getApplicationStoreUrl } from './product';
@@ -50,12 +52,12 @@ export const openRedirectLink = (redirect: string, app: ApplicationType): void =
 		url.searchParams.append(appStoreUrl.type, base64url(appStoreUrl.url));
 	}
 
-	window.location.href = url.toString();
+	redirectToOidc(url.toString());
 };
 
 /**
  * opens the application link.
- * 
+ *
  * @param {ApplicationType} app - The application to open.
  */
 export const attemptToOpenApp = (app: ApplicationType): void => {
@@ -63,7 +65,7 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
 
 	const link = getApplicationGotoLink(app);
 
-	window.location.href = link;
+	redirectToOidc(link);
 
 	if (isMobile()) {
 		const appStoreUrl = getApplicationStoreUrl(app);
@@ -76,4 +78,13 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
 			}, 250);
 		}
 	}
+};
+
+/**
+ * redirects to the oidc provider
+ *
+ * @param {string} url - the final url
+ */
+export const redirectToOidc = (url: string): void => {
+	goto(`${PUBLIC_OIDC_PROVIDER}?redirectUrl=${url}`);
 };
