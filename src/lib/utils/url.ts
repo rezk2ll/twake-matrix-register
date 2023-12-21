@@ -1,6 +1,6 @@
 import { browser } from '$app/environment';
 import { goto } from '$app/navigation';
-import { PUBLIC_OIDC_PROVIDER } from '$env/static/public';
+import { env } from '$env/dynamic/public';
 import type { ApplicationType } from '../../types';
 import { isMobile } from './device';
 import { getApplicationDeepLink, getApplicationGotoLink, getApplicationStoreUrl } from './product';
@@ -86,5 +86,5 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
  * @param {string} url - the final url
  */
 export const redirectToOidc = (url: string): void => {
-	goto(`${PUBLIC_OIDC_PROVIDER}?redirectUrl=${url}`);
+	goto(`${env.PUBLIC_OIDC_PROVIDER}?redirectUrl=${url}`);
 };
