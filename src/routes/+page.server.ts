@@ -15,11 +15,13 @@ import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain } from '$lib/utils/url';
 
-export const load: PageServerLoad = async ({ locals, url }) => {
+export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	await Client.getClient();
 
 	const { session } = locals;
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? null;
+
+	const cookie = cookies.get(authService.cookieName);
 
 	if (redirectUrl) {
 		await session.update((data) => ({
@@ -28,7 +30,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 		}));
 	}
 
-	if (session.data.authenticated === true) {
+	if (session.data.authenticated === true && cookie) {
 		throw redirect(302, '/success');
 	}
 };
@@ -219,8 +221,6 @@ export const actions: Actions = {
 			if ((err as Redirect).location) {
 				throw err;
 			}
-
-			console.error({ err });
 
 			return fail(500, { failed_login: true });
 		}
