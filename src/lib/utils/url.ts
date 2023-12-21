@@ -65,7 +65,7 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
 
 	const link = getApplicationGotoLink(app);
 
-	redirectToOidc(link);
+	redirectToOidc(link)
 
 	if (isMobile()) {
 		const appStoreUrl = getApplicationStoreUrl(app);
