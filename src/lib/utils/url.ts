@@ -65,7 +65,7 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
 
 	const link = getApplicationGotoLink(app);
 
-	redirectToOidc(link)
+	redirectToOidc(link);
 
 	if (isMobile()) {
 		const appStoreUrl = getApplicationStoreUrl(app);
@@ -86,5 +86,12 @@ export const attemptToOpenApp = (app: ApplicationType): void => {
  * @param {string} url - the final url
  */
 export const redirectToOidc = (url: string): void => {
-	goto(`${env.PUBLIC_OIDC_PROVIDER}?redirectUrl=${url}`);
+	goto(getOidcRedirectUrl(url));
 };
+
+/**
+ * Constructs the OIDC redirect URL
+ * @param {string} url - the destination url
+ */
+export const getOidcRedirectUrl = (url: string): string =>
+	`${env.PUBLIC_OIDC_PROVIDER}?redirectUrl=${url}`;
