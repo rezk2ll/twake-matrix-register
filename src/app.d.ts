@@ -28,4 +28,5 @@ interface SessionData {
 	firstName?: string;
 	lastName?: string;
 	redirectUrl?: string;
+	postLoginUrl?: string;
 }
