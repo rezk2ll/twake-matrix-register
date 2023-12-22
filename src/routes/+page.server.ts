@@ -19,24 +19,16 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	await Client.getClient();
 
 	const { session } = locals;
-	const redirectUrl = url.searchParams.get('post_registered_redirect_url');
-	const postLoginUrl = url.searchParams.get('post_login_redirect_url');
+	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
+	const postLoginUrl = url.searchParams.get('post_login_redirect_url') ?? undefined;
 
 	const cookie = cookies.get(authService.cookieName);
 
-	if (redirectUrl) {
-		await session.update((data) => ({
-			...data,
-			redirectUrl
-		}));
-	}
-
-	if (postLoginUrl) {
-		await session.update((data) => ({
-			...data,
-			postLoginUrl
-		}));
-	}
+	await session.update((data) => ({
+		...data,
+		redirectUrl,
+		postLoginUrl
+	}));
 
 	if (session.data.authenticated === true && cookie) {
 		throw redirect(302, postLoginUrl ?? '/success');
