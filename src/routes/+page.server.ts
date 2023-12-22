@@ -13,7 +13,7 @@ import {
 } from '$lib/services/user';
 import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
-import { extractMainDomain } from '$lib/utils/url';
+import { extractMainDomain, getOidcRedirectUrl } from '$lib/utils/url';
 
 export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	await Client.getClient();
@@ -127,7 +127,7 @@ export const actions: Actions = {
 			const data = await request.formData();
 			const { session } = locals;
 			const phone = data.get('phone') as string;
-			const { phone: verifiedPhone } = session.data;
+			const { phone: verifiedPhone, redirectUrl = null } = session.data;
 
 			if (!phone || isPhoneValid(phone) === false || !(await checkPhoneAvailability(phone))) {
 				return fail(400, { invalid_phone: true });
@@ -187,7 +187,9 @@ export const actions: Actions = {
 				domain: extractMainDomain(url.host)
 			});
 
-			throw redirect(302, '/success');
+			const destinationUrl = redirectUrl ? getOidcRedirectUrl(redirectUrl) : '/success';
+
+			throw redirect(302, destinationUrl);
 		} catch (err) {
 			if ((err as Redirect).location) {
 				throw err;
@@ -205,6 +207,8 @@ export const actions: Actions = {
 
 			const login = data.get('login') as string;
 			const password = data.get('password') as string;
+
+			const { postLoginUrl = null } = locals.session.data;
 
 			const cookie = await authService.login(login, password);
 
@@ -228,7 +232,9 @@ export const actions: Actions = {
 
 			cookies.set(authService.cookieName, cookie, { domain: extractMainDomain(url.host) });
 
-			throw redirect(302, locals.session.data.postLoginUrl ?? '/success');
+			const destinationUrl = postLoginUrl ? getOidcRedirectUrl(postLoginUrl) : '/success';
+
+			throw redirect(302, destinationUrl);
 		} catch (err) {
 			if ((err as Redirect).location) {
 				throw err;
