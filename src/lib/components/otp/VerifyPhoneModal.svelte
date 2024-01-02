@@ -178,7 +178,7 @@
 						<span class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-center text-blueGray"
 							>{$t('Enter 6 digit code we sent to')}:</span
 						>
-						<span class="text-base font-medium leading-6 tracking-tight text-center text-[#37383A]"
+						<span class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-center text-[#37383A]"
 							>{maskPhone(phone)}</span
 						>
 					{/if}
