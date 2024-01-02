@@ -191,11 +191,11 @@
 	<div class="flex flex-col items-center justify-center">
 		<SubmitButton {disabled} ariaLabel={$t('Sign up')}>{$t('Sign up')}</SubmitButton>
 	</div>
-	<div class="flex items-start space-x-5 xl:-mx-5">
+	<div class="flex items-start space-x-5 xl:-mx-3">
 		<input
 			type="checkbox"
 			bind:checked={accepted}
-			class="mt-1"
+			class="mt-1 form-checkbox h-6 w-6 focus:ring-0 rounded"
 			name="accept"
 			aria-label={$t('accept terms and conditions')}
 		/>
