@@ -21,7 +21,7 @@
 
 {#if display}
 	<div class="flex justify-start items-start py-1 w-full px-4">
-		<span class="text-[#FF3347] text-[11px] not-italic font-medium leading-4 tracking-[0.5px]"
+		<span class="text-error text-[11px] not-italic font-medium leading-4 tracking-[0.5px]"
 			>{$t('username_taken')}
 		</span>
 	</div>
