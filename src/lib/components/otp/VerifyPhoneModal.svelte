@@ -195,17 +195,17 @@
 								feedback={false}
 							/>
 							{#if incorrect}
-								<span
-									class="text-xs font-medium leading-4 tracking-tight text-left text-error px-5"
+								<div
+									class="text-xs font-medium leading-4 tracking-tight text-left text-error px-5 pt-1 w-full"
 									>{ $t('entered-code-is-incorrect-try-again') }
-								</span>
+								</div>
 							{/if}
 							{#if timeout}
-								<span
-									class="text-xs font-medium leading-4 tracking-tight text-left text-error px-5"
+								<div
+									class="text-xs font-medium leading-4 tracking-tight text-left text-error px-5 pt-1"
 								>
 									{$t('too-many-wrong-attempts-has-been-made-try-again-later')}
-								</span>
+								</div>
 							{/if}
 						</div>
 						<div class="flex flex-col space-y-2 flex-1 justify-end">
