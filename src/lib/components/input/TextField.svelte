@@ -39,9 +39,9 @@
 		on:blur={onBlur}
 		on:input={onInput}
 		type="text"
-		class="h-[52px] rounded-[4px] ring-2 focus:outline-none px-4 peer w-full placeholder:text-transparent text-sm font-medium leading-5 tracking-[0.25px] text-left {notValid
+		class="h-[52px] rounded-[4px] ring-1 focus:outline-none px-4 peer w-full placeholder:text-transparent text-sm font-medium leading-5 tracking-[0.25px] text-left {notValid
 			? 'ring-error focus:ring-error'
-			: 'ring-gray-300 focus:ring-primary'}"
+			: 'ring-inputOutline focus:ring-primary'}"
 	/>
 	<label
 		for={name}

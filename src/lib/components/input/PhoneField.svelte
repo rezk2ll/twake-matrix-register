@@ -29,9 +29,9 @@
 			on:blur={onBlur}
 			on:input={onInput}
 			bind:value
-			class="h-[52px] rounded-[4px] ring-2 focus:outline-none px-5 text-[17px] font-medium leading-6 tracking-tight text-left peer w-full placeholder:text-transparent {notValid
+			class="h-[52px] rounded-[4px] ring-1 focus:outline-none px-5 text-[17px] font-medium leading-6 tracking-tight text-left peer w-full placeholder:text-transparent {notValid
 				? 'ring-error focus:ring-error'
-				: 'ring-gray-300 focus:ring-primary'}"
+				: 'ring-inputOutline focus:ring-primary'}"
 			placeholder={$t("Phone number")}
 		/>
 		<label
