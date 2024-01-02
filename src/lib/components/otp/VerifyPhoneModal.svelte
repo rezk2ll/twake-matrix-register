@@ -55,7 +55,7 @@
 	<button
 		aria-label="verify phone"
 		type="button"
-		class="ocus:outline-none focus:shadow-outline px-6 py-[10px] rounded-full bg-indigo-50 text-sm text-primary font-medium leading-5 h-11 items-center"
+		class="ocus:outline-none focus:shadow-outline px-6 py-[10px] rounded-full bg-indigo-50 text-sm text-primary font-medium leading-5 h-11 items-center tracking-[0.1px]"
 		on:click={openVerificationModal}
 	>
 		{$t('Verify')}
@@ -94,7 +94,7 @@
 							{$t('Phone number confirmation')}
 						</h1>
 						<p
-							class="text-[#8C9CAF] text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px]"
+							class="text-blueGray text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px]"
 						>
 							{$t('Your phone number successfully confirmed')}
 						</p>
@@ -151,7 +151,7 @@
 					<input type="text" name="phone" bind:value={phone} required />
 				</form>
 				<div class="flex flex-col space-y-2">
-					<div class="flex flex-row space-x-2 lg:items-center lg:justify-center">
+					<div class="flex flex-row space-x-2 lg:items-center lg:justify-center text-disabled-text">
 						<button
 							aria-label="close"
 							class="lg:hidden modal-close cursor-pointer z-50"
@@ -175,10 +175,10 @@
 							>{$t('this phone is already taken')}</span
 						>
 					{:else}
-						<span class="text-base font-medium leading-6 tracking-tight text-center text-gray-400"
+						<span class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-center text-blueGray"
 							>{$t('Enter 6 digit code we sent to')}:</span
 						>
-						<span class="text-base font-medium leading-6 tracking-tight text-center"
+						<span class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-center text-[#37383A]"
 							>{maskPhone(phone)}</span
 						>
 					{/if}
@@ -195,17 +195,17 @@
 								feedback={false}
 							/>
 							{#if incorrect}
-								<span
-									class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+								<div
+									class="text-xs font-medium leading-4 tracking-tight text-left text-error px-5 pt-1 w-full"
 									>{ $t('entered-code-is-incorrect-try-again') }
-								</span>
+								</div>
 							{/if}
 							{#if timeout}
-								<span
-									class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+								<div
+									class="text-xs font-medium leading-4 tracking-tight text-left text-error px-5 pt-1"
 								>
 									{$t('too-many-wrong-attempts-has-been-made-try-again-later')}
-								</span>
+								</div>
 							{/if}
 						</div>
 						<div class="flex flex-col space-y-2 flex-1 justify-end">

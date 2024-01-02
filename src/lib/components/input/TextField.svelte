@@ -39,27 +39,27 @@
 		on:blur={onBlur}
 		on:input={onInput}
 		type="text"
-		class="h-[52px] rounded-[4px] ring-2 focus:outline-none px-4 peer w-full placeholder:text-transparent text-sm font-medium leading-5 tracking-[0.25px] text-left {notValid
-			? 'ring-red-500 focus:ring-red-500'
-			: 'ring-gray-300 focus:ring-primary'}"
+		class="h-[52px] rounded-[4px] ring-1 focus:outline-none px-4 peer w-full placeholder:text-transparent text-sm font-medium leading-5 tracking-[0.25px] text-left {notValid
+			? 'ring-error focus:ring-error'
+			: 'ring-inputOutline focus:ring-primary'}"
 	/>
 	<label
 		for={name}
 		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 overflow-hidden text-ellipsis text-[11px] not-italic font-medium leading-4 tracking-[0.5px] {notValid
-			? 'text-red-500 peer-focus:text-red-500'
+			? 'text-error peer-focus:text-error'
 			: 'text-disabled-text peer-focus:text-primary'}">{label}</label
 	>
 	<span class="absolute inset-y-0 right-0 flex items-center px-1">
 		{#if suffix.length > 0}
 			<div
-				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-[#8C9CAF] text-ellipsis whitespace-nowrap text-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
+				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-blueGray text-ellipsis whitespace-nowrap text-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
 			>
 				{suffix}
 			</div>
 		{/if}
 		{#if info && !feedback}
 			<div
-				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-[#8C9CAF] text-ellipsis whitespace-nowraptext-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
+				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-blueGray text-ellipsis whitespace-nowraptext-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
 			>
 				{#if notValid}
 					<ErrorIcon />

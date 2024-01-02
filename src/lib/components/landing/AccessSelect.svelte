@@ -6,23 +6,23 @@
 	import Logo from '../logo/Logo.svelte';
 </script>
 
-<div class="w-full flex flex-col md:flex-row justify-center h-screen lg:h-full">
+<div class="w-full flex flex-col md:flex-row justify-end h-[100vh] lg:h-full">
 	<div
-		class="bg-white md:shadow-xl md:rounded-3xl flex flex-col space-y-5 w-full xl:w-10/12 2xl:w-7/12 md:px-16 py-6 h-full lg:h-fit"
+		class="bg-white md:shadow-xl md:rounded-3xl flex flex-col space-y-6 w-full xl:w-[504px] md:px-[60px] pb-6 h-full lg:h-fit"
 		id="start"
 	>
 		<div class="lg:hidden flex h-6 w-full items-center justify-center">
 			<Logo />
 		</div>
 		<div
-			class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
+			class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 text-center"
 		>
 			<div class="flex items-center justify-center w-full lg:p-3 box-border">
 				<button
 					aria-label={$t('Sign up')}
-					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'register'
+					class="h-10 bg-white w-full box-border tracking-[0.1px] border-b-2 {$activeTab === 'register'
 						? 'text-primary border-[#0A84FF]'
-						: 'border-gray-100 border-b'} "
+						: 'border-gray-100 border-b text-disabled-text'} "
 					on:click={() => ($activeTab = 'register')}
 				>
 					{$t('Sign up')}
@@ -33,9 +33,9 @@
 			>
 				<button
 					aria-label={$t('Sign in')}
-					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'login'
+					class="h-10 bg-white w-full box-border tracking-[0.1px] border-b-2 {$activeTab === 'login'
 						? 'text-primary border-[#0A84FF]'
-						: 'border-gray-100 border-b'} "
+						: 'border-gray-100 border-b text-disabled-text'} "
 					on:click={() => ($activeTab = 'login')}
 				>
 					{$t('Sign in')}
@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div
-			class="text-3xl flex flex-col space-y-4 font-semibold leading-9 tracking-normal text-center w-full h-full"
+			class="text-[28px] flex flex-col space-y-4 font-semibold leading-9 tracking-normal text-center w-full h-full"
 		>
 			{#if $activeTab === 'register'}
 				<span>{$t('Sign up')}</span>

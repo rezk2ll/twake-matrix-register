@@ -95,9 +95,9 @@
 	use:enhance
 	action="?/register"
 	method="POST"
-	class="flex flex-col space-y-4 px-4 py-3 xl:px-3 lg:space-y-5 font-[Inter] w-full"
+	class="flex flex-col space-y-4 px-4 py-3 xl:px-3 lg:space-y-4 font-[Inter] w-full"
 >
-	<div class="flex flex-col lg:flex-row lg:space-x-5 space-y-4 lg:space-y-0 w-full">
+	<div class="flex flex-col lg:flex-row lg:space-x-3 space-y-4 lg:space-y-0 w-full">
 		<TextField
 			name="firstname"
 			placeholder={$t('First Name')}
@@ -139,7 +139,7 @@
 				bind:checked={nickNamechecked}
 			/>
 		{:else if nickName.length && !createUserFormSchema.safeParse({ nickName }).success}
-			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+			<span class="text-xs font-medium leading-4 tracking-wide text-left text-error px-5"
 				>{$t('invalid Username')}
 			</span>
 		{/if}
@@ -154,7 +154,7 @@
 		error={$t('weak_password')}
 	/>
 	{#if $form?.invalid_password}
-		<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+		<span class="text-[11px] font-medium leading-4 tracking-wide text-left text-error px-5"
 			>{$t('invalid password')}
 		</span>
 	{/if}
@@ -179,7 +179,7 @@
 			<VerifyPhoneModal bind:phone />
 		</PhoneField>
 		{#if $form?.invalid_phone}
-			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+			<span class="text-xs font-medium leading-4 tracking-wide text-left text-error px-5"
 				>{$t('invalid phone number')}
 			</span>
 		{:else if phoneTaken}
@@ -191,15 +191,15 @@
 	<div class="flex flex-col items-center justify-center">
 		<SubmitButton {disabled} ariaLabel={$t('Sign up')}>{$t('Sign up')}</SubmitButton>
 	</div>
-	<div class="flex items-start space-x-5 xl:-mx-5">
+	<div class="flex items-start space-x-2 xl:-mx-3">
 		<input
 			type="checkbox"
 			bind:checked={accepted}
-			class="mt-1"
+			class="mt-1 form-checkbox h-6 w-6 focus:ring-0 rounded"
 			name="accept"
 			aria-label={$t('accept terms and conditions')}
 		/>
-		<span class="text-[17px] font-medium leading-6 tracking-tight text-left"
+		<span class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-left"
 			>{@html $t('uela')}</span
 		>
 	</div>

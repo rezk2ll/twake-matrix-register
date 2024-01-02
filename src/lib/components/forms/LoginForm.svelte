@@ -34,14 +34,14 @@
 	/>
 	{#if failedLogin}
 		<span
-			class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-red-500 px-5"
+			class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-error px-5"
 		>
 			{$t('Invalid credentials')}
 		</span>
 	{/if}
 	<div class="flex flex-col items-center space-y-5 flex-1 justify-end h-full">
 		<SubmitButton ariaLabel={$t('Sign in')}>{$t('Sign in')}</SubmitButton>
-		<OutlineLink href="#/login">{$t('Login with SSO')}</OutlineLink>
+		<OutlineLink href="/login">{$t('Login with SSO')}</OutlineLink>
 		<a href="#/recover" class="text-primary text-sm font-medium leading-5 tracking-wide"
 			>{$t('recover password')}</a
 		>
