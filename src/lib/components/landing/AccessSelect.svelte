@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div
-			class="text-3xl flex flex-col space-y-4 font-semibold leading-9 tracking-normal text-center w-full h-full"
+			class="text-[28px] flex flex-col space-y-4 font-semibold leading-9 tracking-normal text-center w-full h-full"
 		>
 			{#if $activeTab === 'register'}
 				<span>{$t('Sign up')}</span>
