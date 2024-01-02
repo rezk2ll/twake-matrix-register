@@ -175,7 +175,7 @@
 							>{$t('this phone is already taken')}</span
 						>
 					{:else}
-						<span class="text-base font-medium leading-6 tracking-tight text-center text-blueGray"
+						<span class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-center text-blueGray"
 							>{$t('Enter 6 digit code we sent to')}:</span
 						>
 						<span class="text-base font-medium leading-6 tracking-tight text-center"
