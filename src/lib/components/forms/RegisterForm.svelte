@@ -191,7 +191,7 @@
 	<div class="flex flex-col items-center justify-center">
 		<SubmitButton {disabled} ariaLabel={$t('Sign up')}>{$t('Sign up')}</SubmitButton>
 	</div>
-	<div class="flex items-start space-x-5 xl:-mx-3">
+	<div class="flex items-start space-x-2 xl:-mx-3">
 		<input
 			type="checkbox"
 			bind:checked={accepted}
@@ -199,7 +199,7 @@
 			name="accept"
 			aria-label={$t('accept terms and conditions')}
 		/>
-		<span class="text-[17px] font-medium leading-6 tracking-tight text-left"
+		<span class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-left"
 			>{@html $t('uela')}</span
 		>
 	</div>
