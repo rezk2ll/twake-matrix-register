@@ -4,10 +4,10 @@
 </script>
 
 <div
-	class="flex flex-col w-full space-y-6 font-[Inter] px-5 md:px-10 pt-52 items-center lg:items-start"
+	class="flex flex-col w-full lg:max-w-[508px] px-10 lg:px-0 space-y-6 font-[Inter] pt-52 items-center lg:items-start"
 >
 	<Logo />
-	<div class="flex flex-col space-y-5 w-full h-screen lg:h-fit 2xl:w-8/12">
+	<div class="flex flex-col space-y-5 w-full h-screen lg:h-fit">
 		<h1
 			class="text-2xl leading-8 lg:text-4xl not-italic font-semibold lg:leading-[44px] text-center lg:text-left w-full text-disabled-text"
 		>
