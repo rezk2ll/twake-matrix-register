@@ -55,7 +55,7 @@
 	<button
 		aria-label="verify phone"
 		type="button"
-		class="ocus:outline-none focus:shadow-outline px-6 py-[10px] rounded-full bg-indigo-50 text-sm text-primary font-medium leading-5 h-11 items-center"
+		class="ocus:outline-none focus:shadow-outline px-6 py-[10px] rounded-full bg-indigo-50 text-sm text-primary font-medium leading-5 h-11 items-center tracking-[0.1px]"
 		on:click={openVerificationModal}
 	>
 		{$t('Verify')}
