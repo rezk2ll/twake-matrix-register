@@ -22,7 +22,7 @@
 					aria-label={$t('Sign up')}
 					class="h-10 bg-white w-full box-border tracking-[0.1px] border-b-2 {$activeTab === 'register'
 						? 'text-primary border-[#0A84FF]'
-						: 'border-gray-100 border-b'} "
+						: 'border-gray-100 border-b text-disabled-text'} "
 					on:click={() => ($activeTab = 'register')}
 				>
 					{$t('Sign up')}
@@ -35,7 +35,7 @@
 					aria-label={$t('Sign in')}
 					class="h-10 bg-white w-full box-border tracking-[0.1px] border-b-2 {$activeTab === 'login'
 						? 'text-primary border-[#0A84FF]'
-						: 'border-gray-100 border-b'} "
+						: 'border-gray-100 border-b text-disabled-text'} "
 					on:click={() => ($activeTab = 'login')}
 				>
 					{$t('Sign in')}
