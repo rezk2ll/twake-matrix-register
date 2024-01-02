@@ -7,7 +7,15 @@ import validator from 'validator';
  * @returns {string} - the masked phone number.
  */
 export const maskPhone = (phone: string): string => {
-	return phone.replace(/(?<=^\+\d{1,3}\d{2})\d+(?=\d$)/, '*****');
+	const code = phone.slice(0, 3);
+	const number = phone.slice(3);
+
+	const inBetween = number
+		.slice(3, number.length - 1)
+		.replace(/(\d{3})(?=\d)/g, '$1 ')
+		.replace(/[0-9]/g, '*')
+
+	return `${code} ${number.slice(0, 3)} ${inBetween} ${number.slice(-1)}`;
 };
 
 /**
