@@ -8,7 +8,7 @@
 
 <div class="w-full flex flex-col md:flex-row justify-center h-[100vh] lg:h-full">
 	<div
-		class="bg-white md:shadow-xl md:rounded-3xl flex flex-col space-y-5 w-full xl:w-[88%] 2xl:w-[65%] md:px-16 py-6 h-fit"
+		class="bg-white md:shadow-xl md:rounded-3xl flex flex-col space-y-5 w-full xl:w-[504px] md:px-16 py-6 h-full lg:h-fit"
 		id="start"
 	>
 		<div class="lg:hidden flex h-6 w-full items-center justify-center">

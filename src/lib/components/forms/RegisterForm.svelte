@@ -97,7 +97,7 @@
 	method="POST"
 	class="flex flex-col space-y-4 px-4 py-3 xl:px-3 lg:space-y-5 font-[Inter] w-full"
 >
-	<div class="flex flex-col lg:flex-row lg:space-x-5 space-y-4 lg:space-y-0 w-full">
+	<div class="flex flex-col lg:flex-row lg:space-x-3 space-y-4 lg:space-y-0 w-full">
 		<TextField
 			name="firstname"
 			placeholder={$t('First Name')}
