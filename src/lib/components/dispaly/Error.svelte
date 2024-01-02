@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="font-regular relative block w-full max-w-screen-md rounded-lg bg-red-500 px-4 py-4 text-base text-white"
+	class="font-regular relative block w-full max-w-screen-md rounded-lg bg-error px-4 py-4 text-base text-white"
 	data-dismissible="alert"
 >
 	<div class="absolute top-4 left-4">

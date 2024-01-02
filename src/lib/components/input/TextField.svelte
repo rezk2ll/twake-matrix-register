@@ -40,13 +40,13 @@
 		on:input={onInput}
 		type="text"
 		class="h-[52px] rounded-[4px] ring-2 focus:outline-none px-4 peer w-full placeholder:text-transparent text-sm font-medium leading-5 tracking-[0.25px] text-left {notValid
-			? 'ring-red-500 focus:ring-red-500'
+			? 'ring-error focus:ring-error'
 			: 'ring-gray-300 focus:ring-primary'}"
 	/>
 	<label
 		for={name}
 		class="absolute left-0 bg-white px-1 duration-100 ease-linear ml-1 -translate-y-2.5 translate-x-2 overflow-hidden text-ellipsis text-[11px] not-italic font-medium leading-4 tracking-[0.5px] {notValid
-			? 'text-red-500 peer-focus:text-red-500'
+			? 'text-error peer-focus:text-error'
 			: 'text-disabled-text peer-focus:text-primary'}">{label}</label
 	>
 	<span class="absolute inset-y-0 right-0 flex items-center px-1">

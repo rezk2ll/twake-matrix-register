@@ -139,7 +139,7 @@
 				bind:checked={nickNamechecked}
 			/>
 		{:else if nickName.length && !createUserFormSchema.safeParse({ nickName }).success}
-			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+			<span class="text-xs font-medium leading-4 tracking-wide text-left text-error px-5"
 				>{$t('invalid Username')}
 			</span>
 		{/if}
@@ -154,7 +154,7 @@
 		error={$t('weak_password')}
 	/>
 	{#if $form?.invalid_password}
-		<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+		<span class="text-xs font-medium leading-4 tracking-wide text-left text-error px-5"
 			>{$t('invalid password')}
 		</span>
 	{/if}
@@ -179,7 +179,7 @@
 			<VerifyPhoneModal bind:phone />
 		</PhoneField>
 		{#if $form?.invalid_phone}
-			<span class="text-xs font-medium leading-4 tracking-wide text-left text-red-500 px-5"
+			<span class="text-xs font-medium leading-4 tracking-wide text-left text-error px-5"
 				>{$t('invalid phone number')}
 			</span>
 		{:else if phoneTaken}

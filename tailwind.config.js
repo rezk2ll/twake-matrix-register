@@ -8,7 +8,8 @@ export default {
 				'coolgray-400': '#818C99',
 				'disabled': 'rgba(28, 27, 31, 0.12)',
 				'disabled-text': '#1C1B1F',
-				'primary': '#0A84FF'
+				'primary': '#0A84FF',
+				'error': '#FF3347'
 			},
 			backgroundImage: {
 				'layout': 'url("/bubble-dynamic-clay.svg"), url("/lock-dynamic-clay.png")'

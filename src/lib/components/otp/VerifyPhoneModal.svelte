@@ -196,13 +196,13 @@
 							/>
 							{#if incorrect}
 								<span
-									class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+									class="text-xs font-medium leading-4 tracking-tight text-left text-error px-5"
 									>{ $t('entered-code-is-incorrect-try-again') }
 								</span>
 							{/if}
 							{#if timeout}
 								<span
-									class="text-xs font-medium leading-4 tracking-tight text-left text-red-500 px-5"
+									class="text-xs font-medium leading-4 tracking-tight text-left text-error px-5"
 								>
 									{$t('too-many-wrong-attempts-has-been-made-try-again-later')}
 								</span>

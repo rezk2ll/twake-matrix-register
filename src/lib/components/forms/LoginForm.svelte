@@ -34,7 +34,7 @@
 	/>
 	{#if failedLogin}
 		<span
-			class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-red-500 px-5"
+			class="text-xs font-medium leading-4 tracking-[0.4000000059604645px] text-left text-error px-5"
 		>
 			{$t('Invalid credentials')}
 		</span>
