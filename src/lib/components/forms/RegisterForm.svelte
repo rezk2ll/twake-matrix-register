@@ -154,7 +154,7 @@
 		error={$t('weak_password')}
 	/>
 	{#if $form?.invalid_password}
-		<span class="text-xs font-medium leading-4 tracking-wide text-left text-error px-5"
+		<span class="text-[11px] font-medium leading-4 tracking-wide text-left text-error px-5"
 			>{$t('invalid password')}
 		</span>
 	{/if}
