@@ -11,7 +11,8 @@ export default {
 				'disabled': 'rgba(28, 27, 31, 0.12)',
 				'disabled-text': '#1C1B1F',
 				'primary': '#0A84FF',
-				'error': '#FF3347'
+				'error': '#FF3347',
+				'blueGray': '#8C9CAF'
 			},
 			backgroundImage: {
 				'layout': 'url("/bubble-dynamic-clay.svg"), url("/lock-dynamic-clay.png")'
