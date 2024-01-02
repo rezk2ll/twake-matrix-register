@@ -15,12 +15,12 @@
 			<Logo />
 		</div>
 		<div
-			class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 tracking-wide text-center"
+			class="flex flex-row w-full items-center justify-center text-sm font-medium leading-5 text-center"
 		>
 			<div class="flex items-center justify-center w-full lg:p-3 box-border">
 				<button
 					aria-label={$t('Sign up')}
-					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'register'
+					class="h-10 bg-white w-full box-border tracking-[0.1px] border-b-2 {$activeTab === 'register'
 						? 'text-primary border-[#0A84FF]'
 						: 'border-gray-100 border-b'} "
 					on:click={() => ($activeTab = 'register')}
@@ -33,7 +33,7 @@
 			>
 				<button
 					aria-label={$t('Sign in')}
-					class="h-10 bg-white w-full box-border border-b-2 {$activeTab === 'login'
+					class="h-10 bg-white w-full box-border tracking-[0.1px] border-b-2 {$activeTab === 'login'
 						? 'text-primary border-[#0A84FF]'
 						: 'border-gray-100 border-b'} "
 					on:click={() => ($activeTab = 'login')}
