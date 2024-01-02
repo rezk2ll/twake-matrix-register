@@ -41,7 +41,7 @@
 	{/if}
 	<div class="flex flex-col items-center space-y-5 flex-1 justify-end h-full">
 		<SubmitButton ariaLabel={$t('Sign in')}>{$t('Sign in')}</SubmitButton>
-		<OutlineLink href="#/login">{$t('Login with SSO')}</OutlineLink>
+		<OutlineLink href="/login">{$t('Login with SSO')}</OutlineLink>
 		<a href="#/recover" class="text-primary text-sm font-medium leading-5 tracking-wide"
 			>{$t('recover password')}</a
 		>
