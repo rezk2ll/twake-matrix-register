@@ -151,7 +151,7 @@
 					<input type="text" name="phone" bind:value={phone} required />
 				</form>
 				<div class="flex flex-col space-y-2">
-					<div class="flex flex-row space-x-2 lg:items-center lg:justify-center">
+					<div class="flex flex-row space-x-2 lg:items-center lg:justify-center text-disabled-text">
 						<button
 							aria-label="close"
 							class="lg:hidden modal-close cursor-pointer z-50"
