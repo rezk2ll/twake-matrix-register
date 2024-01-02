@@ -8,7 +8,7 @@
   "Password": "Password",
   "Confirm password": "Confirm password",
   "Phone number": "Phone number",
-  "uela": "I agree with <a href='#/ue' class='text-primary'>User Agreement</a> and <a href='#/ue' class='text-primary'>Personal Data Usage</a> terms under conditions stipulated in<a href='#/pp' class='text-primary'>Privacy Policy</a> agreement.",
+  "uela": "I agree with <a href='#/ue' class='text-primary'>User Agreement</a> and <a href='#/ue' class='text-primary'>Personal Data Usage</a> terms under conditions stipulated in <a href='#/pp' class='text-primary'>Privacy Policy</a> agreement.",
   "Cellphone / Username / Email": "Cellphone / Username / Email",
   "Login with SSO": "Login with SSO",
   "recover password": "recover password",
