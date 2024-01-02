@@ -4,7 +4,7 @@
 </script>
 
 <div
-	class="flex flex-col w-full space-y-12 font-[Inter] px-5 md:px-10 pt-52 items-center lg:items-start"
+	class="flex flex-col w-full space-y-6 font-[Inter] px-5 md:px-10 pt-52 items-center lg:items-start"
 >
 	<Logo />
 	<div class="flex flex-col space-y-5 w-full h-screen lg:h-fit 2xl:w-8/12">
