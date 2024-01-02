@@ -39,7 +39,7 @@
 			{$t('available-usernames')}
 		</div>
 		<div
-			class="flex lg:hidden overflow-hidden text-[#8C9CAF] text-ellipsis text-sm not-italic font-medium leading-5 tracking-[0.1px]"
+			class="flex lg:hidden overflow-hidden text-blueGray text-ellipsis text-sm not-italic font-medium leading-5 tracking-[0.1px]"
 		>
 			{$t('available-usernames')}
 		</div>

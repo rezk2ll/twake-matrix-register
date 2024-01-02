@@ -52,14 +52,14 @@
 	<span class="absolute inset-y-0 right-0 flex items-center px-1">
 		{#if suffix.length > 0}
 			<div
-				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-[#8C9CAF] text-ellipsis whitespace-nowrap text-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
+				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-blueGray text-ellipsis whitespace-nowrap text-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
 			>
 				{suffix}
 			</div>
 		{/if}
 		{#if info && !feedback}
 			<div
-				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-[#8C9CAF] text-ellipsis whitespace-nowraptext-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
+				class="p-1 focus:outline-none focus:shadow-outline overflow-hidden text-blueGray text-ellipsis whitespace-nowraptext-[17px] font-medium leading-6 tracking-[-0.15000000596046448px] text-left"
 			>
 				{#if notValid}
 					<ErrorIcon />

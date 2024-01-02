@@ -94,7 +94,7 @@
 							{$t('Phone number confirmation')}
 						</h1>
 						<p
-							class="text-[#8C9CAF] text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px]"
+							class="text-blueGray text-center text-[17px] not-italic font-medium leading-6 tracking-[-0.15px]"
 						>
 							{$t('Your phone number successfully confirmed')}
 						</p>
@@ -175,7 +175,7 @@
 							>{$t('this phone is already taken')}</span
 						>
 					{:else}
-						<span class="text-base font-medium leading-6 tracking-tight text-center text-[#8C9CAF]"
+						<span class="text-base font-medium leading-6 tracking-tight text-center text-blueGray"
 							>{$t('Enter 6 digit code we sent to')}:</span
 						>
 						<span class="text-base font-medium leading-6 tracking-tight text-center"

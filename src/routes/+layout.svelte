@@ -19,7 +19,7 @@
 >
 	<slot />
 	<span
-		class="hidden overflow-hidden lg:block absolute bottom-5 left-72 text-sm not-italic font-medium leading-5 tracking-[0.1px] text-[#8C9CAF]"
+		class="hidden overflow-hidden lg:block absolute bottom-5 left-72 text-sm not-italic font-medium leading-5 tracking-[0.1px] text-blueGray"
 		>© 2000-{currentYear}, LINAGORA</span
 	>
 </div>
