@@ -10,6 +10,7 @@
 	import ArrowLeft from '../icons/ArrowLeft.svelte';
 	import Confirmed from '../icons/Confirmed.svelte';
 	import { t } from 'svelte-i18n';
+	import Fail from '../dispaly/Fail.svelte';
 
 	export let phone: string;
 
@@ -174,11 +175,17 @@
 						<span class="text-base font-medium leading-6 tracking-tight text-center text-red-400"
 							>{$t('this phone is already taken')}</span
 						>
+					{:else if $form?.send_failed}
+						<Fail>{$t('failed-to-send-otp-try-again-later')}</Fail>
+					{:else if $form?.check_failed || $form?.missing}
+						<Fail>{$t('failed-to-check-otp-try-again-later')}</Fail>
 					{:else}
-						<span class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-center text-blueGray"
+						<span
+							class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-center text-blueGray"
 							>{$t('Enter 6 digit code we sent to')}:</span
 						>
-						<span class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-center text-[#37383A]"
+						<span
+							class="text-[17px] font-medium leading-6 tracking-[-0.15px] text-center text-[#37383A]"
 							>{maskPhone(phone)}</span
 						>
 					{/if}
@@ -197,7 +204,8 @@
 							{#if incorrect}
 								<div
 									class="text-xs font-medium leading-4 tracking-tight text-left text-error px-5 pt-1 w-full"
-									>{ $t('entered-code-is-incorrect-try-again') }
+								>
+									{$t('entered-code-is-incorrect-try-again')}
 								</div>
 							{/if}
 							{#if timeout}
@@ -209,10 +217,13 @@
 							{/if}
 						</div>
 						<div class="flex flex-col space-y-2 flex-1 justify-end">
-							<SubmitButton disabled={inValid} ariaLabel={$t('Confirm')}
+							<SubmitButton disabled={inValid || $form?.send_failed} ariaLabel={$t('Confirm')}
 								>{$t('Confirm')}</SubmitButton
 							>
-							<OutlineButton handler={handleSendOtp} disabled={resendCounter > 0 || timeout}>
+							<OutlineButton
+								handler={handleSendOtp}
+								disabled={resendCounter > 0 || timeout || $form?.send_failed}
+							>
 								{#if resendCounter === 0}
 									{$t('Send code')}
 								{:else}
