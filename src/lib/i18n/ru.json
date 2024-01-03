@@ -48,7 +48,7 @@
   "invalid Username": "неверное имя пользователя",
   "invalid password": "Неверный пароль",
   "accept terms and conditions": "принять условия использования",
-  "invalid phone number": "неправильный номер телефона",
+  "invalid phone number": "Введенный вами номер недействителен. Попробуйте еще раз.",
   "login": "вход",
   "hide or show": "скрывать или показывать",
   "sign-in-instead": "вместо этого войдите в систему",
@@ -63,5 +63,7 @@
   "add-recovery-email": "Добавить электронную почту для восстановления",
   "sorry-something-went-wrong-please-try-again": "Извините, что-то пошло не так, пожалуйста, попробуйте еще раз.",
   "entered-code-is-incorrect-try-again": "Введенный код неверен. Попробуйте еще раз.",
-  "twake-mail": "Twake почту"
+  "twake-mail": "Twake почту",
+  "failed-to-send-otp-try-again-later": "Не удалось отправить OTP. Повторите попытку позже.",
+  "failed-to-check-otp-try-again-later": "Не удалось проверить OTP. Повторите попытку позже."
 }

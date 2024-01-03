@@ -48,7 +48,7 @@
   "invalid Username": "Nom d'utilisateur invalide",
   "invalid password": "mot de passe invalide",
   "accept terms and conditions": "accepter les termes et conditions",
-  "invalid phone number": "Numéro de téléphone invalide",
+  "invalid phone number": "Le numéro que vous avez entré n'est pas valide. Essayer à nouveau.",
   "login": "connexion",
   "hide or show": "cacher ou montrer",
   "sign-in-instead": "connectez-vous à la place",
@@ -63,5 +63,7 @@
   "add-recovery-email": "Ajouter un courriel de récupération",
   "sorry-something-went-wrong-please-try-again": "Désolé, un problème s'est produit, veuillez réessayer.",
   "entered-code-is-incorrect-try-again": "Le code saisi est incorrect. Réessayez.",
-  "twake-mail": "Email Twake"
+  "twake-mail": "Email Twake",
+  "failed-to-send-otp-try-again-later": "Échec de l'envoi d'OTP, réessayez plus tard",
+  "failed-to-check-otp-try-again-later": "Échec de la vérification d'OTP, réessayez plus tard"
 }

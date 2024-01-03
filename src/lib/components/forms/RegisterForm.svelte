@@ -30,6 +30,7 @@
 
 	$: !!phone && phoneStore.set(phone);
 	$: invalidPhone = !createUserFormSchema.safeParse({ phone }).success || phoneTaken;
+	$: invalidPhoneFormat = phone && !createUserFormSchema.safeParse({ phone }).success;
 
 	$: {
 		if ($form?.nickname_taken === true) nickNameTaken = true;
@@ -178,10 +179,10 @@
 		>
 			<VerifyPhoneModal bind:phone />
 		</PhoneField>
-		{#if $form?.invalid_phone}
-			<span class="text-xs font-medium leading-4 tracking-wide text-left text-error px-5"
+		{#if $form?.invalid_phone || invalidPhoneFormat}
+			<div class="text-xs font-medium leading-4 pt-1 tracking-wide text-left text-error px-5"
 				>{$t('invalid phone number')}
-			</span>
+			</div>
 		{:else if phoneTaken}
 			<div class="relative w-full">
 				<UsedPhone checked={phoneChecked} />

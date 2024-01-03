@@ -48,7 +48,7 @@
   "invalid Username": "tên sử dụng không hợp lệ",
   "invalid password": "mật khẩu không hợp lệ",
   "accept terms and conditions": "Chấp nhận các điều khoản và điều kiện",
-  "invalid phone number": "số điện thoại không hợp lệ",
+  "invalid phone number": "Số bạn đã nhập không hợp lệ. Thử lại.",
   "login": "Đăng nhập",
   "hide or show": "ẩn hoặc hiển thị",
   "sign-in-instead": "Thay vào đó, hãy đăng nhập",
@@ -63,5 +63,7 @@
   "add-recovery-email": "Thêm email khôi phục",
   "sorry-something-went-wrong-please-try-again": "Xin lỗi, đã xảy ra lỗi, vui lòng thử lại.",
   "entered-code-is-incorrect-try-again": "Mã đã nhập không chính xác. Thử lại.",
-  "twake-mail": "Thư đánh thức"
+  "twake-mail": "Thư đánh thức",
+  "failed-to-send-otp-try-again-later": "Không gửi được OTP, hãy thử lại sau",
+  "failed-to-check-otp-try-again-later": "Không kiểm tra được OTP, hãy thử lại sau"
 }
