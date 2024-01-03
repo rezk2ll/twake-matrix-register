@@ -63,5 +63,7 @@
   "add-recovery-email": "Add recovery email",
   "sorry-something-went-wrong-please-try-again": "Sorry, something went wrong please try again.",
   "entered-code-is-incorrect-try-again": "Entered code is incorrect. Try again.",
-  "twake-mail": "Twake mail"
+  "twake-mail": "Twake mail",
+  "failed-to-send-otp-try-again-later": "Failed to send OTP, try again later",
+  "failed-to-check-otp-try-again-later": "Failed to check OTP, try again later"
 }
