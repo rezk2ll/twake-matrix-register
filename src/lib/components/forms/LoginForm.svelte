@@ -7,7 +7,11 @@
 	import TextField from '../input/TextField.svelte';
 	import OutlineLink from '../link/OutlineLink.svelte';
 
+	let login = '';
+	let password = '';
+
 	$: failedLogin = $form?.failed_login === true;
+	$: disabled = login.length === 0 || password.length === 0;
 </script>
 
 <form
@@ -19,7 +23,7 @@
 	<TextField
 		name="login"
 		label={$t('Cellphone / Username / Email')}
-		value=""
+		bind:value={login}
 		placeholder={$t('login')}
 		bind:isInValid={failedLogin}
 		feedback={false}
@@ -27,14 +31,14 @@
 	<PasswordField
 		label={$t('Password')}
 		name="password"
-		value=""
+		bind:value={password}
 		isInvalid={failedLogin}
 		placeholder={$t('Password')}
 		feedback={false}
-		error=	{$t('Invalid credentials')}
+		error={$t('Invalid credentials')}
 	/>
 	<div class="flex flex-col items-center space-y-5 flex-1 justify-end h-full">
-		<SubmitButton ariaLabel={$t('Sign in')}>{$t('Sign in')}</SubmitButton>
+		<SubmitButton ariaLabel={$t('Sign in')} {disabled}>{$t('Sign in')}</SubmitButton>
 		<OutlineLink href="/login">{$t('Login with SSO')}</OutlineLink>
 		<a href="#/recover" class="text-primary text-sm font-medium leading-5 tracking-wide"
 			>{$t('recover password')}</a
