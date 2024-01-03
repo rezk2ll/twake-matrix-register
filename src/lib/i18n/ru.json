@@ -48,7 +48,7 @@
   "invalid Username": "неверное имя пользователя",
   "invalid password": "Неверный пароль",
   "accept terms and conditions": "принять условия использования",
-  "invalid phone number": "неправильный номер телефона",
+  "invalid phone number": "Введенный вами номер недействителен. Попробуйте еще раз.",
   "login": "вход",
   "hide or show": "скрывать или показывать",
   "sign-in-instead": "вместо этого войдите в систему",

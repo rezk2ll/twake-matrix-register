@@ -48,7 +48,7 @@
   "invalid Username": "tên sử dụng không hợp lệ",
   "invalid password": "mật khẩu không hợp lệ",
   "accept terms and conditions": "Chấp nhận các điều khoản và điều kiện",
-  "invalid phone number": "số điện thoại không hợp lệ",
+  "invalid phone number": "Số bạn đã nhập không hợp lệ. Thử lại.",
   "login": "Đăng nhập",
   "hide or show": "ẩn hoặc hiển thị",
   "sign-in-instead": "Thay vào đó, hãy đăng nhập",

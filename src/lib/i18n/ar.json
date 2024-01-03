@@ -48,7 +48,7 @@
   "invalid Username": "اسم المستخدم غير صالح",
   "invalid password": "كلمة المرور غير صالحة",
   "accept terms and conditions": "قبول الشروط والأحكام",
-  "invalid phone number": "رقم الهاتف غير صالح",
+  "invalid phone number": "الرقم الذي أدخلته غير صالح. حاول ثانية.",
   "login": "تسجيل الدخول",
   "hide or show": "إخفاء أو إظهار",
   "sign-in-instead": "تسجيل الدخول بدلا من ذلك",
