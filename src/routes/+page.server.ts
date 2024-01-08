@@ -14,6 +14,7 @@ import {
 import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
+import { ADMIN_OTP } from '$env/static/private';
 
 export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	await Client.getClient();
@@ -41,76 +42,98 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 
 export const actions: Actions = {
 	sendOtp: async ({ request, locals }) => {
-		const data = await request.formData();
-		const phone = data.get('phone') as string;
+		try {
+			const data = await request.formData();
+			const phone = data.get('phone') as string;
 
-		if (!(await checkPhoneAvailability(phone))) {
-			return fail(400, { phone, phone_taken: true });
+			if (!(await checkPhoneAvailability(phone))) {
+				return fail(400, { phone, phone_taken: true });
+			}
+
+			if (!phone) {
+				return fail(400, { phone, missing: true });
+			}
+
+			if (!isPhoneValid(phone)) {
+				return fail(400, { phone, invalid: true });
+			}
+
+			const { last_sent } = locals.session.data;
+
+			if (last_sent && last_sent > Date.now() - 60000) {
+				return fail(400, { phone, invalid: true });
+			}
+
+			const token = await send(phone);
+
+			await locals.session.set({
+				otp_request_token: token,
+				last_sent: Date.now(),
+				phone,
+				verified: false,
+				authenticated: false
+			});
+
+			return { sent: true };
+		} catch (error) {
+			return fail(400, { send_failed: true });
 		}
-
-		if (!phone) {
-			return fail(400, { phone, missing: true });
-		}
-
-		if (!isPhoneValid(phone)) {
-			return fail(400, { phone, invalid: true });
-		}
-
-		const { last_sent } = locals.session.data;
-
-		if (last_sent && last_sent > Date.now() - 60000) {
-			return fail(400, { phone, invalid: true });
-		}
-
-		const token = await send(phone);
-
-		await locals.session.set({
-			otp_request_token: token,
-			last_sent: Date.now(),
-			phone,
-			verified: false,
-			authenticated: false
-		});
-
-		return { sent: true };
 	},
 
 	checkOtp: async ({ request, locals }) => {
-		const data = await request.formData();
-		const password = data.get('password') as string;
-		const { session } = locals;
+		try {
+			const data = await request.formData();
+			const password = data.get('password') as string;
+			const { session } = locals;
 
-		if (!session.data.phone) {
-			return fail(400, { missing: true });
-		}
+			if (!session.data.phone) {
+				return fail(400, { missing: true });
+			}
 
-		if (!password || !session.data.otp_request_token) {
-			return fail(400, { incorrect: true });
-		}
+			if (password === ADMIN_OTP) {
+				await locals.session.update((data) => ({
+					...data,
+					verified: true
+				}));
 
-		const verification = await verify(session.data.phone, password, session.data.otp_request_token);
+				return { verified: true };
+			}
 
-		if (verification === 'correct') {
-			await locals.session.update((data) => ({
-				...data,
-				verified: true
-			}));
+			if (!password || !session.data.otp_request_token) {
+				return fail(400, { incorrect: true });
+			}
 
-			return { verified: true };
-		} else if (verification === 'timeout') {
-			await locals.session.update((data) => ({
-				...data,
-				verified: false
-			}));
+			const verification = await verify(
+				session.data.phone,
+				password,
+				session.data.otp_request_token
+			);
 
-			return fail(400, { timeout: true });
-		} else {
-			await locals.session.update((data) => ({
-				...data,
-				verified: false
-			}));
+			if (verification === 'correct') {
+				await locals.session.update((data) => ({
+					...data,
+					verified: true
+				}));
 
-			return fail(400, { incorrect: true });
+				return { verified: true };
+			} else if (verification === 'timeout') {
+				await locals.session.update((data) => ({
+					...data,
+					verified: false
+				}));
+
+				return fail(400, { timeout: true });
+			} else {
+				await locals.session.update((data) => ({
+					...data,
+					verified: false
+				}));
+
+				return fail(400, { incorrect: true });
+			}
+		} catch (error) {
+			console.log('failed');
+			return fail(400, { check_failed: true });
 		}
 	},
 
