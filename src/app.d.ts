@@ -29,4 +29,5 @@ interface SessionData {
 	lastName?: string;
 	redirectUrl?: string;
 	postLoginUrl?: string;
+	challenge?: string;
 }
