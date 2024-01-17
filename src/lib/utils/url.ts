@@ -45,11 +45,11 @@ export const openRedirectLink = (redirect: string, app: ApplicationType): void =
 	const appStoreUrl = getApplicationStoreUrl(app);
 
 	if (appDeepLink) {
-		url.searchParams.append('open_app', base64url(appDeepLink));
+		url.searchParams.set('open_app', base64url(appDeepLink));
 	}
 
 	if (appStoreUrl) {
-		url.searchParams.append(appStoreUrl.type, base64url(appStoreUrl.url));
+		url.searchParams.set(appStoreUrl.type, base64url(appStoreUrl.url));
 	}
 
 	redirectToOidc(url.toString());
@@ -91,7 +91,37 @@ export const redirectToOidc = (url: string): void => {
 
 /**
  * Constructs the OIDC redirect URL
+ *
  * @param {string} url - the destination url
  */
 export const getOidcRedirectUrl = (url: string): string =>
 	`${env.PUBLIC_OIDC_PROVIDER}?redirectUrl=${url}`;
+
+/**
+ * builds an Oath2 redirect url.
+ *
+ * @param {string} challenge - the app challenge
+ * @param {string} redirectUri - the app redirect uri
+ */
+export const getOath2RedirectUri = (challenge: string, redirectUri: string) => {
+	const url = new URL(env.PUBLIC_AUTHORISATION_URL);
+
+	url.searchParams.set('client_id', env.PUBLIC_TMAIL_CLIENT_ID);
+	url.searchParams.set('redirect_uri', redirectUri);
+	url.searchParams.set('response_type', 'code');
+	url.searchParams.set('scope', env.PUBLIC_TMAIL_SCOPE);
+	url.searchParams.set('code_challenge_method', 'S256');
+	url.searchParams.set('code_challenge', challenge);
+
+	return url.toString();
+};
+
+/**
+ * redirects to the oath2 redirect url
+ *
+ * @param {string} url - the destination url
+ * @param {string} challenge - the app challenge
+ */
+export const gotoOath2RedirectUrl = (url: string, challenge: string): void => {
+	goto(getOath2RedirectUri(challenge, url));
+};
