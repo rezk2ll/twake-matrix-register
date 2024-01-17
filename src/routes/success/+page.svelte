@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { redirectUrl as redirectUrlStore } from './../../store';
+	import { challenge as challengeStore, redirectUrl as redirectUrlStore } from './../../store';
 	import type { PageData } from './$types';
 	import SuccessCard from '$lib/components/landing/SuccessCard.svelte';
 	import LoggedUser from '$lib/components/nav/LoggedUser.svelte';
@@ -11,6 +11,7 @@
 	$: username = data.username ?? '';
 	$: phone = data.phone ?? '';
 	$: redirectUrlStore.set(data.redirectUrl);
+	$: challengeStore.set(data.challenge ?? '');
 </script>
 
 <div class="w-full h-full lg:h-fit">
