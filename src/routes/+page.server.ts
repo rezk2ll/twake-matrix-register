@@ -22,17 +22,25 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	const { session } = locals;
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
 	const postLoginUrl = url.searchParams.get('post_login_redirect_url') ?? undefined;
+	const challenge = url.searchParams.get('challenge_code') ?? undefined;
 
 	const cookie = cookies.get(authService.cookieName);
 
 	await session.update((data) => ({
 		...data,
 		redirectUrl,
-		postLoginUrl
+		postLoginUrl,
+		challenge
 	}));
 
 	if (session.data.authenticated === true && cookie) {
-		throw redirect(302, postLoginUrl ?? '/success');
+		const destinationUrl = postLoginUrl
+			? challenge
+				? getOath2RedirectUri(challenge, postLoginUrl)
+				: getOidcRedirectUrl(postLoginUrl)
+			: '/success';
+
+		throw redirect(302, destinationUrl);
 	}
 
 	return {
