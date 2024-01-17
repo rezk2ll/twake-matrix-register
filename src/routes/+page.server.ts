@@ -22,6 +22,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
 	const postLoginUrl = url.searchParams.get('post_login_redirect_url') ?? undefined;
 	const clientId = url.searchParams.get('client_id') ?? undefined;
+	const challenge = url.searchParams.get('challenge_code') ?? undefined;
 
 	const cookie = cookies.get(authService.cookieName);
 
@@ -29,11 +30,18 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 		...data,
 		redirectUrl,
 		postLoginUrl,
-		clientId
+		clientId,
+		challenge
 	}));
 
 	if (session.data.authenticated === true && cookie) {
-		throw redirect(302, postLoginUrl ?? '/success');
+		const destinationUrl = postLoginUrl
+			? challenge && clientId
+				? getOath2RedirectUri(challenge, postLoginUrl, clientId)
+				: getOidcRedirectUrl(postLoginUrl)
+			: '/success';
+
+		throw redirect(302, destinationUrl);
 	}
 
 	return {
