@@ -8,6 +8,7 @@ export const phone = writable<string>('');
 export const verifiedPhones = writable<string[]>([]);
 export const redirectUrl = writable<string | null>(null);
 export const challenge = writable<string | null>(null);
+export const clientId = writable<string | null>(null);
 
 verified.subscribe((v) => {
 	if (v === true) {

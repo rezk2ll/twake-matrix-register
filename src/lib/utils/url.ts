@@ -103,10 +103,10 @@ export const getOidcRedirectUrl = (url: string): string =>
  * @param {string} challenge - the app challenge
  * @param {string} redirectUri - the app redirect uri
  */
-export const getOath2RedirectUri = (challenge: string, redirectUri: string) => {
+export const getOath2RedirectUri = (challenge: string, redirectUri: string, client_id: string) => {
 	const url = new URL(env.PUBLIC_AUTHORISATION_URL);
 
-	url.searchParams.set('client_id', env.PUBLIC_TMAIL_CLIENT_ID);
+	url.searchParams.set('client_id', client_id);
 	url.searchParams.set('redirect_uri', redirectUri);
 	url.searchParams.set('response_type', 'code');
 	url.searchParams.set('scope', env.PUBLIC_TMAIL_SCOPE);
@@ -122,6 +122,6 @@ export const getOath2RedirectUri = (challenge: string, redirectUri: string) => {
  * @param {string} url - the destination url
  * @param {string} challenge - the app challenge
  */
-export const gotoOath2RedirectUrl = (url: string, challenge: string): void => {
-	goto(getOath2RedirectUri(challenge, url));
+export const gotoOath2RedirectUrl = (url: string, challenge: string, client_id: string): void => {
+	goto(getOath2RedirectUri(challenge, url, client_id));
 };

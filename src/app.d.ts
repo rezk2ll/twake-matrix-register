@@ -30,4 +30,5 @@ interface SessionData {
 	redirectUrl?: string;
 	postLoginUrl?: string;
 	challenge?: string;
+	clientId?: string;
 }

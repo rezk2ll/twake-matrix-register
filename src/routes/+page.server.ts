@@ -23,6 +23,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
 	const postLoginUrl = url.searchParams.get('post_login_redirect_url') ?? undefined;
 	const challenge = url.searchParams.get('challenge_code') ?? undefined;
+	const client_id = url.searchParams.get('client_id') ?? undefined;
 
 	const cookie = cookies.get(authService.cookieName);
 
@@ -35,8 +36,8 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 
 	if (session.data.authenticated === true && cookie) {
 		const destinationUrl = postLoginUrl
-			? challenge
-				? getOath2RedirectUri(challenge, postLoginUrl)
+			? challenge && client_id
+				? getOath2RedirectUri(challenge, postLoginUrl, client_id)
 				: getOidcRedirectUrl(postLoginUrl)
 			: '/success';
 
@@ -150,7 +151,7 @@ export const actions: Actions = {
 			const data = await request.formData();
 			const { session } = locals;
 			const phone = data.get('phone') as string;
-			const { phone: verifiedPhone, redirectUrl = null, challenge = null } = session.data;
+			const { phone: verifiedPhone, redirectUrl = null, challenge = null, clientId = null } = session.data;
 
 			if (!phone || isPhoneValid(phone) === false || !(await checkPhoneAvailability(phone))) {
 				return fail(400, { invalid_phone: true });
@@ -211,8 +212,8 @@ export const actions: Actions = {
 			});
 
 			const destinationUrl = redirectUrl
-				? challenge
-					? getOath2RedirectUri(challenge, redirectUrl)
+				? challenge && clientId
+					? getOath2RedirectUri(challenge, redirectUrl, clientId)
 					: getOidcRedirectUrl(redirectUrl)
 				: '/success';
 
@@ -235,7 +236,7 @@ export const actions: Actions = {
 			const login = data.get('login') as string;
 			const password = data.get('password') as string;
 
-			const { postLoginUrl = null, challenge = null } = locals.session.data;
+			const { postLoginUrl = null, challenge = null, clientId = null } = locals.session.data;
 
 			const cookie = await authService.login(login, password);
 
@@ -260,8 +261,8 @@ export const actions: Actions = {
 			cookies.set(authService.cookieName, cookie, { domain: extractMainDomain(url.host) });
 
 			const destinationUrl = postLoginUrl
-				? challenge
-					? getOath2RedirectUri(challenge, postLoginUrl)
+				? challenge && clientId
+					? getOath2RedirectUri(challenge, postLoginUrl, clientId)
 					: getOidcRedirectUrl(postLoginUrl)
 				: '/success';
 
