@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { challenge as challengeStore, redirectUrl as redirectUrlStore } from './../../store';
+	import {
+		challenge as challengeStore,
+		redirectUrl as redirectUrlStore,
+		clientId as clientIdStore
+	} from './../../store';
 	import type { PageData } from './$types';
 	import SuccessCard from '$lib/components/landing/SuccessCard.svelte';
 	import LoggedUser from '$lib/components/nav/LoggedUser.svelte';
@@ -11,7 +15,8 @@
 	$: username = data.username ?? '';
 	$: phone = data.phone ?? '';
 	$: redirectUrlStore.set(data.redirectUrl);
-	$: challengeStore.set(data.challenge ?? '');
+	$: challengeStore.set(data.challenge);
+	$: clientIdStore.set(data.clientId);
 </script>
 
 <div class="w-full h-full lg:h-fit">
@@ -24,7 +29,9 @@
 		</div>
 		<div class="flex space-x-4 w-full lg:px-48 lg:py-4">
 			<div class="w-full overflow-hidden">
-				<div class="flex flex-col-reverse lg:flex-row-reverse w-full lg:space-x-20 lg:py-10 lg:px-10 h-full">
+				<div
+					class="flex flex-col-reverse lg:flex-row-reverse w-full lg:space-x-20 lg:py-10 lg:px-10 h-full"
+				>
 					<SuccessCard {user} bind:id={username} {phone} />
 					<div class="hidden lg:block w-full">
 						<LoggedHero />

@@ -17,6 +17,7 @@ export const load: PageServerLoad = async ({ parent, cookies }) => {
 		lastName: session.lastName,
 		phone: session.phone,
 		redirectUrl: session.redirectUrl ?? null,
-		challenge: session.challenge ?? null
+		challenge: session.challenge ?? null,
+		clientId: session.clientId ?? null,
 	};
 };
