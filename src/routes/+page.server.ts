@@ -14,7 +14,6 @@ import {
 import { validateName, validateNickName } from '$lib/utils/username';
 import authService from '$lib/services/auth';
 import { extractMainDomain, getOath2RedirectUri, getOidcRedirectUrl } from '$lib/utils/url';
-import { env } from '$env/dynamic/private';
 
 export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	await Client.getClient();
@@ -98,15 +97,6 @@ export const actions: Actions = {
 
 			if (!session.data.phone) {
 				return fail(400, { missing: true });
-			}
-
-			if (password === env.ADMIN_OTP) {
-				await locals.session.update((data) => ({
-					...data,
-					verified: true
-				}));
-
-				return { verified: true };
 			}
 
 			if (!password || !session.data.otp_request_token) {
