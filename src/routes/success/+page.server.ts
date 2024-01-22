@@ -18,6 +18,6 @@ export const load: PageServerLoad = async ({ parent, cookies }) => {
 		phone: session.phone,
 		redirectUrl: session.redirectUrl ?? null,
 		challenge: session.challenge ?? null,
-		clientId: session.clientId ?? null,
+		clientId: session.clientId ?? null
 	};
 };

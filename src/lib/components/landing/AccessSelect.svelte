@@ -6,9 +6,9 @@
 	import Logo from '../logo/Logo.svelte';
 </script>
 
-<div class="w-full flex flex-col md:flex-row justify-end h-[100vh] lg:h-full">
+<div class="w-full flex flex-col md:flex-row justify-end h-[100dvh] lg:h-full">
 	<div
-		class="bg-white md:shadow-xl md:rounded-3xl flex flex-col space-y-6 w-full xl:w-[504px] md:px-[60px] pb-6 h-full lg:h-fit"
+		class="bg-white md:shadow-xl md:rounded-3xl flex flex-col space-y-6 w-full xl:w-[504px] md:px-[60px] pb-20 h-[calc(100%+40px)] pt-6 lg:pt-0 lg:pb-6 lg:h-fit"
 		id="start"
 	>
 		<div class="lg:hidden flex h-6 w-full items-center justify-center">
