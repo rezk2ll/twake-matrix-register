@@ -194,8 +194,6 @@ export const actions: Actions = {
 				domain: extractMainDomain(url.host)
 			});
 
-			console.debug({ challenge, redirectUrl, clientId })
-
 			const destinationUrl = redirectUrl
 				? challenge && clientId
 					? getOath2RedirectUri(challenge, redirectUrl, clientId)
