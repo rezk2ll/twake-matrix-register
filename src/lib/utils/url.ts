@@ -109,7 +109,7 @@ export const getOath2RedirectUri = (challenge: string, redirectUri: string, clie
 	url.searchParams.set('client_id', client_id);
 	url.searchParams.set('redirect_uri', redirectUri);
 	url.searchParams.set('response_type', 'code');
-	url.searchParams.set('scope', env.PUBLIC_TMAIL_SCOPE);
+	url.searchParams.set('scope', 'openid profile email offline_access');
 	url.searchParams.set('code_challenge_method', 'S256');
 	url.searchParams.set('code_challenge', challenge);
 
@@ -125,3 +125,11 @@ export const getOath2RedirectUri = (challenge: string, redirectUri: string, clie
 export const gotoOath2RedirectUrl = (url: string, challenge: string, client_id: string): void => {
 	goto(getOath2RedirectUri(challenge, url, client_id));
 };
+
+/**
+ * removes trailing slash from a url
+ *
+ * @returns {string} the url without a trailing slash
+ */
+export const removeTrailingSlash = (url: string): string =>
+	url.endsWith('/') ? url.slice(0, -1) : url;
