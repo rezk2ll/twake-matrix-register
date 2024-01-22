@@ -23,7 +23,7 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 	const redirectUrl = url.searchParams.get('post_registered_redirect_url') ?? undefined;
 	const postLoginUrl = url.searchParams.get('post_login_redirect_url') ?? undefined;
 	const challenge = url.searchParams.get('challenge_code') ?? undefined;
-	const client_id = url.searchParams.get('client_id') ?? undefined;
+	const clientId = url.searchParams.get('client_id') ?? undefined;
 
 	const cookie = cookies.get(authService.cookieName);
 
@@ -31,13 +31,14 @@ export const load: PageServerLoad = async ({ locals, url, cookies }) => {
 		...data,
 		redirectUrl,
 		postLoginUrl,
-		challenge
+		challenge,
+		clientId
 	}));
 
 	if (session.data.authenticated === true && cookie) {
 		const destinationUrl = postLoginUrl
-			? challenge && client_id
-				? getOath2RedirectUri(challenge, postLoginUrl, client_id)
+			? challenge && clientId
+				? getOath2RedirectUri(challenge, postLoginUrl, clientId)
 				: getOidcRedirectUrl(postLoginUrl)
 			: '/success';
 
@@ -149,15 +150,20 @@ export const actions: Actions = {
 	register: async ({ request, locals, cookies, url }) => {
 		try {
 			const data = await request.formData();
-			const { session } = locals;
 			const phone = data.get('phone') as string;
-			const { phone: verifiedPhone, redirectUrl = null, challenge = null, clientId = null } = session.data;
+			const {
+				phone: verifiedPhone,
+				redirectUrl = null,
+				challenge = null,
+				clientId = null,
+				verified
+			} = locals.session.data;
 
 			if (!phone || isPhoneValid(phone) === false || !(await checkPhoneAvailability(phone))) {
 				return fail(400, { invalid_phone: true });
 			}
 
-			if (!session.data.verified || verifiedPhone !== phone) {
+			if (!verified || verifiedPhone !== phone) {
 				return fail(400, { invalid_phone: true });
 			}
 
@@ -210,6 +216,8 @@ export const actions: Actions = {
 			cookies.set(authService.cookieName, authSessionCookie, {
 				domain: extractMainDomain(url.host)
 			});
+
+			console.debug({ challenge, redirectUrl, clientId })
 
 			const destinationUrl = redirectUrl
 				? challenge && clientId
