@@ -127,15 +127,20 @@ export const actions: Actions = {
 	register: async ({ request, locals, cookies, url }) => {
 		try {
 			const data = await request.formData();
-			const { session } = locals;
 			const phone = data.get('phone') as string;
-			const { phone: verifiedPhone, redirectUrl = null, challenge = null, clientId = null } = session.data;
+			const {
+				phone: verifiedPhone,
+				redirectUrl = null,
+				challenge = null,
+				clientId = null,
+				verified
+			} = locals.session.data;
 
 			if (!phone || isPhoneValid(phone) === false || !(await checkPhoneAvailability(phone))) {
 				return fail(400, { invalid_phone: true });
 			}
 
-			if (!session.data.verified || verifiedPhone !== phone) {
+			if (!verified || verifiedPhone !== phone) {
 				return fail(400, { invalid_phone: true });
 			}
 
@@ -188,6 +193,8 @@ export const actions: Actions = {
 			cookies.set(authService.cookieName, authSessionCookie, {
 				domain: extractMainDomain(url.host)
 			});
+
+			console.debug({ challenge, redirectUrl, clientId })
 
 			const destinationUrl = redirectUrl
 				? challenge && clientId
